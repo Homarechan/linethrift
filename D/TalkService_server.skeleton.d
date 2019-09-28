@@ -22,12 +22,6 @@ class TalkServiceHandler : TalkService {
     // Your initialization goes here.
   }
 
-  SearchResult searchCollection(string query, ref const(SearchPagingParameter) param) {
-    // Your implementation goes here.
-    writeln("searchCollection called");
-    return typeof(return).init;
-  }
-
   ChatRoomAnnouncement[][string] getChatRoomAnnouncementsBulk(string[] chatRoomMids) {
     // Your implementation goes here.
     writeln("getChatRoomAnnouncementsBulk called");
@@ -300,7 +294,7 @@ class TalkServiceHandler : TalkService {
     return typeof(return).init;
   }
 
-  void destroyMessage(int seq, string chatId, string messageId, int sessionId) {
+  void destroyMessage(int seq, string chatId, string messageId, byte sessionId) {
     // Your implementation goes here.
     writeln("destroyMessage called");
   }
@@ -1058,7 +1052,7 @@ class TalkServiceHandler : TalkService {
     return typeof(return).init;
   }
 
-  E2EEPublicKey getE2EEPublicKey(string mid, int version, int keyId) {
+  E2EEPublicKey getE2EEPublicKey(string mid, int version_, int keyId) {
     // Your implementation goes here.
     writeln("getE2EEPublicKey called");
     return typeof(return).init;
@@ -1292,11 +1286,6 @@ class TalkServiceHandler : TalkService {
   void updateProfileAttribute(int reqSeq, ProfileAttribute attr, string value) {
     // Your implementation goes here.
     writeln("updateProfileAttribute called");
-  }
-
-  void updateProfileAttributes(int reqSeq, ref const(UpdateProfileAttributesRequest) request) {
-    // Your implementation goes here.
-    writeln("updateProfileAttributes called");
   }
 
   void updateRegion(string region) {

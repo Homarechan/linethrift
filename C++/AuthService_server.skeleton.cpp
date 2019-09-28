@@ -18,21 +18,6 @@ class AuthServiceHandler : virtual public AuthServiceIf {
     // Your initialization goes here
   }
 
-  void updatePassword(IdentityCredentialResponse& _return, const std::string& authSessionId, const IdentityCredentialRequest& request) {
-    // Your implementation goes here
-    printf("updatePassword\n");
-  }
-
-  void getAuthRSAKey(RSAKey& _return, const std::string& authSessionId, const IdentityProvider::type identityProvider) {
-    // Your implementation goes here
-    printf("getAuthRSAKey\n");
-  }
-
-  void openAuthSession(std::string& _return, const AuthSessionRequest& request) {
-    // Your implementation goes here
-    printf("openAuthSession\n");
-  }
-
   void normalizePhoneNumber(std::string& _return, const std::string& countryCode, const std::string& phoneNumber, const std::string& countryCodeHint) {
     // Your implementation goes here
     printf("normalizePhoneNumber\n");
@@ -77,11 +62,11 @@ class AuthServiceHandler : virtual public AuthServiceIf {
 
 int main(int argc, char **argv) {
   int port = 9090;
-  ::apache::thrift::stdcxx::shared_ptr<AuthServiceHandler> handler(new AuthServiceHandler());
-  ::apache::thrift::stdcxx::shared_ptr<TProcessor> processor(new AuthServiceProcessor(handler));
-  ::apache::thrift::stdcxx::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  ::apache::thrift::stdcxx::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  ::apache::thrift::stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+  ::std::shared_ptr<AuthServiceHandler> handler(new AuthServiceHandler());
+  ::std::shared_ptr<TProcessor> processor(new AuthServiceProcessor(handler));
+  ::std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+  ::std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+  ::std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();

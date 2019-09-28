@@ -18,11 +18,6 @@ class TalkServiceHandler : virtual public TalkServiceIf {
     // Your initialization goes here
   }
 
-  void searchCollection(SearchResult& _return, const std::string& query, const SearchPagingParameter& param) {
-    // Your implementation goes here
-    printf("searchCollection\n");
-  }
-
   void getChatRoomAnnouncementsBulk(std::map<std::string, std::vector<ChatRoomAnnouncement> > & _return, const std::vector<std::string> & chatRoomMids) {
     // Your implementation goes here
     printf("getChatRoomAnnouncementsBulk\n");
@@ -263,7 +258,7 @@ class TalkServiceHandler : virtual public TalkServiceIf {
     printf("generateUserTicket\n");
   }
 
-  void destroyMessage(const int32_t seq, const std::string& chatId, const std::string& messageId, const int32_t sessionId) {
+  void destroyMessage(const int32_t seq, const std::string& chatId, const std::string& messageId, const int8_t sessionId) {
     // Your implementation goes here
     printf("destroyMessage\n");
   }
@@ -1143,11 +1138,6 @@ class TalkServiceHandler : virtual public TalkServiceIf {
     printf("updateProfileAttribute\n");
   }
 
-  void updateProfileAttributes(const int32_t reqSeq, const UpdateProfileAttributesRequest& request) {
-    // Your implementation goes here
-    printf("updateProfileAttributes\n");
-  }
-
   void updateRegion(const std::string& region) {
     // Your implementation goes here
     printf("updateRegion\n");
@@ -1197,11 +1187,11 @@ class TalkServiceHandler : virtual public TalkServiceIf {
 
 int main(int argc, char **argv) {
   int port = 9090;
-  ::apache::thrift::stdcxx::shared_ptr<TalkServiceHandler> handler(new TalkServiceHandler());
-  ::apache::thrift::stdcxx::shared_ptr<TProcessor> processor(new TalkServiceProcessor(handler));
-  ::apache::thrift::stdcxx::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  ::apache::thrift::stdcxx::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  ::apache::thrift::stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+  ::std::shared_ptr<TalkServiceHandler> handler(new TalkServiceHandler());
+  ::std::shared_ptr<TProcessor> processor(new TalkServiceProcessor(handler));
+  ::std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+  ::std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+  ::std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();

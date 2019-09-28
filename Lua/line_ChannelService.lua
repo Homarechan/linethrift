@@ -1969,11 +1969,11 @@ function getChannelNotificationSettings_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1233, _size1230 = iprot:readListBegin()
-        for _i=1,_size1230 do
-          local _elem1234 = ChannelNotificationSetting:new{}
-          _elem1234:read(iprot)
-          table.insert(self.success, _elem1234)
+        local _etype1097, _size1094 = iprot:readListBegin()
+        for _i=1,_size1094 do
+          local _elem1098 = ChannelNotificationSetting:new{}
+          _elem1098:read(iprot)
+          table.insert(self.success, _elem1098)
         end
         iprot:readListEnd()
       else
@@ -1999,8 +1999,8 @@ function getChannelNotificationSettings_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1235 in ipairs(self.success) do
-      iter1235:write(oprot)
+    for _,iter1099 in ipairs(self.success) do
+      iter1099:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2207,10 +2207,10 @@ function getFriendChannelMatrices_args:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.channelIds = {}
-        local _etype1239, _size1236 = iprot:readListBegin()
-        for _i=1,_size1236 do
-          local _elem1240 = iprot:readString()
-          table.insert(self.channelIds, _elem1240)
+        local _etype1103, _size1100 = iprot:readListBegin()
+        for _i=1,_size1100 do
+          local _elem1104 = iprot:readString()
+          table.insert(self.channelIds, _elem1104)
         end
         iprot:readListEnd()
       else
@@ -2229,8 +2229,8 @@ function getFriendChannelMatrices_args:write(oprot)
   if self.channelIds ~= nil then
     oprot:writeFieldBegin('channelIds', TType.LIST, 1)
     oprot:writeListBegin(TType.STRING, #self.channelIds)
-    for _,iter1241 in ipairs(self.channelIds) do
-      oprot:writeString(iter1241)
+    for _,iter1105 in ipairs(self.channelIds) do
+      oprot:writeString(iter1105)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2746,10 +2746,10 @@ function issueRequestTokenWithAuthScheme_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.authScheme = {}
-        local _etype1245, _size1242 = iprot:readListBegin()
-        for _i=1,_size1242 do
-          local _elem1246 = iprot:readString()
-          table.insert(self.authScheme, _elem1246)
+        local _etype1109, _size1106 = iprot:readListBegin()
+        for _i=1,_size1106 do
+          local _elem1110 = iprot:readString()
+          table.insert(self.authScheme, _elem1110)
         end
         iprot:readListEnd()
       else
@@ -2784,8 +2784,8 @@ function issueRequestTokenWithAuthScheme_args:write(oprot)
   if self.authScheme ~= nil then
     oprot:writeFieldBegin('authScheme', TType.LIST, 3)
     oprot:writeListBegin(TType.STRING, #self.authScheme)
-    for _,iter1247 in ipairs(self.authScheme) do
-      oprot:writeString(iter1247)
+    for _,iter1111 in ipairs(self.authScheme) do
+      oprot:writeString(iter1111)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2968,11 +2968,11 @@ function getUpdatedChannelIds_args:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.channelIds = {}
-        local _etype1251, _size1248 = iprot:readListBegin()
-        for _i=1,_size1248 do
-          local _elem1252 = ChannelIdWithLastUpdated:new{}
-          _elem1252:read(iprot)
-          table.insert(self.channelIds, _elem1252)
+        local _etype1115, _size1112 = iprot:readListBegin()
+        for _i=1,_size1112 do
+          local _elem1116 = ChannelIdWithLastUpdated:new{}
+          _elem1116:read(iprot)
+          table.insert(self.channelIds, _elem1116)
         end
         iprot:readListEnd()
       else
@@ -2991,8 +2991,8 @@ function getUpdatedChannelIds_args:write(oprot)
   if self.channelIds ~= nil then
     oprot:writeFieldBegin('channelIds', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.channelIds)
-    for _,iter1253 in ipairs(self.channelIds) do
-      iter1253:write(oprot)
+    for _,iter1117 in ipairs(self.channelIds) do
+      iter1117:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3015,10 +3015,10 @@ function getUpdatedChannelIds_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1257, _size1254 = iprot:readListBegin()
-        for _i=1,_size1254 do
-          local _elem1258 = iprot:readString()
-          table.insert(self.success, _elem1258)
+        local _etype1121, _size1118 = iprot:readListBegin()
+        for _i=1,_size1118 do
+          local _elem1122 = iprot:readString()
+          table.insert(self.success, _elem1122)
         end
         iprot:readListEnd()
       else
@@ -3044,8 +3044,8 @@ function getUpdatedChannelIds_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1259 in ipairs(self.success) do
-      oprot:writeString(iter1259)
+    for _,iter1123 in ipairs(self.success) do
+      oprot:writeString(iter1123)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3335,11 +3335,11 @@ function updateChannelNotificationSetting_args:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.setting = {}
-        local _etype1263, _size1260 = iprot:readListBegin()
-        for _i=1,_size1260 do
-          local _elem1264 = ChannelNotificationSetting:new{}
-          _elem1264:read(iprot)
-          table.insert(self.setting, _elem1264)
+        local _etype1127, _size1124 = iprot:readListBegin()
+        for _i=1,_size1124 do
+          local _elem1128 = ChannelNotificationSetting:new{}
+          _elem1128:read(iprot)
+          table.insert(self.setting, _elem1128)
         end
         iprot:readListEnd()
       else
@@ -3358,8 +3358,8 @@ function updateChannelNotificationSetting_args:write(oprot)
   if self.setting ~= nil then
     oprot:writeFieldBegin('setting', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.setting)
-    for _,iter1265 in ipairs(self.setting) do
-      iter1265:write(oprot)
+    for _,iter1129 in ipairs(self.setting) do
+      iter1129:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()

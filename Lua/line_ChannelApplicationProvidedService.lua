@@ -2056,10 +2056,10 @@ function getAllContactIdsForChannel_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1147, _size1144 = iprot:readListBegin()
-        for _i=1,_size1144 do
-          local _elem1148 = iprot:readString()
-          table.insert(self.success, _elem1148)
+        local _etype1011, _size1008 = iprot:readListBegin()
+        for _i=1,_size1008 do
+          local _elem1012 = iprot:readString()
+          table.insert(self.success, _elem1012)
         end
         iprot:readListEnd()
       else
@@ -2085,8 +2085,8 @@ function getAllContactIdsForChannel_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1149 in ipairs(self.success) do
-      oprot:writeString(iter1149)
+    for _,iter1013 in ipairs(self.success) do
+      oprot:writeString(iter1013)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2149,11 +2149,11 @@ function getCompactContacts_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1153, _size1150 = iprot:readListBegin()
-        for _i=1,_size1150 do
-          local _elem1154 = CompactContact:new{}
-          _elem1154:read(iprot)
-          table.insert(self.success, _elem1154)
+        local _etype1017, _size1014 = iprot:readListBegin()
+        for _i=1,_size1014 do
+          local _elem1018 = CompactContact:new{}
+          _elem1018:read(iprot)
+          table.insert(self.success, _elem1018)
         end
         iprot:readListEnd()
       else
@@ -2179,8 +2179,8 @@ function getCompactContacts_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1155 in ipairs(self.success) do
-      iter1155:write(oprot)
+    for _,iter1019 in ipairs(self.success) do
+      iter1019:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2207,10 +2207,10 @@ function getContactsForChannel_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.ids = {}
-        local _etype1159, _size1156 = iprot:readListBegin()
-        for _i=1,_size1156 do
-          local _elem1160 = iprot:readString()
-          table.insert(self.ids, _elem1160)
+        local _etype1023, _size1020 = iprot:readListBegin()
+        for _i=1,_size1020 do
+          local _elem1024 = iprot:readString()
+          table.insert(self.ids, _elem1024)
         end
         iprot:readListEnd()
       else
@@ -2229,8 +2229,8 @@ function getContactsForChannel_args:write(oprot)
   if self.ids ~= nil then
     oprot:writeFieldBegin('ids', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.ids)
-    for _,iter1161 in ipairs(self.ids) do
-      oprot:writeString(iter1161)
+    for _,iter1025 in ipairs(self.ids) do
+      oprot:writeString(iter1025)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2253,11 +2253,11 @@ function getContactsForChannel_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1165, _size1162 = iprot:readListBegin()
-        for _i=1,_size1162 do
-          local _elem1166 = Contact:new{}
-          _elem1166:read(iprot)
-          table.insert(self.success, _elem1166)
+        local _etype1029, _size1026 = iprot:readListBegin()
+        for _i=1,_size1026 do
+          local _elem1030 = Contact:new{}
+          _elem1030:read(iprot)
+          table.insert(self.success, _elem1030)
         end
         iprot:readListEnd()
       else
@@ -2283,8 +2283,8 @@ function getContactsForChannel_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1167 in ipairs(self.success) do
-      iter1167:write(oprot)
+    for _,iter1031 in ipairs(self.success) do
+      iter1031:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2419,10 +2419,10 @@ function getFavoriteMidsForChannel_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1171, _size1168 = iprot:readListBegin()
-        for _i=1,_size1168 do
-          local _elem1172 = iprot:readString()
-          table.insert(self.success, _elem1172)
+        local _etype1035, _size1032 = iprot:readListBegin()
+        for _i=1,_size1032 do
+          local _elem1036 = iprot:readString()
+          table.insert(self.success, _elem1036)
         end
         iprot:readListEnd()
       else
@@ -2448,8 +2448,8 @@ function getFavoriteMidsForChannel_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1173 in ipairs(self.success) do
-      oprot:writeString(iter1173)
+    for _,iter1037 in ipairs(self.success) do
+      oprot:writeString(iter1037)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2501,10 +2501,10 @@ function getFriendMids_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1177, _size1174 = iprot:readListBegin()
-        for _i=1,_size1174 do
-          local _elem1178 = iprot:readString()
-          table.insert(self.success, _elem1178)
+        local _etype1041, _size1038 = iprot:readListBegin()
+        for _i=1,_size1038 do
+          local _elem1042 = iprot:readString()
+          table.insert(self.success, _elem1042)
         end
         iprot:readListEnd()
       else
@@ -2530,8 +2530,8 @@ function getFriendMids_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1179 in ipairs(self.success) do
-      oprot:writeString(iter1179)
+    for _,iter1043 in ipairs(self.success) do
+      oprot:writeString(iter1043)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2594,10 +2594,10 @@ function getGroupMemberMids_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1183, _size1180 = iprot:readListBegin()
-        for _i=1,_size1180 do
-          local _elem1184 = iprot:readString()
-          table.insert(self.success, _elem1184)
+        local _etype1047, _size1044 = iprot:readListBegin()
+        for _i=1,_size1044 do
+          local _elem1048 = iprot:readString()
+          table.insert(self.success, _elem1048)
         end
         iprot:readListEnd()
       else
@@ -2623,8 +2623,8 @@ function getGroupMemberMids_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1185 in ipairs(self.success) do
-      oprot:writeString(iter1185)
+    for _,iter1049 in ipairs(self.success) do
+      oprot:writeString(iter1049)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2651,10 +2651,10 @@ function getGroupsForChannel_args:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.groupIds = {}
-        local _etype1189, _size1186 = iprot:readListBegin()
-        for _i=1,_size1186 do
-          local _elem1190 = iprot:readString()
-          table.insert(self.groupIds, _elem1190)
+        local _etype1053, _size1050 = iprot:readListBegin()
+        for _i=1,_size1050 do
+          local _elem1054 = iprot:readString()
+          table.insert(self.groupIds, _elem1054)
         end
         iprot:readListEnd()
       else
@@ -2673,8 +2673,8 @@ function getGroupsForChannel_args:write(oprot)
   if self.groupIds ~= nil then
     oprot:writeFieldBegin('groupIds', TType.LIST, 1)
     oprot:writeListBegin(TType.STRING, #self.groupIds)
-    for _,iter1191 in ipairs(self.groupIds) do
-      oprot:writeString(iter1191)
+    for _,iter1055 in ipairs(self.groupIds) do
+      oprot:writeString(iter1055)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2697,11 +2697,11 @@ function getGroupsForChannel_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1195, _size1192 = iprot:readListBegin()
-        for _i=1,_size1192 do
-          local _elem1196 = Group:new{}
-          _elem1196:read(iprot)
-          table.insert(self.success, _elem1196)
+        local _etype1059, _size1056 = iprot:readListBegin()
+        for _i=1,_size1056 do
+          local _elem1060 = Group:new{}
+          _elem1060:read(iprot)
+          table.insert(self.success, _elem1060)
         end
         iprot:readListEnd()
       else
@@ -2727,8 +2727,8 @@ function getGroupsForChannel_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1197 in ipairs(self.success) do
-      iter1197:write(oprot)
+    for _,iter1061 in ipairs(self.success) do
+      iter1061:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2853,10 +2853,10 @@ function getJoinedGroupIdsForChannel_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1201, _size1198 = iprot:readListBegin()
-        for _i=1,_size1198 do
-          local _elem1202 = iprot:readString()
-          table.insert(self.success, _elem1202)
+        local _etype1065, _size1062 = iprot:readListBegin()
+        for _i=1,_size1062 do
+          local _elem1066 = iprot:readString()
+          table.insert(self.success, _elem1066)
         end
         iprot:readListEnd()
       else
@@ -2882,8 +2882,8 @@ function getJoinedGroupIdsForChannel_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1203 in ipairs(self.success) do
-      oprot:writeString(iter1203)
+    for _,iter1067 in ipairs(self.success) do
+      oprot:writeString(iter1067)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3201,10 +3201,10 @@ function getSimpleChannelContacts_args:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.ids = {}
-        local _etype1207, _size1204 = iprot:readListBegin()
-        for _i=1,_size1204 do
-          local _elem1208 = iprot:readString()
-          table.insert(self.ids, _elem1208)
+        local _etype1071, _size1068 = iprot:readListBegin()
+        for _i=1,_size1068 do
+          local _elem1072 = iprot:readString()
+          table.insert(self.ids, _elem1072)
         end
         iprot:readListEnd()
       else
@@ -3223,8 +3223,8 @@ function getSimpleChannelContacts_args:write(oprot)
   if self.ids ~= nil then
     oprot:writeFieldBegin('ids', TType.LIST, 1)
     oprot:writeListBegin(TType.STRING, #self.ids)
-    for _,iter1209 in ipairs(self.ids) do
-      oprot:writeString(iter1209)
+    for _,iter1073 in ipairs(self.ids) do
+      oprot:writeString(iter1073)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3247,11 +3247,11 @@ function getSimpleChannelContacts_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1213, _size1210 = iprot:readListBegin()
-        for _i=1,_size1210 do
-          local _elem1214 = SimpleChannelContact:new{}
-          _elem1214:read(iprot)
-          table.insert(self.success, _elem1214)
+        local _etype1077, _size1074 = iprot:readListBegin()
+        for _i=1,_size1074 do
+          local _elem1078 = SimpleChannelContact:new{}
+          _elem1078:read(iprot)
+          table.insert(self.success, _elem1078)
         end
         iprot:readListEnd()
       else
@@ -3277,8 +3277,8 @@ function getSimpleChannelContacts_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1215 in ipairs(self.success) do
-      iter1215:write(oprot)
+    for _,iter1079 in ipairs(self.success) do
+      iter1079:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3497,11 +3497,11 @@ function getUserIdentities_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.MAP then
         self.success = {}
-        local _ktype1217, _vtype1218, _size1216 = iprot:readMapBegin() 
-        for _i=1,_size1216 do
-          local _key1220 = iprot:readI32()
-          local _val1221 = iprot:readString()
-          self.success[_key1220] = _val1221
+        local _ktype1081, _vtype1082, _size1080 = iprot:readMapBegin() 
+        for _i=1,_size1080 do
+          local _key1084 = iprot:readI32()
+          local _val1085 = iprot:readString()
+          self.success[_key1084] = _val1085
         end
         iprot:readMapEnd()
       else
@@ -3527,9 +3527,9 @@ function getUserIdentities_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.MAP, 0)
     oprot:writeMapBegin(TType.I32, TType.STRING, ttable_size(self.success))
-    for kiter1222,viter1223 in pairs(self.success) do
-      oprot:writeI32(kiter1222)
-      oprot:writeString(viter1223)
+    for kiter1086,viter1087 in pairs(self.success) do
+      oprot:writeI32(kiter1086)
+      oprot:writeString(viter1087)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -3653,10 +3653,10 @@ function getUserMidsWhoAddedMe_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1227, _size1224 = iprot:readListBegin()
-        for _i=1,_size1224 do
-          local _elem1228 = iprot:readString()
-          table.insert(self.success, _elem1228)
+        local _etype1091, _size1088 = iprot:readListBegin()
+        for _i=1,_size1088 do
+          local _elem1092 = iprot:readString()
+          table.insert(self.success, _elem1092)
         end
         iprot:readListEnd()
       else
@@ -3682,8 +3682,8 @@ function getUserMidsWhoAddedMe_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1229 in ipairs(self.success) do
-      oprot:writeString(iter1229)
+    for _,iter1093 in ipairs(self.success) do
+      oprot:writeString(iter1093)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()

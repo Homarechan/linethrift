@@ -2191,11 +2191,11 @@ function getCoinProducts_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1281, _size1278 = iprot:readListBegin()
-        for _i=1,_size1278 do
-          local _elem1282 = CoinProductItem:new{}
-          _elem1282:read(iprot)
-          table.insert(self.success, _elem1282)
+        local _etype1145, _size1142 = iprot:readListBegin()
+        for _i=1,_size1142 do
+          local _elem1146 = CoinProductItem:new{}
+          _elem1146:read(iprot)
+          table.insert(self.success, _elem1146)
         end
         iprot:readListEnd()
       else
@@ -2221,8 +2221,8 @@ function getCoinProducts_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1283 in ipairs(self.success) do
-      iter1283:write(oprot)
+    for _,iter1147 in ipairs(self.success) do
+      iter1147:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -2321,11 +2321,11 @@ function getCoinProductsByPgCode_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1287, _size1284 = iprot:readListBegin()
-        for _i=1,_size1284 do
-          local _elem1288 = CoinProductItem:new{}
-          _elem1288:read(iprot)
-          table.insert(self.success, _elem1288)
+        local _etype1151, _size1148 = iprot:readListBegin()
+        for _i=1,_size1148 do
+          local _elem1152 = CoinProductItem:new{}
+          _elem1152:read(iprot)
+          table.insert(self.success, _elem1152)
         end
         iprot:readListEnd()
       else
@@ -2351,8 +2351,8 @@ function getCoinProductsByPgCode_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1289 in ipairs(self.success) do
-      iter1289:write(oprot)
+    for _,iter1153 in ipairs(self.success) do
+      iter1153:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3379,10 +3379,10 @@ function getProductList_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.productIdList = {}
-        local _etype1293, _size1290 = iprot:readListBegin()
-        for _i=1,_size1290 do
-          local _elem1294 = iprot:readString()
-          table.insert(self.productIdList, _elem1294)
+        local _etype1157, _size1154 = iprot:readListBegin()
+        for _i=1,_size1154 do
+          local _elem1158 = iprot:readString()
+          table.insert(self.productIdList, _elem1158)
         end
         iprot:readListEnd()
       else
@@ -3413,8 +3413,8 @@ function getProductList_args:write(oprot)
   if self.productIdList ~= nil then
     oprot:writeFieldBegin('productIdList', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.productIdList)
-    for _,iter1295 in ipairs(self.productIdList) do
-      oprot:writeString(iter1295)
+    for _,iter1159 in ipairs(self.productIdList) do
+      oprot:writeString(iter1159)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3498,10 +3498,10 @@ function getProductListWithCarrier_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.productIdList = {}
-        local _etype1299, _size1296 = iprot:readListBegin()
-        for _i=1,_size1296 do
-          local _elem1300 = iprot:readString()
-          table.insert(self.productIdList, _elem1300)
+        local _etype1163, _size1160 = iprot:readListBegin()
+        for _i=1,_size1160 do
+          local _elem1164 = iprot:readString()
+          table.insert(self.productIdList, _elem1164)
         end
         iprot:readListEnd()
       else
@@ -3538,8 +3538,8 @@ function getProductListWithCarrier_args:write(oprot)
   if self.productIdList ~= nil then
     oprot:writeFieldBegin('productIdList', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.productIdList)
-    for _,iter1301 in ipairs(self.productIdList) do
-      oprot:writeString(iter1301)
+    for _,iter1165 in ipairs(self.productIdList) do
+      oprot:writeString(iter1165)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()

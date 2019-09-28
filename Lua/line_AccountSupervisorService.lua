@@ -434,11 +434,11 @@ function notifyEmailConfirmationResult_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.parameterMap = {}
-        local _ktype969, _vtype970, _size968 = iprot:readMapBegin() 
-        for _i=1,_size968 do
-          local _key972 = iprot:readString()
-          local _val973 = iprot:readString()
-          self.parameterMap[_key972] = _val973
+        local _ktype833, _vtype834, _size832 = iprot:readMapBegin() 
+        for _i=1,_size832 do
+          local _key836 = iprot:readString()
+          local _val837 = iprot:readString()
+          self.parameterMap[_key836] = _val837
         end
         iprot:readMapEnd()
       else
@@ -457,9 +457,9 @@ function notifyEmailConfirmationResult_args:write(oprot)
   if self.parameterMap ~= nil then
     oprot:writeFieldBegin('parameterMap', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.parameterMap))
-    for kiter974,viter975 in pairs(self.parameterMap) do
-      oprot:writeString(kiter974)
-      oprot:writeString(viter975)
+    for kiter838,viter839 in pairs(self.parameterMap) do
+      oprot:writeString(kiter838)
+      oprot:writeString(viter839)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()

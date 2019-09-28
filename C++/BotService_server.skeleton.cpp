@@ -33,7 +33,7 @@ class BotServiceHandler : virtual public BotServiceIf {
     printf("getBotUseInfo\n");
   }
 
-  void sendChatCheckedByWatermark(const int32_t seq, const std::string& mid, const int64_t watermark, const int32_t sessionId) {
+  void sendChatCheckedByWatermark(const int32_t seq, const std::string& mid, const int64_t watermark, const int8_t sessionId) {
     // Your implementation goes here
     printf("sendChatCheckedByWatermark\n");
   }
@@ -42,11 +42,11 @@ class BotServiceHandler : virtual public BotServiceIf {
 
 int main(int argc, char **argv) {
   int port = 9090;
-  ::apache::thrift::stdcxx::shared_ptr<BotServiceHandler> handler(new BotServiceHandler());
-  ::apache::thrift::stdcxx::shared_ptr<TProcessor> processor(new BotServiceProcessor(handler));
-  ::apache::thrift::stdcxx::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  ::apache::thrift::stdcxx::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  ::apache::thrift::stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+  ::std::shared_ptr<BotServiceHandler> handler(new BotServiceHandler());
+  ::std::shared_ptr<TProcessor> processor(new BotServiceProcessor(handler));
+  ::std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+  ::std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+  ::std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();

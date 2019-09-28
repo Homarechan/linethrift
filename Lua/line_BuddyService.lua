@@ -650,11 +650,11 @@ function findBuddyContactsByQuery_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1109, _size1106 = iprot:readListBegin()
-        for _i=1,_size1106 do
-          local _elem1110 = BuddySearchResult:new{}
-          _elem1110:read(iprot)
-          table.insert(self.success, _elem1110)
+        local _etype973, _size970 = iprot:readListBegin()
+        for _i=1,_size970 do
+          local _elem974 = BuddySearchResult:new{}
+          _elem974:read(iprot)
+          table.insert(self.success, _elem974)
         end
         iprot:readListEnd()
       else
@@ -680,8 +680,8 @@ function findBuddyContactsByQuery_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1111 in ipairs(self.success) do
-      iter1111:write(oprot)
+    for _,iter975 in ipairs(self.success) do
+      iter975:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -792,11 +792,11 @@ function getBuddyContacts_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1115, _size1112 = iprot:readListBegin()
-        for _i=1,_size1112 do
-          local _elem1116 = Contact:new{}
-          _elem1116:read(iprot)
-          table.insert(self.success, _elem1116)
+        local _etype979, _size976 = iprot:readListBegin()
+        for _i=1,_size976 do
+          local _elem980 = Contact:new{}
+          _elem980:read(iprot)
+          table.insert(self.success, _elem980)
         end
         iprot:readListEnd()
       else
@@ -822,8 +822,8 @@ function getBuddyContacts_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1117 in ipairs(self.success) do
-      iter1117:write(oprot)
+    for _,iter981 in ipairs(self.success) do
+      iter981:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -1043,10 +1043,10 @@ function getCountriesHavingBuddy_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1121, _size1118 = iprot:readListBegin()
-        for _i=1,_size1118 do
-          local _elem1122 = iprot:readString()
-          table.insert(self.success, _elem1122)
+        local _etype985, _size982 = iprot:readListBegin()
+        for _i=1,_size982 do
+          local _elem986 = iprot:readString()
+          table.insert(self.success, _elem986)
         end
         iprot:readListEnd()
       else
@@ -1072,8 +1072,8 @@ function getCountriesHavingBuddy_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1123 in ipairs(self.success) do
-      oprot:writeString(iter1123)
+    for _,iter987 in ipairs(self.success) do
+      oprot:writeString(iter987)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -1136,11 +1136,11 @@ function getNewlyReleasedBuddyIds_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.MAP then
         self.success = {}
-        local _ktype1125, _vtype1126, _size1124 = iprot:readMapBegin() 
-        for _i=1,_size1124 do
-          local _key1128 = iprot:readString()
-          local _val1129 = iprot:readI64()
-          self.success[_key1128] = _val1129
+        local _ktype989, _vtype990, _size988 = iprot:readMapBegin() 
+        for _i=1,_size988 do
+          local _key992 = iprot:readString()
+          local _val993 = iprot:readI64()
+          self.success[_key992] = _val993
         end
         iprot:readMapEnd()
       else
@@ -1166,9 +1166,9 @@ function getNewlyReleasedBuddyIds_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.MAP, 0)
     oprot:writeMapBegin(TType.STRING, TType.I64, ttable_size(self.success))
-    for kiter1130,viter1131 in pairs(self.success) do
-      oprot:writeString(kiter1130)
-      oprot:writeI64(viter1131)
+    for kiter994,viter995 in pairs(self.success) do
+      oprot:writeString(kiter994)
+      oprot:writeI64(viter995)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -1363,11 +1363,11 @@ function getPopularBuddyLists_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1135, _size1132 = iprot:readListBegin()
-        for _i=1,_size1132 do
-          local _elem1136 = BuddyList:new{}
-          _elem1136:read(iprot)
-          table.insert(self.success, _elem1136)
+        local _etype999, _size996 = iprot:readListBegin()
+        for _i=1,_size996 do
+          local _elem1000 = BuddyList:new{}
+          _elem1000:read(iprot)
+          table.insert(self.success, _elem1000)
         end
         iprot:readListEnd()
       else
@@ -1393,8 +1393,8 @@ function getPopularBuddyLists_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1137 in ipairs(self.success) do
-      iter1137:write(oprot)
+    for _,iter1001 in ipairs(self.success) do
+      iter1001:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -1469,11 +1469,11 @@ function getPromotedBuddyContacts_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1141, _size1138 = iprot:readListBegin()
-        for _i=1,_size1138 do
-          local _elem1142 = Contact:new{}
-          _elem1142:read(iprot)
-          table.insert(self.success, _elem1142)
+        local _etype1005, _size1002 = iprot:readListBegin()
+        for _i=1,_size1002 do
+          local _elem1006 = Contact:new{}
+          _elem1006:read(iprot)
+          table.insert(self.success, _elem1006)
         end
         iprot:readListEnd()
       else
@@ -1499,8 +1499,8 @@ function getPromotedBuddyContacts_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1143 in ipairs(self.success) do
-      iter1143:write(oprot)
+    for _,iter1007 in ipairs(self.success) do
+      iter1007:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()

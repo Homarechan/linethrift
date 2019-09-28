@@ -38,7 +38,7 @@ class BotServiceHandler : BotService {
     return typeof(return).init;
   }
 
-  void sendChatCheckedByWatermark(int seq, string mid, long watermark, int sessionId) {
+  void sendChatCheckedByWatermark(int seq, string mid, long watermark, byte sessionId) {
     // Your implementation goes here.
     writeln("sendChatCheckedByWatermark called");
   }

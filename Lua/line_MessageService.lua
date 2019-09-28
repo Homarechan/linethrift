@@ -411,10 +411,10 @@ function multiGetLastReadMessageIds_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.chatIds = {}
-        local _etype1269, _size1266 = iprot:readListBegin()
-        for _i=1,_size1266 do
-          local _elem1270 = iprot:readString()
-          table.insert(self.chatIds, _elem1270)
+        local _etype1133, _size1130 = iprot:readListBegin()
+        for _i=1,_size1130 do
+          local _elem1134 = iprot:readString()
+          table.insert(self.chatIds, _elem1134)
         end
         iprot:readListEnd()
       else
@@ -433,8 +433,8 @@ function multiGetLastReadMessageIds_args:write(oprot)
   if self.chatIds ~= nil then
     oprot:writeFieldBegin('chatIds', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.chatIds)
-    for _,iter1271 in ipairs(self.chatIds) do
-      oprot:writeString(iter1271)
+    for _,iter1135 in ipairs(self.chatIds) do
+      oprot:writeString(iter1135)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -457,11 +457,11 @@ function multiGetLastReadMessageIds_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1275, _size1272 = iprot:readListBegin()
-        for _i=1,_size1272 do
-          local _elem1276 = LastReadMessageIds:new{}
-          _elem1276:read(iprot)
-          table.insert(self.success, _elem1276)
+        local _etype1139, _size1136 = iprot:readListBegin()
+        for _i=1,_size1136 do
+          local _elem1140 = LastReadMessageIds:new{}
+          _elem1140:read(iprot)
+          table.insert(self.success, _elem1140)
         end
         iprot:readListEnd()
       else
@@ -487,8 +487,8 @@ function multiGetLastReadMessageIds_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1277 in ipairs(self.success) do
-      iter1277:write(oprot)
+    for _,iter1141 in ipairs(self.success) do
+      iter1141:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()

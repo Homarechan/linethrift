@@ -501,8 +501,8 @@ function sendChatCheckedByWatermark_args:read(iprot)
         iprot:skip(ftype)
       end
     elseif fid == 4 then
-      if ftype == TType.I32 then
-        self.sessionId = iprot:readI32()
+      if ftype == TType.BYTE then
+        self.sessionId = iprot:readByte()
       else
         iprot:skip(ftype)
       end
@@ -532,8 +532,8 @@ function sendChatCheckedByWatermark_args:write(oprot)
     oprot:writeFieldEnd()
   end
   if self.sessionId ~= nil then
-    oprot:writeFieldBegin('sessionId', TType.I32, 4)
-    oprot:writeI32(self.sessionId)
+    oprot:writeFieldBegin('sessionId', TType.BYTE, 4)
+    oprot:writeByte(self.sessionId)
     oprot:writeFieldEnd()
   end
   oprot:writeFieldStop()

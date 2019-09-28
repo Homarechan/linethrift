@@ -1280,72 +1280,6 @@ SquareEventStatus = {
   ALERT_DISABLED = 2
 }
 
-PType = {
-  STICKER = 1,
-  THEME = 2,
-  STICON = 3
-}
-
-PromotionType = {
-  NONE = 0,
-  CARRIER = 1,
-  BUDDY = 2,
-  INSTALL = 3,
-  MISSION = 4,
-  MUSTBUY = 5
-}
-
-PMType = {
-  DEFAULT = 1,
-  VIEW_VIDEO = 2
-}
-
-SRType = {
-  STATIC = 1,
-  ANIMATION = 2,
-  SOUND = 3,
-  ANIMATION_SOUND = 4,
-  POPUP = 5,
-  l = 6,
-  POPUP_SOUND = 6
-}
-
-TRType = {
-  STATIC = 1,
-  ANIMATION = 2
-}
-
-SubType = {
-  GENERAL = 0,
-  CREATORS = 1
-}
-
-IdentityResponseType = {
-  UNKNOWN = 0,
-  SUCCESS = 1,
-  REQUIRE_SERVER_SIDE_EMAIL = 2,
-  REQUIRE_CLIENT_SIDE_EMAIL = 3
-}
-
-AvailableChatTypes = {
-  PERSONAL = 1,
-  ROOM = 2,
-  GROUP = 3,
-  SQUARE_CHAT = 4
-}
-
-ChatAppExceptionCode = {
-  INVALID_REQUEST = 1,
-  UNAUTHORIZED = 2,
-  SERVER_ERROR = 100
-}
-
-ChatappCategory = {
-  PRIORITY = 2,
-  REGULAR = 1,
-  MORE = 3
-}
-
 SuggestDictionaryIncrementStatus = {
   SUCCESS = 0,
   INVALID_REVISION = 1,
@@ -1355,3628 +1289,6 @@ SuggestDictionaryIncrementStatus = {
   FAIL = 5,
   TOO_OLD_DATA = 6
 }
-
-Chatapp = __TObject:new{
-  chatappId,
-  name,
-  icon,
-  url,
-  availableChatTypes
-}
-
-function Chatapp:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.chatappId = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.name = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.icon = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.url = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.LIST then
-        self.availableChatTypes = {}
-        local _etype3, _size0 = iprot:readListBegin()
-        for _i=1,_size0 do
-          local _elem4 = iprot:readI32()
-          table.insert(self.availableChatTypes, _elem4)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function Chatapp:write(oprot)
-  oprot:writeStructBegin('Chatapp')
-  if self.chatappId ~= nil then
-    oprot:writeFieldBegin('chatappId', TType.STRING, 1)
-    oprot:writeString(self.chatappId)
-    oprot:writeFieldEnd()
-  end
-  if self.name ~= nil then
-    oprot:writeFieldBegin('name', TType.STRING, 2)
-    oprot:writeString(self.name)
-    oprot:writeFieldEnd()
-  end
-  if self.icon ~= nil then
-    oprot:writeFieldBegin('icon', TType.STRING, 3)
-    oprot:writeString(self.icon)
-    oprot:writeFieldEnd()
-  end
-  if self.url ~= nil then
-    oprot:writeFieldBegin('url', TType.STRING, 4)
-    oprot:writeString(self.url)
-    oprot:writeFieldEnd()
-  end
-  if self.availableChatTypes ~= nil then
-    oprot:writeFieldBegin('availableChatTypes', TType.LIST, 5)
-    oprot:writeListBegin(TType.I32, #self.availableChatTypes)
-    for _,iter5 in ipairs(self.availableChatTypes) do
-      oprot:writeI32(iter5)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-MyChatapp = __TObject:new{
-  app,
-  category,
-  priority
-}
-
-function MyChatapp:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRUCT then
-        self.app = Chatapp:new{}
-        self.app:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.category = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.I64 then
-        self.priority = iprot:readI64()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function MyChatapp:write(oprot)
-  oprot:writeStructBegin('MyChatapp')
-  if self.app ~= nil then
-    oprot:writeFieldBegin('app', TType.STRUCT, 1)
-    self.app:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.category ~= nil then
-    oprot:writeFieldBegin('category', TType.I32, 2)
-    oprot:writeI32(self.category)
-    oprot:writeFieldEnd()
-  end
-  if self.priority ~= nil then
-    oprot:writeFieldBegin('priority', TType.I64, 3)
-    oprot:writeI64(self.priority)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-GetMyChatappsResponse = __TObject:new{
-  apps,
-  continuationToken
-}
-
-function GetMyChatappsResponse:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.LIST then
-        self.apps = {}
-        local _etype9, _size6 = iprot:readListBegin()
-        for _i=1,_size6 do
-          local _elem10 = MyChatapp:new{}
-          _elem10:read(iprot)
-          table.insert(self.apps, _elem10)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.continuationToken = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function GetMyChatappsResponse:write(oprot)
-  oprot:writeStructBegin('GetMyChatappsResponse')
-  if self.apps ~= nil then
-    oprot:writeFieldBegin('apps', TType.LIST, 1)
-    oprot:writeListBegin(TType.STRUCT, #self.apps)
-    for _,iter11 in ipairs(self.apps) do
-      iter11:write(oprot)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.continuationToken ~= nil then
-    oprot:writeFieldBegin('continuationToken', TType.STRING, 2)
-    oprot:writeString(self.continuationToken)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-GetMyChatappsRequest = __TObject:new{
-  language,
-  continuationToken
-}
-
-function GetMyChatappsRequest:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.language = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.continuationToken = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function GetMyChatappsRequest:write(oprot)
-  oprot:writeStructBegin('GetMyChatappsRequest')
-  if self.language ~= nil then
-    oprot:writeFieldBegin('language', TType.STRING, 1)
-    oprot:writeString(self.language)
-    oprot:writeFieldEnd()
-  end
-  if self.continuationToken ~= nil then
-    oprot:writeFieldBegin('continuationToken', TType.STRING, 2)
-    oprot:writeString(self.continuationToken)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-GetChatappRequest = __TObject:new{
-  chatappId,
-  language
-}
-
-function GetChatappRequest:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.chatappId = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.language = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function GetChatappRequest:write(oprot)
-  oprot:writeStructBegin('GetChatappRequest')
-  if self.chatappId ~= nil then
-    oprot:writeFieldBegin('chatappId', TType.STRING, 1)
-    oprot:writeString(self.chatappId)
-    oprot:writeFieldEnd()
-  end
-  if self.language ~= nil then
-    oprot:writeFieldBegin('language', TType.STRING, 2)
-    oprot:writeString(self.language)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ChatappException = __TObject:new{
-  code,
-  reason
-}
-
-function ChatappException:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.I32 then
-        self.code = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.reason = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ChatappException:write(oprot)
-  oprot:writeStructBegin('ChatappException')
-  if self.code ~= nil then
-    oprot:writeFieldBegin('code', TType.I32, 1)
-    oprot:writeI32(self.code)
-    oprot:writeFieldEnd()
-  end
-  if self.reason ~= nil then
-    oprot:writeFieldBegin('reason', TType.STRING, 2)
-    oprot:writeString(self.reason)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-GetChatappResponse = __TObject:new{
-  app
-}
-
-function GetChatappResponse:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRUCT then
-        self.app = Chatapp:new{}
-        self.app:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function GetChatappResponse:write(oprot)
-  oprot:writeStructBegin('GetChatappResponse')
-  if self.app ~= nil then
-    oprot:writeFieldBegin('app', TType.STRUCT, 1)
-    self.app:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-WebLoginResponse = __TObject:new{
-  returnUrl
-}
-
-function WebLoginResponse:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.returnUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function WebLoginResponse:write(oprot)
-  oprot:writeStructBegin('WebLoginResponse')
-  if self.returnUrl ~= nil then
-    oprot:writeFieldBegin('returnUrl', TType.STRING, 1)
-    oprot:writeString(self.returnUrl)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-WebLoginRequest = __TObject:new{
-  hookedFullUrl,
-  sessionString,
-  fromIAB
-}
-
-function WebLoginRequest:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.hookedFullUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.sessionString = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.BOOL then
-        self.fromIAB = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function WebLoginRequest:write(oprot)
-  oprot:writeStructBegin('WebLoginRequest')
-  if self.hookedFullUrl ~= nil then
-    oprot:writeFieldBegin('hookedFullUrl', TType.STRING, 1)
-    oprot:writeString(self.hookedFullUrl)
-    oprot:writeFieldEnd()
-  end
-  if self.sessionString ~= nil then
-    oprot:writeFieldBegin('sessionString', TType.STRING, 2)
-    oprot:writeString(self.sessionString)
-    oprot:writeFieldEnd()
-  end
-  if self.fromIAB ~= nil then
-    oprot:writeFieldBegin('fromIAB', TType.BOOL, 3)
-    oprot:writeBool(self.fromIAB)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-TestCallRoute = __TObject:new{
-  token,
-  voipServer
-}
-
-function TestCallRoute:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.token = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRUCT then
-        self.voipServer = CallHost:new{}
-        self.voipServer:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function TestCallRoute:write(oprot)
-  oprot:writeStructBegin('TestCallRoute')
-  if self.token ~= nil then
-    oprot:writeFieldBegin('token', TType.STRING, 1)
-    oprot:writeString(self.token)
-    oprot:writeFieldEnd()
-  end
-  if self.voipServer ~= nil then
-    oprot:writeFieldBegin('voipServer', TType.STRUCT, 2)
-    self.voipServer:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ProfileContent = __TObject:new{
-  value,
-  meta
-}
-
-function ProfileContent:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.value = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.MAP then
-        self.meta = {}
-        local _ktype13, _vtype14, _size12 = iprot:readMapBegin() 
-        for _i=1,_size12 do
-          local _key16 = iprot:readString()
-          local _val17 = iprot:readString()
-          self.meta[_key16] = _val17
-        end
-        iprot:readMapEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ProfileContent:write(oprot)
-  oprot:writeStructBegin('ProfileContent')
-  if self.value ~= nil then
-    oprot:writeFieldBegin('value', TType.STRING, 1)
-    oprot:writeString(self.value)
-    oprot:writeFieldEnd()
-  end
-  if self.meta ~= nil then
-    oprot:writeFieldBegin('meta', TType.MAP, 2)
-    oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.meta))
-    for kiter18,viter19 in pairs(self.meta) do
-      oprot:writeString(kiter18)
-      oprot:writeString(viter19)
-    end
-    oprot:writeMapEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-UpdateProfileAttributesRequest = __TObject:new{
-  profileAttributes
-}
-
-function UpdateProfileAttributesRequest:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.MAP then
-        self.profileAttributes = {}
-        local _ktype21, _vtype22, _size20 = iprot:readMapBegin() 
-        for _i=1,_size20 do
-          local _key24 = iprot:readI32()
-          local _val25 = ProfileContent:new{}
-          _val25:read(iprot)
-          self.profileAttributes[_key24] = _val25
-        end
-        iprot:readMapEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function UpdateProfileAttributesRequest:write(oprot)
-  oprot:writeStructBegin('UpdateProfileAttributesRequest')
-  if self.profileAttributes ~= nil then
-    oprot:writeFieldBegin('profileAttributes', TType.MAP, 1)
-    oprot:writeMapBegin(TType.I32, TType.STRUCT, ttable_size(self.profileAttributes))
-    for kiter26,viter27 in pairs(self.profileAttributes) do
-      oprot:writeI32(kiter26)
-      viter27:write(oprot)
-    end
-    oprot:writeMapEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-IdentityCredentialResponse = __TObject:new{
-  metaData,
-  responseType,
-  confirmationVerifier,
-  timeoutInSeconds
-}
-
-function IdentityCredentialResponse:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.MAP then
-        self.metaData = {}
-        local _ktype29, _vtype30, _size28 = iprot:readMapBegin() 
-        for _i=1,_size28 do
-          local _key32 = iprot:readString()
-          local _val33 = iprot:readString()
-          self.metaData[_key32] = _val33
-        end
-        iprot:readMapEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.responseType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.confirmationVerifier = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.I64 then
-        self.timeoutInSeconds = iprot:readI64()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function IdentityCredentialResponse:write(oprot)
-  oprot:writeStructBegin('IdentityCredentialResponse')
-  if self.metaData ~= nil then
-    oprot:writeFieldBegin('metaData', TType.MAP, 1)
-    oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.metaData))
-    for kiter34,viter35 in pairs(self.metaData) do
-      oprot:writeString(kiter34)
-      oprot:writeString(viter35)
-    end
-    oprot:writeMapEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.responseType ~= nil then
-    oprot:writeFieldBegin('responseType', TType.I32, 2)
-    oprot:writeI32(self.responseType)
-    oprot:writeFieldEnd()
-  end
-  if self.confirmationVerifier ~= nil then
-    oprot:writeFieldBegin('confirmationVerifier', TType.STRING, 3)
-    oprot:writeString(self.confirmationVerifier)
-    oprot:writeFieldEnd()
-  end
-  if self.timeoutInSeconds ~= nil then
-    oprot:writeFieldBegin('timeoutInSeconds', TType.I64, 4)
-    oprot:writeI64(self.timeoutInSeconds)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-IdentifierConfirmationRequest = __TObject:new{
-  metaData,
-  forceRegistration,
-  verificationCode
-}
-
-function IdentifierConfirmationRequest:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.MAP then
-        self.metaData = {}
-        local _ktype37, _vtype38, _size36 = iprot:readMapBegin() 
-        for _i=1,_size36 do
-          local _key40 = iprot:readString()
-          local _val41 = iprot:readString()
-          self.metaData[_key40] = _val41
-        end
-        iprot:readMapEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.BOOL then
-        self.forceRegistration = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.verificationCode = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function IdentifierConfirmationRequest:write(oprot)
-  oprot:writeStructBegin('IdentifierConfirmationRequest')
-  if self.metaData ~= nil then
-    oprot:writeFieldBegin('metaData', TType.MAP, 1)
-    oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.metaData))
-    for kiter42,viter43 in pairs(self.metaData) do
-      oprot:writeString(kiter42)
-      oprot:writeString(viter43)
-    end
-    oprot:writeMapEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.forceRegistration ~= nil then
-    oprot:writeFieldBegin('forceRegistration', TType.BOOL, 2)
-    oprot:writeBool(self.forceRegistration)
-    oprot:writeFieldEnd()
-  end
-  if self.verificationCode ~= nil then
-    oprot:writeFieldBegin('verificationCode', TType.STRING, 3)
-    oprot:writeString(self.verificationCode)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-IdentityCredentialRequest = __TObject:new{
-  metaData,
-  identityProvider,
-  cipherKeyId,
-  cipherText,
-  confirmationRequest
-}
-
-function IdentityCredentialRequest:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.MAP then
-        self.metaData = {}
-        local _ktype45, _vtype46, _size44 = iprot:readMapBegin() 
-        for _i=1,_size44 do
-          local _key48 = iprot:readString()
-          local _val49 = iprot:readString()
-          self.metaData[_key48] = _val49
-        end
-        iprot:readMapEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.identityProvider = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.cipherKeyId = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.cipherText = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRUCT then
-        self.confirmationRequest = IdentifierConfirmationRequest:new{}
-        self.confirmationRequest:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function IdentityCredentialRequest:write(oprot)
-  oprot:writeStructBegin('IdentityCredentialRequest')
-  if self.metaData ~= nil then
-    oprot:writeFieldBegin('metaData', TType.MAP, 1)
-    oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.metaData))
-    for kiter50,viter51 in pairs(self.metaData) do
-      oprot:writeString(kiter50)
-      oprot:writeString(viter51)
-    end
-    oprot:writeMapEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.identityProvider ~= nil then
-    oprot:writeFieldBegin('identityProvider', TType.I32, 2)
-    oprot:writeI32(self.identityProvider)
-    oprot:writeFieldEnd()
-  end
-  if self.cipherKeyId ~= nil then
-    oprot:writeFieldBegin('cipherKeyId', TType.STRING, 3)
-    oprot:writeString(self.cipherKeyId)
-    oprot:writeFieldEnd()
-  end
-  if self.cipherText ~= nil then
-    oprot:writeFieldBegin('cipherText', TType.STRING, 4)
-    oprot:writeString(self.cipherText)
-    oprot:writeFieldEnd()
-  end
-  if self.confirmationRequest ~= nil then
-    oprot:writeFieldBegin('confirmationRequest', TType.STRUCT, 5)
-    self.confirmationRequest:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-AuthSessionRequest = __TObject:new{
-  metaData
-}
-
-function AuthSessionRequest:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.MAP then
-        self.metaData = {}
-        local _ktype53, _vtype54, _size52 = iprot:readMapBegin() 
-        for _i=1,_size52 do
-          local _key56 = iprot:readString()
-          local _val57 = iprot:readString()
-          self.metaData[_key56] = _val57
-        end
-        iprot:readMapEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function AuthSessionRequest:write(oprot)
-  oprot:writeStructBegin('AuthSessionRequest')
-  if self.metaData ~= nil then
-    oprot:writeFieldBegin('metaData', TType.MAP, 1)
-    oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.metaData))
-    for kiter58,viter59 in pairs(self.metaData) do
-      oprot:writeString(kiter58)
-      oprot:writeString(viter59)
-    end
-    oprot:writeMapEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-CategoryItem = __TObject:new{
-  collection,
-  cat,
-  name
-}
-
-function CategoryItem:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.I32 then
-        self.collection = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.cat = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.name = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function CategoryItem:write(oprot)
-  oprot:writeStructBegin('CategoryItem')
-  if self.collection ~= nil then
-    oprot:writeFieldBegin('collection', TType.I32, 1)
-    oprot:writeI32(self.collection)
-    oprot:writeFieldEnd()
-  end
-  if self.cat ~= nil then
-    oprot:writeFieldBegin('cat', TType.I32, 2)
-    oprot:writeI32(self.cat)
-    oprot:writeFieldEnd()
-  end
-  if self.name ~= nil then
-    oprot:writeFieldBegin('name', TType.STRING, 3)
-    oprot:writeString(self.name)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-PromotionBuddyInfo = __TObject:new{
-  buddyMid
-}
-
-function PromotionBuddyInfo:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.buddyMid = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function PromotionBuddyInfo:write(oprot)
-  oprot:writeStructBegin('PromotionBuddyInfo')
-  if self.buddyMid ~= nil then
-    oprot:writeFieldBegin('buddyMid', TType.STRING, 1)
-    oprot:writeString(self.buddyMid)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-PromotionInstallInfo = __TObject:new{
-  downloadUrl,
-  customUrlSchema
-}
-
-function PromotionInstallInfo:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.downloadUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.customUrlSchema = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function PromotionInstallInfo:write(oprot)
-  oprot:writeStructBegin('PromotionInstallInfo')
-  if self.downloadUrl ~= nil then
-    oprot:writeFieldBegin('downloadUrl', TType.STRING, 1)
-    oprot:writeString(self.downloadUrl)
-    oprot:writeFieldEnd()
-  end
-  if self.customUrlSchema ~= nil then
-    oprot:writeFieldBegin('customUrlSchema', TType.STRING, 2)
-    oprot:writeString(self.customUrlSchema)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-PromotionMissionInfo = __TObject:new{
-  promotionMissionType,
-  missionCompleted,
-  downloadUrl,
-  customUrlSchema
-}
-
-function PromotionMissionInfo:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.I32 then
-        self.promotionMissionType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.BOOL then
-        self.missionCompleted = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.downloadUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.customUrlSchema = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function PromotionMissionInfo:write(oprot)
-  oprot:writeStructBegin('PromotionMissionInfo')
-  if self.promotionMissionType ~= nil then
-    oprot:writeFieldBegin('promotionMissionType', TType.I32, 1)
-    oprot:writeI32(self.promotionMissionType)
-    oprot:writeFieldEnd()
-  end
-  if self.missionCompleted ~= nil then
-    oprot:writeFieldBegin('missionCompleted', TType.BOOL, 2)
-    oprot:writeBool(self.missionCompleted)
-    oprot:writeFieldEnd()
-  end
-  if self.downloadUrl ~= nil then
-    oprot:writeFieldBegin('downloadUrl', TType.STRING, 3)
-    oprot:writeString(self.downloadUrl)
-    oprot:writeFieldEnd()
-  end
-  if self.customUrlSchema ~= nil then
-    oprot:writeFieldBegin('customUrlSchema', TType.STRING, 4)
-    oprot:writeString(self.customUrlSchema)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-PromotionDetail = __TObject:new{
-  promotionBuddyInfo,
-  promotionInstallInfo,
-  promotionMissionInfo
-}
-
-function PromotionDetail:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRUCT then
-        self.promotionBuddyInfo = PromotionBuddyInfo:new{}
-        self.promotionBuddyInfo:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRUCT then
-        self.promotionInstallInfo = PromotionInstallInfo:new{}
-        self.promotionInstallInfo:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRUCT then
-        self.promotionMissionInfo = PromotionMissionInfo:new{}
-        self.promotionMissionInfo:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function PromotionDetail:write(oprot)
-  oprot:writeStructBegin('PromotionDetail')
-  if self.promotionBuddyInfo ~= nil then
-    oprot:writeFieldBegin('promotionBuddyInfo', TType.STRUCT, 1)
-    self.promotionBuddyInfo:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.promotionInstallInfo ~= nil then
-    oprot:writeFieldBegin('promotionInstallInfo', TType.STRUCT, 2)
-    self.promotionInstallInfo:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.promotionMissionInfo ~= nil then
-    oprot:writeFieldBegin('promotionMissionInfo', TType.STRUCT, 3)
-    self.promotionMissionInfo:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-PromotionInfo = __TObject:new{
-  promotionType,
-  buddyInfo,
-  promotionDetail
-}
-
-function PromotionInfo:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.I32 then
-        self.promotionType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 51 then
-      if ftype == TType.STRUCT then
-        self.buddyInfo = PromotionBuddyInfo:new{}
-        self.buddyInfo:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRUCT then
-        self.promotionDetail = PromotionDetail:new{}
-        self.promotionDetail:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function PromotionInfo:write(oprot)
-  oprot:writeStructBegin('PromotionInfo')
-  if self.promotionType ~= nil then
-    oprot:writeFieldBegin('promotionType', TType.I32, 1)
-    oprot:writeI32(self.promotionType)
-    oprot:writeFieldEnd()
-  end
-  if self.buddyInfo ~= nil then
-    oprot:writeFieldBegin('buddyInfo', TType.STRUCT, 51)
-    self.buddyInfo:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.promotionDetail ~= nil then
-    oprot:writeFieldBegin('promotionDetail', TType.STRUCT, 2)
-    self.promotionDetail:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-StickerProperty = __TObject:new{
-  hasAnimation,
-  hasSound,
-  hasPopup,
-  stickerResourceType,
-  stickerOptions,
-  compactStickerOptions,
-  stickerHash,
-  stickerIds
-}
-
-function StickerProperty:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.BOOL then
-        self.hasAnimation = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.BOOL then
-        self.hasSound = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.BOOL then
-        self.hasPopup = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.I32 then
-        self.stickerResourceType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRING then
-        self.stickerOptions = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.I32 then
-        self.compactStickerOptions = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.STRING then
-        self.stickerHash = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.SET then
-        self.stickerIds = {}
-        local _etype63, _size60 = iprot:readSetBegin()
-        for _i=1,_size60 do
-          local _elem64 = iprot:readString()
-          self.stickerIds[_elem64] = _elem64
-        end
-        iprot:readSetEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function StickerProperty:write(oprot)
-  oprot:writeStructBegin('StickerProperty')
-  if self.hasAnimation ~= nil then
-    oprot:writeFieldBegin('hasAnimation', TType.BOOL, 1)
-    oprot:writeBool(self.hasAnimation)
-    oprot:writeFieldEnd()
-  end
-  if self.hasSound ~= nil then
-    oprot:writeFieldBegin('hasSound', TType.BOOL, 2)
-    oprot:writeBool(self.hasSound)
-    oprot:writeFieldEnd()
-  end
-  if self.hasPopup ~= nil then
-    oprot:writeFieldBegin('hasPopup', TType.BOOL, 3)
-    oprot:writeBool(self.hasPopup)
-    oprot:writeFieldEnd()
-  end
-  if self.stickerResourceType ~= nil then
-    oprot:writeFieldBegin('stickerResourceType', TType.I32, 4)
-    oprot:writeI32(self.stickerResourceType)
-    oprot:writeFieldEnd()
-  end
-  if self.stickerOptions ~= nil then
-    oprot:writeFieldBegin('stickerOptions', TType.STRING, 5)
-    oprot:writeString(self.stickerOptions)
-    oprot:writeFieldEnd()
-  end
-  if self.compactStickerOptions ~= nil then
-    oprot:writeFieldBegin('compactStickerOptions', TType.I32, 6)
-    oprot:writeI32(self.compactStickerOptions)
-    oprot:writeFieldEnd()
-  end
-  if self.stickerHash ~= nil then
-    oprot:writeFieldBegin('stickerHash', TType.STRING, 7)
-    oprot:writeString(self.stickerHash)
-    oprot:writeFieldEnd()
-  end
-  if self.stickerIds ~= nil then
-    oprot:writeFieldBegin('stickerIds', TType.SET, 8)
-    oprot:writeSetBegin(TType.STRING, ttable_size(self.stickerIds))
-    for iter65,_ in pairs(self.stickerIds) do
-      oprot:writeString(iter65)
-    end
-    oprot:writeSetEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ThemeProperty = __TObject:new{
-  thumbnailUrl,
-  themeResourceType
-}
-
-function ThemeProperty:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.thumbnailUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.themeResourceType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ThemeProperty:write(oprot)
-  oprot:writeStructBegin('ThemeProperty')
-  if self.thumbnailUrl ~= nil then
-    oprot:writeFieldBegin('thumbnailUrl', TType.STRING, 1)
-    oprot:writeString(self.thumbnailUrl)
-    oprot:writeFieldEnd()
-  end
-  if self.themeResourceType ~= nil then
-    oprot:writeFieldBegin('themeResourceType', TType.I32, 2)
-    oprot:writeI32(self.themeResourceType)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-SticonProperty = __TObject:new{
-  sticonIds
-}
-
-function SticonProperty:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.SET then
-        self.sticonIds = {}
-        local _etype69, _size66 = iprot:readSetBegin()
-        for _i=1,_size66 do
-          local _elem70 = iprot:readString()
-          self.sticonIds[_elem70] = _elem70
-        end
-        iprot:readSetEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function SticonProperty:write(oprot)
-  oprot:writeStructBegin('SticonProperty')
-  if self.sticonIds ~= nil then
-    oprot:writeFieldBegin('sticonIds', TType.SET, 1)
-    oprot:writeSetBegin(TType.STRING, ttable_size(self.sticonIds))
-    for iter71,_ in pairs(self.sticonIds) do
-      oprot:writeString(iter71)
-    end
-    oprot:writeSetEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ProductProperty = __TObject:new{
-  stickerProperty,
-  sticonProperty,
-  themeProperty
-}
-
-function ProductProperty:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRUCT then
-        self.stickerProperty = StickerProperty:new{}
-        self.stickerProperty:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRUCT then
-        self.sticonProperty = SticonProperty:new{}
-        self.sticonProperty:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRUCT then
-        self.themeProperty = ThemeProperty:new{}
-        self.themeProperty:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ProductProperty:write(oprot)
-  oprot:writeStructBegin('ProductProperty')
-  if self.stickerProperty ~= nil then
-    oprot:writeFieldBegin('stickerProperty', TType.STRUCT, 1)
-    self.stickerProperty:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.sticonProperty ~= nil then
-    oprot:writeFieldBegin('sticonProperty', TType.STRUCT, 3)
-    self.sticonProperty:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.themeProperty ~= nil then
-    oprot:writeFieldBegin('themeProperty', TType.STRUCT, 2)
-    self.themeProperty:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ProductSearchSummary = __TObject:new{
-  id,
-  type,
-  name,
-  author,
-  promotionInfo,
-  version,
-  newFlag,
-  priceTier,
-  priceInLineCoin,
-  property,
-  subType,
-  onSale,
-  availableForPresent,
-  availableForPurchase,
-  validDays,
-  authorId,
-  saleFlag
-}
-
-function ProductSearchSummary:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.id = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.type = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.name = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.author = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRUCT then
-        self.promotionInfo = PromotionInfo:new{}
-        self.promotionInfo:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.I64 then
-        self.version = iprot:readI64()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.BOOL then
-        self.newFlag = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.I32 then
-        self.priceTier = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 9 then
-      if ftype == TType.STRING then
-        self.priceInLineCoin = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 10 then
-      if ftype == TType.STRUCT then
-        self.property = ProductProperty:new{}
-        self.property:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 11 then
-      if ftype == TType.I32 then
-        self.subType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 12 then
-      if ftype == TType.BOOL then
-        self.onSale = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 13 then
-      if ftype == TType.BOOL then
-        self.availableForPresent = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 14 then
-      if ftype == TType.BOOL then
-        self.availableForPurchase = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 15 then
-      if ftype == TType.I32 then
-        self.validDays = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 16 then
-      if ftype == TType.STRING then
-        self.authorId = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 17 then
-      if ftype == TType.BOOL then
-        self.saleFlag = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ProductSearchSummary:write(oprot)
-  oprot:writeStructBegin('ProductSearchSummary')
-  if self.id ~= nil then
-    oprot:writeFieldBegin('id', TType.STRING, 1)
-    oprot:writeString(self.id)
-    oprot:writeFieldEnd()
-  end
-  if self.type ~= nil then
-    oprot:writeFieldBegin('type', TType.I32, 2)
-    oprot:writeI32(self.type)
-    oprot:writeFieldEnd()
-  end
-  if self.name ~= nil then
-    oprot:writeFieldBegin('name', TType.STRING, 3)
-    oprot:writeString(self.name)
-    oprot:writeFieldEnd()
-  end
-  if self.author ~= nil then
-    oprot:writeFieldBegin('author', TType.STRING, 4)
-    oprot:writeString(self.author)
-    oprot:writeFieldEnd()
-  end
-  if self.promotionInfo ~= nil then
-    oprot:writeFieldBegin('promotionInfo', TType.STRUCT, 5)
-    self.promotionInfo:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.version ~= nil then
-    oprot:writeFieldBegin('version', TType.I64, 6)
-    oprot:writeI64(self.version)
-    oprot:writeFieldEnd()
-  end
-  if self.newFlag ~= nil then
-    oprot:writeFieldBegin('newFlag', TType.BOOL, 7)
-    oprot:writeBool(self.newFlag)
-    oprot:writeFieldEnd()
-  end
-  if self.priceTier ~= nil then
-    oprot:writeFieldBegin('priceTier', TType.I32, 8)
-    oprot:writeI32(self.priceTier)
-    oprot:writeFieldEnd()
-  end
-  if self.priceInLineCoin ~= nil then
-    oprot:writeFieldBegin('priceInLineCoin', TType.STRING, 9)
-    oprot:writeString(self.priceInLineCoin)
-    oprot:writeFieldEnd()
-  end
-  if self.property ~= nil then
-    oprot:writeFieldBegin('property', TType.STRUCT, 10)
-    self.property:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.subType ~= nil then
-    oprot:writeFieldBegin('subType', TType.I32, 11)
-    oprot:writeI32(self.subType)
-    oprot:writeFieldEnd()
-  end
-  if self.onSale ~= nil then
-    oprot:writeFieldBegin('onSale', TType.BOOL, 12)
-    oprot:writeBool(self.onSale)
-    oprot:writeFieldEnd()
-  end
-  if self.availableForPresent ~= nil then
-    oprot:writeFieldBegin('availableForPresent', TType.BOOL, 13)
-    oprot:writeBool(self.availableForPresent)
-    oprot:writeFieldEnd()
-  end
-  if self.availableForPurchase ~= nil then
-    oprot:writeFieldBegin('availableForPurchase', TType.BOOL, 14)
-    oprot:writeBool(self.availableForPurchase)
-    oprot:writeFieldEnd()
-  end
-  if self.validDays ~= nil then
-    oprot:writeFieldBegin('validDays', TType.I32, 15)
-    oprot:writeI32(self.validDays)
-    oprot:writeFieldEnd()
-  end
-  if self.authorId ~= nil then
-    oprot:writeFieldBegin('authorId', TType.STRING, 16)
-    oprot:writeString(self.authorId)
-    oprot:writeFieldEnd()
-  end
-  if self.saleFlag ~= nil then
-    oprot:writeFieldBegin('saleFlag', TType.BOOL, 17)
-    oprot:writeBool(self.saleFlag)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ServiceItem = __TObject:new{
-  id,
-  title,
-  g,
-  subType,
-  appId,
-  channelId,
-  badge,
-  iconUrl,
-  downloadUrl,
-  launchScheme,
-  iconTint
-}
-
-function ServiceItem:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.id = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.title = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.I32 then
-        self.g = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.I32 then
-        self.subType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRING then
-        self.appId = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.STRING then
-        self.channelId = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.STRING then
-        self.badge = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.STRING then
-        self.iconUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 9 then
-      if ftype == TType.STRING then
-        self.downloadUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 10 then
-      if ftype == TType.STRING then
-        self.launchScheme = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 11 then
-      if ftype == TType.BOOL then
-        self.iconTint = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ServiceItem:write(oprot)
-  oprot:writeStructBegin('ServiceItem')
-  if self.id ~= nil then
-    oprot:writeFieldBegin('id', TType.STRING, 1)
-    oprot:writeString(self.id)
-    oprot:writeFieldEnd()
-  end
-  if self.title ~= nil then
-    oprot:writeFieldBegin('title', TType.STRING, 2)
-    oprot:writeString(self.title)
-    oprot:writeFieldEnd()
-  end
-  if self.g ~= nil then
-    oprot:writeFieldBegin('g', TType.I32, 3)
-    oprot:writeI32(self.g)
-    oprot:writeFieldEnd()
-  end
-  if self.subType ~= nil then
-    oprot:writeFieldBegin('subType', TType.I32, 4)
-    oprot:writeI32(self.subType)
-    oprot:writeFieldEnd()
-  end
-  if self.appId ~= nil then
-    oprot:writeFieldBegin('appId', TType.STRING, 5)
-    oprot:writeString(self.appId)
-    oprot:writeFieldEnd()
-  end
-  if self.channelId ~= nil then
-    oprot:writeFieldBegin('channelId', TType.STRING, 6)
-    oprot:writeString(self.channelId)
-    oprot:writeFieldEnd()
-  end
-  if self.badge ~= nil then
-    oprot:writeFieldBegin('badge', TType.STRING, 7)
-    oprot:writeString(self.badge)
-    oprot:writeFieldEnd()
-  end
-  if self.iconUrl ~= nil then
-    oprot:writeFieldBegin('iconUrl', TType.STRING, 8)
-    oprot:writeString(self.iconUrl)
-    oprot:writeFieldEnd()
-  end
-  if self.downloadUrl ~= nil then
-    oprot:writeFieldBegin('downloadUrl', TType.STRING, 9)
-    oprot:writeString(self.downloadUrl)
-    oprot:writeFieldEnd()
-  end
-  if self.launchScheme ~= nil then
-    oprot:writeFieldBegin('launchScheme', TType.STRING, 10)
-    oprot:writeString(self.launchScheme)
-    oprot:writeFieldEnd()
-  end
-  if self.iconTint ~= nil then
-    oprot:writeFieldBegin('iconTint', TType.BOOL, 11)
-    oprot:writeBool(self.iconTint)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-AdditionalInfoItem = __TObject:new{
-  id,
-  g,
-  title,
-  descr,
-  iconUrl,
-  link
-}
-
-function AdditionalInfoItem:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.id = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.g = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.title = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.descr = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRING then
-        self.iconUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.STRING then
-        self.link = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function AdditionalInfoItem:write(oprot)
-  oprot:writeStructBegin('AdditionalInfoItem')
-  if self.id ~= nil then
-    oprot:writeFieldBegin('id', TType.STRING, 1)
-    oprot:writeString(self.id)
-    oprot:writeFieldEnd()
-  end
-  if self.g ~= nil then
-    oprot:writeFieldBegin('g', TType.I32, 2)
-    oprot:writeI32(self.g)
-    oprot:writeFieldEnd()
-  end
-  if self.title ~= nil then
-    oprot:writeFieldBegin('title', TType.STRING, 3)
-    oprot:writeString(self.title)
-    oprot:writeFieldEnd()
-  end
-  if self.descr ~= nil then
-    oprot:writeFieldBegin('descr', TType.STRING, 4)
-    oprot:writeString(self.descr)
-    oprot:writeFieldEnd()
-  end
-  if self.iconUrl ~= nil then
-    oprot:writeFieldBegin('iconUrl', TType.STRING, 5)
-    oprot:writeString(self.iconUrl)
-    oprot:writeFieldEnd()
-  end
-  if self.link ~= nil then
-    oprot:writeFieldBegin('link', TType.STRING, 6)
-    oprot:writeString(self.link)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-YellowpageItem = __TObject:new{
-  id,
-  mid,
-  name,
-  address,
-  latitude,
-  longitude,
-  distance,
-  canFreeCall,
-  k,
-  phoneNumber,
-  cat,
-  categoryIcon,
-  additionalInfo
-}
-
-function YellowpageItem:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.id = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.mid = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.name = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.address = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.DOUBLE then
-        self.latitude = iprot:readDouble()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.DOUBLE then
-        self.longitude = iprot:readDouble()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.DOUBLE then
-        self.distance = iprot:readDouble()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.BOOL then
-        self.canFreeCall = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 9 then
-      if ftype == TType.I32 then
-        self.k = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 10 then
-      if ftype == TType.STRING then
-        self.phoneNumber = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 11 then
-      if ftype == TType.I32 then
-        self.cat = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 12 then
-      if ftype == TType.I32 then
-        self.categoryIcon = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 13 then
-      if ftype == TType.LIST then
-        self.additionalInfo = {}
-        local _etype75, _size72 = iprot:readListBegin()
-        for _i=1,_size72 do
-          local _elem76 = AdditionalInfoItem:new{}
-          _elem76:read(iprot)
-          table.insert(self.additionalInfo, _elem76)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function YellowpageItem:write(oprot)
-  oprot:writeStructBegin('YellowpageItem')
-  if self.id ~= nil then
-    oprot:writeFieldBegin('id', TType.STRING, 1)
-    oprot:writeString(self.id)
-    oprot:writeFieldEnd()
-  end
-  if self.mid ~= nil then
-    oprot:writeFieldBegin('mid', TType.STRING, 2)
-    oprot:writeString(self.mid)
-    oprot:writeFieldEnd()
-  end
-  if self.name ~= nil then
-    oprot:writeFieldBegin('name', TType.STRING, 3)
-    oprot:writeString(self.name)
-    oprot:writeFieldEnd()
-  end
-  if self.address ~= nil then
-    oprot:writeFieldBegin('address', TType.STRING, 4)
-    oprot:writeString(self.address)
-    oprot:writeFieldEnd()
-  end
-  if self.latitude ~= nil then
-    oprot:writeFieldBegin('latitude', TType.DOUBLE, 5)
-    oprot:writeDouble(self.latitude)
-    oprot:writeFieldEnd()
-  end
-  if self.longitude ~= nil then
-    oprot:writeFieldBegin('longitude', TType.DOUBLE, 6)
-    oprot:writeDouble(self.longitude)
-    oprot:writeFieldEnd()
-  end
-  if self.distance ~= nil then
-    oprot:writeFieldBegin('distance', TType.DOUBLE, 7)
-    oprot:writeDouble(self.distance)
-    oprot:writeFieldEnd()
-  end
-  if self.canFreeCall ~= nil then
-    oprot:writeFieldBegin('canFreeCall', TType.BOOL, 8)
-    oprot:writeBool(self.canFreeCall)
-    oprot:writeFieldEnd()
-  end
-  if self.k ~= nil then
-    oprot:writeFieldBegin('k', TType.I32, 9)
-    oprot:writeI32(self.k)
-    oprot:writeFieldEnd()
-  end
-  if self.phoneNumber ~= nil then
-    oprot:writeFieldBegin('phoneNumber', TType.STRING, 10)
-    oprot:writeString(self.phoneNumber)
-    oprot:writeFieldEnd()
-  end
-  if self.cat ~= nil then
-    oprot:writeFieldBegin('cat', TType.I32, 11)
-    oprot:writeI32(self.cat)
-    oprot:writeFieldEnd()
-  end
-  if self.categoryIcon ~= nil then
-    oprot:writeFieldBegin('categoryIcon', TType.I32, 12)
-    oprot:writeI32(self.categoryIcon)
-    oprot:writeFieldEnd()
-  end
-  if self.additionalInfo ~= nil then
-    oprot:writeFieldBegin('additionalInfo', TType.LIST, 13)
-    oprot:writeListBegin(TType.STRUCT, #self.additionalInfo)
-    for _,iter77 in ipairs(self.additionalInfo) do
-      iter77:write(oprot)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-BuddySearchResult = __TObject:new{
-  mid,
-  displayName,
-  pictureStatus,
-  picturePath,
-  statusMessage,
-  businessAccount,
-  iconType,
-  botType
-}
-
-function BuddySearchResult:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.mid = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.displayName = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.pictureStatus = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.picturePath = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRING then
-        self.statusMessage = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.BOOL then
-        self.businessAccount = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.I32 then
-        self.iconType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.I32 then
-        self.botType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function BuddySearchResult:write(oprot)
-  oprot:writeStructBegin('BuddySearchResult')
-  if self.mid ~= nil then
-    oprot:writeFieldBegin('mid', TType.STRING, 1)
-    oprot:writeString(self.mid)
-    oprot:writeFieldEnd()
-  end
-  if self.displayName ~= nil then
-    oprot:writeFieldBegin('displayName', TType.STRING, 2)
-    oprot:writeString(self.displayName)
-    oprot:writeFieldEnd()
-  end
-  if self.pictureStatus ~= nil then
-    oprot:writeFieldBegin('pictureStatus', TType.STRING, 3)
-    oprot:writeString(self.pictureStatus)
-    oprot:writeFieldEnd()
-  end
-  if self.picturePath ~= nil then
-    oprot:writeFieldBegin('picturePath', TType.STRING, 4)
-    oprot:writeString(self.picturePath)
-    oprot:writeFieldEnd()
-  end
-  if self.statusMessage ~= nil then
-    oprot:writeFieldBegin('statusMessage', TType.STRING, 5)
-    oprot:writeString(self.statusMessage)
-    oprot:writeFieldEnd()
-  end
-  if self.businessAccount ~= nil then
-    oprot:writeFieldBegin('businessAccount', TType.BOOL, 6)
-    oprot:writeBool(self.businessAccount)
-    oprot:writeFieldEnd()
-  end
-  if self.iconType ~= nil then
-    oprot:writeFieldBegin('iconType', TType.I32, 7)
-    oprot:writeI32(self.iconType)
-    oprot:writeFieldEnd()
-  end
-  if self.botType ~= nil then
-    oprot:writeFieldBegin('botType', TType.I32, 8)
-    oprot:writeI32(self.botType)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-GeoAddressItem = __TObject:new{
-  latitude,
-  longitude,
-  displayAddress
-}
-
-function GeoAddressItem:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.DOUBLE then
-        self.latitude = iprot:readDouble()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.DOUBLE then
-        self.longitude = iprot:readDouble()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.displayAddress = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function GeoAddressItem:write(oprot)
-  oprot:writeStructBegin('GeoAddressItem')
-  if self.latitude ~= nil then
-    oprot:writeFieldBegin('latitude', TType.DOUBLE, 1)
-    oprot:writeDouble(self.latitude)
-    oprot:writeFieldEnd()
-  end
-  if self.longitude ~= nil then
-    oprot:writeFieldBegin('longitude', TType.DOUBLE, 2)
-    oprot:writeDouble(self.longitude)
-    oprot:writeFieldEnd()
-  end
-  if self.displayAddress ~= nil then
-    oprot:writeFieldBegin('displayAddress', TType.STRING, 3)
-    oprot:writeString(self.displayAddress)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-AddFriendData = __TObject:new{
-  mid
-}
-
-function AddFriendData:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.mid = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function AddFriendData:write(oprot)
-  oprot:writeStructBegin('AddFriendData')
-  if self.mid ~= nil then
-    oprot:writeFieldBegin('mid', TType.STRING, 1)
-    oprot:writeString(self.mid)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-InstallAppData = __TObject:new{
-  installData
-}
-
-function InstallAppData:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.MAP then
-        self.installData = {}
-        local _ktype79, _vtype80, _size78 = iprot:readMapBegin() 
-        for _i=1,_size78 do
-          local _key82 = iprot:readString()
-          local _val83 = iprot:readString()
-          self.installData[_key82] = _val83
-        end
-        iprot:readMapEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function InstallAppData:write(oprot)
-  oprot:writeStructBegin('InstallAppData')
-  if self.installData ~= nil then
-    oprot:writeFieldBegin('installData', TType.MAP, 1)
-    oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.installData))
-    for kiter84,viter85 in pairs(self.installData) do
-      oprot:writeString(kiter84)
-      oprot:writeString(viter85)
-    end
-    oprot:writeMapEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-JumpUrlData = __TObject:new{
-
-}
-
-function JumpUrlData:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function JumpUrlData:write(oprot)
-  oprot:writeStructBegin('JumpUrlData')
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ButtonActionData = __TObject:new{
-  addFriendData,
-  installAppData,
-  jumpUrlData
-}
-
-function ButtonActionData:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRUCT then
-        self.addFriendData = AddFriendData:new{}
-        self.addFriendData:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRUCT then
-        self.installAppData = InstallAppData:new{}
-        self.installAppData:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRUCT then
-        self.jumpUrlData = JumpUrlData:new{}
-        self.jumpUrlData:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ButtonActionData:write(oprot)
-  oprot:writeStructBegin('ButtonActionData')
-  if self.addFriendData ~= nil then
-    oprot:writeFieldBegin('addFriendData', TType.STRUCT, 1)
-    self.addFriendData:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.installAppData ~= nil then
-    oprot:writeFieldBegin('installAppData', TType.STRUCT, 2)
-    self.installAppData:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.jumpUrlData ~= nil then
-    oprot:writeFieldBegin('jumpUrlData', TType.STRUCT, 3)
-    self.jumpUrlData:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ShortcutButtonAction = __TObject:new{
-  actionType,
-  actionData
-}
-
-function ShortcutButtonAction:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.I32 then
-        self.actionType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRUCT then
-        self.actionData = ButtonActionData:new{}
-        self.actionData:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ShortcutButtonAction:write(oprot)
-  oprot:writeStructBegin('ShortcutButtonAction')
-  if self.actionType ~= nil then
-    oprot:writeFieldBegin('actionType', TType.I32, 1)
-    oprot:writeI32(self.actionType)
-    oprot:writeFieldEnd()
-  end
-  if self.actionData ~= nil then
-    oprot:writeFieldBegin('actionData', TType.STRUCT, 2)
-    self.actionData:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ShortcutButton = __TObject:new{
-  id,
-  title,
-  url,
-  iconPath,
-  action
-}
-
-function ShortcutButton:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.id = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.title = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.url = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.iconPath = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRUCT then
-        self.action = ShortcutButtonAction:new{}
-        self.action:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ShortcutButton:write(oprot)
-  oprot:writeStructBegin('ShortcutButton')
-  if self.id ~= nil then
-    oprot:writeFieldBegin('id', TType.STRING, 1)
-    oprot:writeString(self.id)
-    oprot:writeFieldEnd()
-  end
-  if self.title ~= nil then
-    oprot:writeFieldBegin('title', TType.STRING, 2)
-    oprot:writeString(self.title)
-    oprot:writeFieldEnd()
-  end
-  if self.url ~= nil then
-    oprot:writeFieldBegin('url', TType.STRING, 3)
-    oprot:writeString(self.url)
-    oprot:writeFieldEnd()
-  end
-  if self.iconPath ~= nil then
-    oprot:writeFieldBegin('iconPath', TType.STRING, 4)
-    oprot:writeString(self.iconPath)
-    oprot:writeFieldEnd()
-  end
-  if self.action ~= nil then
-    oprot:writeFieldBegin('action', TType.STRUCT, 5)
-    self.action:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-ShortcutItem = __TObject:new{
-  id,
-  title,
-  descr,
-  iconPath,
-  url,
-  buttons,
-  action
-}
-
-function ShortcutItem:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.id = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.title = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.descr = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.iconPath = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRING then
-        self.url = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.LIST then
-        self.buttons = {}
-        local _etype89, _size86 = iprot:readListBegin()
-        for _i=1,_size86 do
-          local _elem90 = ShortcutButton:new{}
-          _elem90:read(iprot)
-          table.insert(self.buttons, _elem90)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.STRUCT then
-        self.action = ShortcutButtonAction:new{}
-        self.action:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function ShortcutItem:write(oprot)
-  oprot:writeStructBegin('ShortcutItem')
-  if self.id ~= nil then
-    oprot:writeFieldBegin('id', TType.STRING, 1)
-    oprot:writeString(self.id)
-    oprot:writeFieldEnd()
-  end
-  if self.title ~= nil then
-    oprot:writeFieldBegin('title', TType.STRING, 2)
-    oprot:writeString(self.title)
-    oprot:writeFieldEnd()
-  end
-  if self.descr ~= nil then
-    oprot:writeFieldBegin('descr', TType.STRING, 3)
-    oprot:writeString(self.descr)
-    oprot:writeFieldEnd()
-  end
-  if self.iconPath ~= nil then
-    oprot:writeFieldBegin('iconPath', TType.STRING, 4)
-    oprot:writeString(self.iconPath)
-    oprot:writeFieldEnd()
-  end
-  if self.url ~= nil then
-    oprot:writeFieldBegin('url', TType.STRING, 5)
-    oprot:writeString(self.url)
-    oprot:writeFieldEnd()
-  end
-  if self.buttons ~= nil then
-    oprot:writeFieldBegin('buttons', TType.LIST, 6)
-    oprot:writeListBegin(TType.STRUCT, #self.buttons)
-    for _,iter91 in ipairs(self.buttons) do
-      iter91:write(oprot)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.action ~= nil then
-    oprot:writeFieldBegin('action', TType.STRUCT, 7)
-    self.action:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-SQCat = __TObject:new{
-  id,
-  name
-}
-
-function SQCat:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.I32 then
-        self.id = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.name = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function SQCat:write(oprot)
-  oprot:writeStructBegin('SQCat')
-  if self.id ~= nil then
-    oprot:writeFieldBegin('id', TType.I32, 1)
-    oprot:writeI32(self.id)
-    oprot:writeFieldEnd()
-  end
-  if self.name ~= nil then
-    oprot:writeFieldBegin('name', TType.STRING, 2)
-    oprot:writeString(self.name)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-SearchItemUnion = __TObject:new{
-  categoryItem,
-  spotItem,
-  productItem,
-  serviceItem,
-  yellowpageItem,
-  oaItem,
-  geoAddressItem,
-  shortcutItem,
-  squareItem,
-  squareCategoryItem
-}
-
-function SearchItemUnion:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRUCT then
-        self.categoryItem = CategoryItem:new{}
-        self.categoryItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRUCT then
-        self.spotItem = SpotItem:new{}
-        self.spotItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRUCT then
-        self.productItem = ProductSearchSummary:new{}
-        self.productItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRUCT then
-        self.serviceItem = ServiceItem:new{}
-        self.serviceItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRUCT then
-        self.yellowpageItem = YellowpageItem:new{}
-        self.yellowpageItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.STRUCT then
-        self.oaItem = BuddySearchResult:new{}
-        self.oaItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.STRUCT then
-        self.geoAddressItem = GeoAddressItem:new{}
-        self.geoAddressItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.STRUCT then
-        self.shortcutItem = ShortcutItem:new{}
-        self.shortcutItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 9 then
-      if ftype == TType.STRUCT then
-        self.squareItem = SquareInfo:new{}
-        self.squareItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 10 then
-      if ftype == TType.STRUCT then
-        self.squareCategoryItem = SQCat:new{}
-        self.squareCategoryItem:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function SearchItemUnion:write(oprot)
-  oprot:writeStructBegin('SearchItemUnion')
-  if self.categoryItem ~= nil then
-    oprot:writeFieldBegin('categoryItem', TType.STRUCT, 1)
-    self.categoryItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.spotItem ~= nil then
-    oprot:writeFieldBegin('spotItem', TType.STRUCT, 2)
-    self.spotItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.productItem ~= nil then
-    oprot:writeFieldBegin('productItem', TType.STRUCT, 3)
-    self.productItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.serviceItem ~= nil then
-    oprot:writeFieldBegin('serviceItem', TType.STRUCT, 4)
-    self.serviceItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.yellowpageItem ~= nil then
-    oprot:writeFieldBegin('yellowpageItem', TType.STRUCT, 5)
-    self.yellowpageItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.oaItem ~= nil then
-    oprot:writeFieldBegin('oaItem', TType.STRUCT, 6)
-    self.oaItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.geoAddressItem ~= nil then
-    oprot:writeFieldBegin('geoAddressItem', TType.STRUCT, 7)
-    self.geoAddressItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.shortcutItem ~= nil then
-    oprot:writeFieldBegin('shortcutItem', TType.STRUCT, 8)
-    self.shortcutItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.squareItem ~= nil then
-    oprot:writeFieldBegin('squareItem', TType.STRUCT, 9)
-    self.squareItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.squareCategoryItem ~= nil then
-    oprot:writeFieldBegin('squareCategoryItem', TType.STRUCT, 10)
-    self.squareCategoryItem:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-SearchResultItem = __TObject:new{
-  id,
-  ItemType,
-  item,
-  title,
-  sub1,
-  sub2,
-  iconUrl,
-  titleLink,
-  iconLink,
-  displayTemplate,
-  additionalInfo
-}
-
-function SearchResultItem:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.id = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.ItemType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRUCT then
-        self.item = SearchItemUnion:new{}
-        self.item:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.title = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRING then
-        self.sub1 = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.STRING then
-        self.sub2 = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.STRING then
-        self.iconUrl = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.STRING then
-        self.titleLink = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 9 then
-      if ftype == TType.STRING then
-        self.iconLink = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 10 then
-      if ftype == TType.STRING then
-        self.displayTemplate = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 11 then
-      if ftype == TType.LIST then
-        self.additionalInfo = {}
-        local _etype95, _size92 = iprot:readListBegin()
-        for _i=1,_size92 do
-          local _elem96 = AdditionalInfoItem:new{}
-          _elem96:read(iprot)
-          table.insert(self.additionalInfo, _elem96)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function SearchResultItem:write(oprot)
-  oprot:writeStructBegin('SearchResultItem')
-  if self.id ~= nil then
-    oprot:writeFieldBegin('id', TType.STRING, 1)
-    oprot:writeString(self.id)
-    oprot:writeFieldEnd()
-  end
-  if self.ItemType ~= nil then
-    oprot:writeFieldBegin('ItemType', TType.I32, 2)
-    oprot:writeI32(self.ItemType)
-    oprot:writeFieldEnd()
-  end
-  if self.item ~= nil then
-    oprot:writeFieldBegin('item', TType.STRUCT, 3)
-    self.item:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  if self.title ~= nil then
-    oprot:writeFieldBegin('title', TType.STRING, 4)
-    oprot:writeString(self.title)
-    oprot:writeFieldEnd()
-  end
-  if self.sub1 ~= nil then
-    oprot:writeFieldBegin('sub1', TType.STRING, 5)
-    oprot:writeString(self.sub1)
-    oprot:writeFieldEnd()
-  end
-  if self.sub2 ~= nil then
-    oprot:writeFieldBegin('sub2', TType.STRING, 6)
-    oprot:writeString(self.sub2)
-    oprot:writeFieldEnd()
-  end
-  if self.iconUrl ~= nil then
-    oprot:writeFieldBegin('iconUrl', TType.STRING, 7)
-    oprot:writeString(self.iconUrl)
-    oprot:writeFieldEnd()
-  end
-  if self.titleLink ~= nil then
-    oprot:writeFieldBegin('titleLink', TType.STRING, 8)
-    oprot:writeString(self.titleLink)
-    oprot:writeFieldEnd()
-  end
-  if self.iconLink ~= nil then
-    oprot:writeFieldBegin('iconLink', TType.STRING, 9)
-    oprot:writeString(self.iconLink)
-    oprot:writeFieldEnd()
-  end
-  if self.displayTemplate ~= nil then
-    oprot:writeFieldBegin('displayTemplate', TType.STRING, 10)
-    oprot:writeString(self.displayTemplate)
-    oprot:writeFieldEnd()
-  end
-  if self.additionalInfo ~= nil then
-    oprot:writeFieldBegin('additionalInfo', TType.LIST, 11)
-    oprot:writeListBegin(TType.STRUCT, #self.additionalInfo)
-    for _,iter97 in ipairs(self.additionalInfo) do
-      iter97:write(oprot)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-SearchResultCollection = __TObject:new{
-  collection,
-  title,
-  rank,
-  hits,
-  items,
-  hasNext,
-  cat,
-  error,
-  tabTitle,
-  start,
-  length,
-  squareCategoryId
-}
-
-function SearchResultCollection:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.I32 then
-        self.collection = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.STRING then
-        self.title = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.I32 then
-        self.rank = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.I32 then
-        self.hits = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.LIST then
-        self.items = {}
-        local _etype101, _size98 = iprot:readListBegin()
-        for _i=1,_size98 do
-          local _elem102 = SearchResultItem:new{}
-          _elem102:read(iprot)
-          table.insert(self.items, _elem102)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.BOOL then
-        self.hasNext = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 7 then
-      if ftype == TType.LIST then
-        self.cat = {}
-        local _etype106, _size103 = iprot:readListBegin()
-        for _i=1,_size103 do
-          local _elem107 = iprot:readI32()
-          table.insert(self.cat, _elem107)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.STRING then
-        self.error = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 9 then
-      if ftype == TType.STRING then
-        self.tabTitle = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 10 then
-      if ftype == TType.I32 then
-        self.start = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 11 then
-      if ftype == TType.I32 then
-        self.length = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 12 then
-      if ftype == TType.I32 then
-        self.squareCategoryId = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function SearchResultCollection:write(oprot)
-  oprot:writeStructBegin('SearchResultCollection')
-  if self.collection ~= nil then
-    oprot:writeFieldBegin('collection', TType.I32, 1)
-    oprot:writeI32(self.collection)
-    oprot:writeFieldEnd()
-  end
-  if self.title ~= nil then
-    oprot:writeFieldBegin('title', TType.STRING, 2)
-    oprot:writeString(self.title)
-    oprot:writeFieldEnd()
-  end
-  if self.rank ~= nil then
-    oprot:writeFieldBegin('rank', TType.I32, 3)
-    oprot:writeI32(self.rank)
-    oprot:writeFieldEnd()
-  end
-  if self.hits ~= nil then
-    oprot:writeFieldBegin('hits', TType.I32, 4)
-    oprot:writeI32(self.hits)
-    oprot:writeFieldEnd()
-  end
-  if self.items ~= nil then
-    oprot:writeFieldBegin('items', TType.LIST, 5)
-    oprot:writeListBegin(TType.STRUCT, #self.items)
-    for _,iter108 in ipairs(self.items) do
-      iter108:write(oprot)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.hasNext ~= nil then
-    oprot:writeFieldBegin('hasNext', TType.BOOL, 6)
-    oprot:writeBool(self.hasNext)
-    oprot:writeFieldEnd()
-  end
-  if self.cat ~= nil then
-    oprot:writeFieldBegin('cat', TType.LIST, 7)
-    oprot:writeListBegin(TType.I32, #self.cat)
-    for _,iter109 in ipairs(self.cat) do
-      oprot:writeI32(iter109)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.error ~= nil then
-    oprot:writeFieldBegin('error', TType.STRING, 8)
-    oprot:writeString(self.error)
-    oprot:writeFieldEnd()
-  end
-  if self.tabTitle ~= nil then
-    oprot:writeFieldBegin('tabTitle', TType.STRING, 9)
-    oprot:writeString(self.tabTitle)
-    oprot:writeFieldEnd()
-  end
-  if self.start ~= nil then
-    oprot:writeFieldBegin('start', TType.I32, 10)
-    oprot:writeI32(self.start)
-    oprot:writeFieldEnd()
-  end
-  if self.length ~= nil then
-    oprot:writeFieldBegin('length', TType.I32, 11)
-    oprot:writeI32(self.length)
-    oprot:writeFieldEnd()
-  end
-  if self.squareCategoryId ~= nil then
-    oprot:writeFieldBegin('squareCategoryId', TType.I32, 12)
-    oprot:writeI32(self.squareCategoryId)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-SearchResult = __TObject:new{
-  sid,
-  collections,
-  start,
-  length
-}
-
-function SearchResult:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.STRING then
-        self.sid = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.LIST then
-        self.collections = {}
-        local _etype113, _size110 = iprot:readListBegin()
-        for _i=1,_size110 do
-          local _elem114 = SearchResultCollection:new{}
-          _elem114:read(iprot)
-          table.insert(self.collections, _elem114)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.I32 then
-        self.start = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.I32 then
-        self.length = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function SearchResult:write(oprot)
-  oprot:writeStructBegin('SearchResult')
-  if self.sid ~= nil then
-    oprot:writeFieldBegin('sid', TType.STRING, 1)
-    oprot:writeString(self.sid)
-    oprot:writeFieldEnd()
-  end
-  if self.collections ~= nil then
-    oprot:writeFieldBegin('collections', TType.LIST, 2)
-    oprot:writeListBegin(TType.STRUCT, #self.collections)
-    for _,iter115 in ipairs(self.collections) do
-      iter115:write(oprot)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.start ~= nil then
-    oprot:writeFieldBegin('start', TType.I32, 3)
-    oprot:writeI32(self.start)
-    oprot:writeFieldEnd()
-  end
-  if self.length ~= nil then
-    oprot:writeFieldBegin('length', TType.I32, 4)
-    oprot:writeI32(self.length)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-SearchCommonParameter = __TObject:new{
-  latitude,
-  longitude,
-  source,
-  region,
-  sid,
-  queryType
-}
-
-function SearchCommonParameter:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.DOUBLE then
-        self.latitude = iprot:readDouble()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.DOUBLE then
-        self.longitude = iprot:readDouble()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.STRING then
-        self.source = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRING then
-        self.region = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 5 then
-      if ftype == TType.STRING then
-        self.sid = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 6 then
-      if ftype == TType.I32 then
-        self.queryType = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function SearchCommonParameter:write(oprot)
-  oprot:writeStructBegin('SearchCommonParameter')
-  if self.latitude ~= nil then
-    oprot:writeFieldBegin('latitude', TType.DOUBLE, 1)
-    oprot:writeDouble(self.latitude)
-    oprot:writeFieldEnd()
-  end
-  if self.longitude ~= nil then
-    oprot:writeFieldBegin('longitude', TType.DOUBLE, 2)
-    oprot:writeDouble(self.longitude)
-    oprot:writeFieldEnd()
-  end
-  if self.source ~= nil then
-    oprot:writeFieldBegin('source', TType.STRING, 3)
-    oprot:writeString(self.source)
-    oprot:writeFieldEnd()
-  end
-  if self.region ~= nil then
-    oprot:writeFieldBegin('region', TType.STRING, 4)
-    oprot:writeString(self.region)
-    oprot:writeFieldEnd()
-  end
-  if self.sid ~= nil then
-    oprot:writeFieldBegin('sid', TType.STRING, 5)
-    oprot:writeString(self.sid)
-    oprot:writeFieldEnd()
-  end
-  if self.queryType ~= nil then
-    oprot:writeFieldBegin('queryType', TType.I32, 6)
-    oprot:writeI32(self.queryType)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
-
-SearchPagingParameter = __TObject:new{
-  collection,
-  start,
-  length,
-  commonParam
-}
-
-function SearchPagingParameter:read(iprot)
-  iprot:readStructBegin()
-  while true do
-    local fname, ftype, fid = iprot:readFieldBegin()
-    if ftype == TType.STOP then
-      break
-    elseif fid == 1 then
-      if ftype == TType.I32 then
-        self.collection = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 2 then
-      if ftype == TType.I32 then
-        self.start = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.I32 then
-        self.length = iprot:readI32()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 4 then
-      if ftype == TType.STRUCT then
-        self.commonParam = SearchCommonParameter:new{}
-        self.commonParam:read(iprot)
-      else
-        iprot:skip(ftype)
-      end
-    else
-      iprot:skip(ftype)
-    end
-    iprot:readFieldEnd()
-  end
-  iprot:readStructEnd()
-end
-
-function SearchPagingParameter:write(oprot)
-  oprot:writeStructBegin('SearchPagingParameter')
-  if self.collection ~= nil then
-    oprot:writeFieldBegin('collection', TType.I32, 1)
-    oprot:writeI32(self.collection)
-    oprot:writeFieldEnd()
-  end
-  if self.start ~= nil then
-    oprot:writeFieldBegin('start', TType.I32, 2)
-    oprot:writeI32(self.start)
-    oprot:writeFieldEnd()
-  end
-  if self.length ~= nil then
-    oprot:writeFieldBegin('length', TType.I32, 3)
-    oprot:writeI32(self.length)
-    oprot:writeFieldEnd()
-  end
-  if self.commonParam ~= nil then
-    oprot:writeFieldBegin('commonParam', TType.STRUCT, 4)
-    self.commonParam:write(oprot)
-    oprot:writeFieldEnd()
-  end
-  oprot:writeFieldStop()
-  oprot:writeStructEnd()
-end
 
 Location = __TObject:new{
   title,
@@ -5149,10 +1461,10 @@ function MessageCommitResult:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.messageIds = {}
-        local _etype119, _size116 = iprot:readListBegin()
-        for _i=1,_size116 do
-          local _elem120 = iprot:readString()
-          table.insert(self.messageIds, _elem120)
+        local _etype3, _size0 = iprot:readListBegin()
+        for _i=1,_size0 do
+          local _elem4 = iprot:readString()
+          table.insert(self.messageIds, _elem4)
         end
         iprot:readListEnd()
       else
@@ -5228,8 +1540,8 @@ function MessageCommitResult:write(oprot)
   if self.messageIds ~= nil then
     oprot:writeFieldBegin('messageIds', TType.LIST, 4)
     oprot:writeListBegin(TType.STRING, #self.messageIds)
-    for _,iter121 in ipairs(self.messageIds) do
-      oprot:writeString(iter121)
+    for _,iter5 in ipairs(self.messageIds) do
+      oprot:writeString(iter5)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -5867,10 +2179,10 @@ function E2EENegotiationResult:read(iprot)
     elseif fid == 1 then
       if ftype == TType.SET then
         self.allowedTypes = {}
-        local _etype125, _size122 = iprot:readSetBegin()
-        for _i=1,_size122 do
-          local _elem126 = iprot:readI32()
-          self.allowedTypes[_elem126] = _elem126
+        local _etype9, _size6 = iprot:readSetBegin()
+        for _i=1,_size6 do
+          local _elem10 = iprot:readI32()
+          self.allowedTypes[_elem10] = _elem10
         end
         iprot:readSetEnd()
       else
@@ -5896,8 +2208,8 @@ function E2EENegotiationResult:write(oprot)
   if self.allowedTypes ~= nil then
     oprot:writeFieldBegin('allowedTypes', TType.SET, 1)
     oprot:writeSetBegin(TType.I32, ttable_size(self.allowedTypes))
-    for iter127,_ in pairs(self.allowedTypes) do
-      oprot:writeI32(iter127)
+    for iter11,_ in pairs(self.allowedTypes) do
+      oprot:writeI32(iter11)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -7855,11 +4167,11 @@ function SpotNearbyResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.spotNearbyItems = {}
-        local _etype131, _size128 = iprot:readListBegin()
-        for _i=1,_size128 do
-          local _elem132 = SpotNearbyItem:new{}
-          _elem132:read(iprot)
-          table.insert(self.spotNearbyItems, _elem132)
+        local _etype15, _size12 = iprot:readListBegin()
+        for _i=1,_size12 do
+          local _elem16 = SpotNearbyItem:new{}
+          _elem16:read(iprot)
+          table.insert(self.spotNearbyItems, _elem16)
         end
         iprot:readListEnd()
       else
@@ -7878,8 +4190,8 @@ function SpotNearbyResponse:write(oprot)
   if self.spotNearbyItems ~= nil then
     oprot:writeFieldBegin('spotNearbyItems', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.spotNearbyItems)
-    for _,iter133 in ipairs(self.spotNearbyItems) do
-      iter133:write(oprot)
+    for _,iter17 in ipairs(self.spotNearbyItems) do
+      iter17:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -7901,11 +4213,11 @@ function SpotPhoneNumberResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.spotItems = {}
-        local _etype137, _size134 = iprot:readListBegin()
-        for _i=1,_size134 do
-          local _elem138 = SpotItem:new{}
-          _elem138:read(iprot)
-          table.insert(self.spotItems, _elem138)
+        local _etype21, _size18 = iprot:readListBegin()
+        for _i=1,_size18 do
+          local _elem22 = SpotItem:new{}
+          _elem22:read(iprot)
+          table.insert(self.spotItems, _elem22)
         end
         iprot:readListEnd()
       else
@@ -7924,8 +4236,8 @@ function SpotPhoneNumberResponse:write(oprot)
   if self.spotItems ~= nil then
     oprot:writeFieldBegin('spotItems', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.spotItems)
-    for _,iter139 in ipairs(self.spotItems) do
-      iter139:write(oprot)
+    for _,iter23 in ipairs(self.spotItems) do
+      iter23:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8151,11 +4463,11 @@ function PaidCallHistoryResult:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.historys = {}
-        local _etype143, _size140 = iprot:readListBegin()
-        for _i=1,_size140 do
-          local _elem144 = PaidCallHistory:new{}
-          _elem144:read(iprot)
-          table.insert(self.historys, _elem144)
+        local _etype27, _size24 = iprot:readListBegin()
+        for _i=1,_size24 do
+          local _elem28 = PaidCallHistory:new{}
+          _elem28:read(iprot)
+          table.insert(self.historys, _elem28)
         end
         iprot:readListEnd()
       else
@@ -8180,8 +4492,8 @@ function PaidCallHistoryResult:write(oprot)
   if self.historys ~= nil then
     oprot:writeFieldBegin('historys', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.historys)
-    for _,iter145 in ipairs(self.historys) do
-      iter145:write(oprot)
+    for _,iter29 in ipairs(self.historys) do
+      iter29:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8210,11 +4522,11 @@ function PaidCallMetadataResult:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.currencyExchangeRates = {}
-        local _etype149, _size146 = iprot:readListBegin()
-        for _i=1,_size146 do
-          local _elem150 = PaidCallCurrencyExchangeRate:new{}
-          _elem150:read(iprot)
-          table.insert(self.currencyExchangeRates, _elem150)
+        local _etype33, _size30 = iprot:readListBegin()
+        for _i=1,_size30 do
+          local _elem34 = PaidCallCurrencyExchangeRate:new{}
+          _elem34:read(iprot)
+          table.insert(self.currencyExchangeRates, _elem34)
         end
         iprot:readListEnd()
       else
@@ -8223,10 +4535,10 @@ function PaidCallMetadataResult:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.recommendedCountryCodes = {}
-        local _etype154, _size151 = iprot:readListBegin()
-        for _i=1,_size151 do
-          local _elem155 = iprot:readString()
-          table.insert(self.recommendedCountryCodes, _elem155)
+        local _etype38, _size35 = iprot:readListBegin()
+        for _i=1,_size35 do
+          local _elem39 = iprot:readString()
+          table.insert(self.recommendedCountryCodes, _elem39)
         end
         iprot:readListEnd()
       else
@@ -8235,11 +4547,11 @@ function PaidCallMetadataResult:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.adCountries = {}
-        local _etype159, _size156 = iprot:readListBegin()
-        for _i=1,_size156 do
-          local _elem160 = PaidCallAdCountry:new{}
-          _elem160:read(iprot)
-          table.insert(self.adCountries, _elem160)
+        local _etype43, _size40 = iprot:readListBegin()
+        for _i=1,_size40 do
+          local _elem44 = PaidCallAdCountry:new{}
+          _elem44:read(iprot)
+          table.insert(self.adCountries, _elem44)
         end
         iprot:readListEnd()
       else
@@ -8258,8 +4570,8 @@ function PaidCallMetadataResult:write(oprot)
   if self.currencyExchangeRates ~= nil then
     oprot:writeFieldBegin('currencyExchangeRates', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.currencyExchangeRates)
-    for _,iter161 in ipairs(self.currencyExchangeRates) do
-      iter161:write(oprot)
+    for _,iter45 in ipairs(self.currencyExchangeRates) do
+      iter45:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8267,8 +4579,8 @@ function PaidCallMetadataResult:write(oprot)
   if self.recommendedCountryCodes ~= nil then
     oprot:writeFieldBegin('recommendedCountryCodes', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.recommendedCountryCodes)
-    for _,iter162 in ipairs(self.recommendedCountryCodes) do
-      oprot:writeString(iter162)
+    for _,iter46 in ipairs(self.recommendedCountryCodes) do
+      oprot:writeString(iter46)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8276,8 +4588,8 @@ function PaidCallMetadataResult:write(oprot)
   if self.adCountries ~= nil then
     oprot:writeFieldBegin('adCountries', TType.LIST, 3)
     oprot:writeListBegin(TType.STRUCT, #self.adCountries)
-    for _,iter163 in ipairs(self.adCountries) do
-      iter163:write(oprot)
+    for _,iter47 in ipairs(self.adCountries) do
+      iter47:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8369,11 +4681,11 @@ function PaidCallResponse:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.spotItems = {}
-        local _etype167, _size164 = iprot:readListBegin()
-        for _i=1,_size164 do
-          local _elem168 = SpotItem:new{}
-          _elem168:read(iprot)
-          table.insert(self.spotItems, _elem168)
+        local _etype51, _size48 = iprot:readListBegin()
+        for _i=1,_size48 do
+          local _elem52 = SpotItem:new{}
+          _elem52:read(iprot)
+          table.insert(self.spotItems, _elem52)
         end
         iprot:readListEnd()
       else
@@ -8407,8 +4719,8 @@ function PaidCallResponse:write(oprot)
   if self.spotItems ~= nil then
     oprot:writeFieldBegin('spotItems', TType.LIST, 4)
     oprot:writeListBegin(TType.STRUCT, #self.spotItems)
-    for _,iter169 in ipairs(self.spotItems) do
-      iter169:write(oprot)
+    for _,iter53 in ipairs(self.spotItems) do
+      iter53:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8557,10 +4869,10 @@ function ChannelInfo:read(iprot)
     elseif fid == 9 then
       if ftype == TType.LIST then
         self.permissions = {}
-        local _etype173, _size170 = iprot:readListBegin()
-        for _i=1,_size170 do
-          local _elem174 = iprot:readString()
-          table.insert(self.permissions, _elem174)
+        local _etype57, _size54 = iprot:readListBegin()
+        for _i=1,_size54 do
+          local _elem58 = iprot:readString()
+          table.insert(self.permissions, _elem58)
         end
         iprot:readListEnd()
       else
@@ -8575,10 +4887,10 @@ function ChannelInfo:read(iprot)
     elseif fid == 12 then
       if ftype == TType.LIST then
         self.channelConfigurations = {}
-        local _etype178, _size175 = iprot:readListBegin()
-        for _i=1,_size175 do
-          local _elem179 = iprot:readI32()
-          table.insert(self.channelConfigurations, _elem179)
+        local _etype62, _size59 = iprot:readListBegin()
+        for _i=1,_size59 do
+          local _elem63 = iprot:readI32()
+          table.insert(self.channelConfigurations, _elem63)
         end
         iprot:readListEnd()
       else
@@ -8593,10 +4905,10 @@ function ChannelInfo:read(iprot)
     elseif fid == 14 then
       if ftype == TType.SET then
         self.allowedPermissions = {}
-        local _etype183, _size180 = iprot:readSetBegin()
-        for _i=1,_size180 do
-          local _elem184 = iprot:readI32()
-          self.allowedPermissions[_elem184] = _elem184
+        local _etype67, _size64 = iprot:readSetBegin()
+        for _i=1,_size64 do
+          local _elem68 = iprot:readI32()
+          self.allowedPermissions[_elem68] = _elem68
         end
         iprot:readSetEnd()
       else
@@ -8605,11 +4917,11 @@ function ChannelInfo:read(iprot)
     elseif fid == 15 then
       if ftype == TType.LIST then
         self.channelDomains = {}
-        local _etype188, _size185 = iprot:readListBegin()
-        for _i=1,_size185 do
-          local _elem189 = ChannelDomain:new{}
-          _elem189:read(iprot)
-          table.insert(self.channelDomains, _elem189)
+        local _etype72, _size69 = iprot:readListBegin()
+        for _i=1,_size69 do
+          local _elem73 = ChannelDomain:new{}
+          _elem73:read(iprot)
+          table.insert(self.channelDomains, _elem73)
         end
         iprot:readListEnd()
       else
@@ -8669,8 +4981,8 @@ function ChannelInfo:write(oprot)
   if self.permissions ~= nil then
     oprot:writeFieldBegin('permissions', TType.LIST, 9)
     oprot:writeListBegin(TType.STRING, #self.permissions)
-    for _,iter190 in ipairs(self.permissions) do
-      oprot:writeString(iter190)
+    for _,iter74 in ipairs(self.permissions) do
+      oprot:writeString(iter74)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8683,8 +4995,8 @@ function ChannelInfo:write(oprot)
   if self.channelConfigurations ~= nil then
     oprot:writeFieldBegin('channelConfigurations', TType.LIST, 12)
     oprot:writeListBegin(TType.I32, #self.channelConfigurations)
-    for _,iter191 in ipairs(self.channelConfigurations) do
-      oprot:writeI32(iter191)
+    for _,iter75 in ipairs(self.channelConfigurations) do
+      oprot:writeI32(iter75)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8697,8 +5009,8 @@ function ChannelInfo:write(oprot)
   if self.allowedPermissions ~= nil then
     oprot:writeFieldBegin('allowedPermissions', TType.SET, 14)
     oprot:writeSetBegin(TType.I32, ttable_size(self.allowedPermissions))
-    for iter192,_ in pairs(self.allowedPermissions) do
-      oprot:writeI32(iter192)
+    for iter76,_ in pairs(self.allowedPermissions) do
+      oprot:writeI32(iter76)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -8706,8 +5018,8 @@ function ChannelInfo:write(oprot)
   if self.channelDomains ~= nil then
     oprot:writeFieldBegin('channelDomains', TType.LIST, 15)
     oprot:writeListBegin(TType.STRUCT, #self.channelDomains)
-    for _,iter193 in ipairs(self.channelDomains) do
-      iter193:write(oprot)
+    for _,iter77 in ipairs(self.channelDomains) do
+      iter77:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -8783,11 +5095,11 @@ function ApprovedChannelInfos:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.approvedChannelInfos = {}
-        local _etype197, _size194 = iprot:readListBegin()
-        for _i=1,_size194 do
-          local _elem198 = ApprovedChannelInfo:new{}
-          _elem198:read(iprot)
-          table.insert(self.approvedChannelInfos, _elem198)
+        local _etype81, _size78 = iprot:readListBegin()
+        for _i=1,_size78 do
+          local _elem82 = ApprovedChannelInfo:new{}
+          _elem82:read(iprot)
+          table.insert(self.approvedChannelInfos, _elem82)
         end
         iprot:readListEnd()
       else
@@ -8812,8 +5124,8 @@ function ApprovedChannelInfos:write(oprot)
   if self.approvedChannelInfos ~= nil then
     oprot:writeFieldBegin('approvedChannelInfos', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.approvedChannelInfos)
-    for _,iter199 in ipairs(self.approvedChannelInfos) do
-      iter199:write(oprot)
+    for _,iter83 in ipairs(self.approvedChannelInfos) do
+      iter83:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -9159,10 +5471,10 @@ function BuddyDetail:read(iprot)
     elseif fid == 6 then
       if ftype == TType.SET then
         self.acceptableContentTypes = {}
-        local _etype203, _size200 = iprot:readSetBegin()
-        for _i=1,_size200 do
-          local _elem204 = iprot:readI32()
-          self.acceptableContentTypes[_elem204] = _elem204
+        local _etype87, _size84 = iprot:readSetBegin()
+        for _i=1,_size84 do
+          local _elem88 = iprot:readI32()
+          self.acceptableContentTypes[_elem88] = _elem88
         end
         iprot:readSetEnd()
       else
@@ -9212,8 +5524,8 @@ function BuddyDetail:write(oprot)
   if self.acceptableContentTypes ~= nil then
     oprot:writeFieldBegin('acceptableContentTypes', TType.SET, 6)
     oprot:writeSetBegin(TType.I32, ttable_size(self.acceptableContentTypes))
-    for iter205,_ in pairs(self.acceptableContentTypes) do
-      oprot:writeI32(iter205)
+    for iter89,_ in pairs(self.acceptableContentTypes) do
+      oprot:writeI32(iter89)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -9250,8 +5562,7 @@ Contact = __TObject:new{
   recommendParams,
   friendRequestStatus,
   musicProfile,
-  videoProfile,
-  statusMessageContentMetadata
+  videoProfile
 }
 
 function Contact:read(iprot)
@@ -9398,19 +5709,6 @@ function Contact:read(iprot)
       else
         iprot:skip(ftype)
       end
-    elseif fid == 43 then
-      if ftype == TType.MAP then
-        self.statusMessageContentMetadata = {}
-        local _ktype207, _vtype208, _size206 = iprot:readMapBegin() 
-        for _i=1,_size206 do
-          local _key210 = iprot:readString()
-          local _val211 = iprot:readString()
-          self.statusMessageContentMetadata[_key210] = _val211
-        end
-        iprot:readMapEnd()
-      else
-        iprot:skip(ftype)
-      end
     else
       iprot:skip(ftype)
     end
@@ -9536,16 +5834,6 @@ function Contact:write(oprot)
     oprot:writeString(self.videoProfile)
     oprot:writeFieldEnd()
   end
-  if self.statusMessageContentMetadata ~= nil then
-    oprot:writeFieldBegin('statusMessageContentMetadata', TType.MAP, 43)
-    oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.statusMessageContentMetadata))
-    for kiter212,viter213 in pairs(self.statusMessageContentMetadata) do
-      oprot:writeString(kiter212)
-      oprot:writeString(viter213)
-    end
-    oprot:writeMapEnd()
-    oprot:writeFieldEnd()
-  end
   oprot:writeFieldStop()
   oprot:writeStructEnd()
 end
@@ -9584,11 +5872,11 @@ function BuddyList:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.popularContacts = {}
-        local _etype217, _size214 = iprot:readListBegin()
-        for _i=1,_size214 do
-          local _elem218 = Contact:new{}
-          _elem218:read(iprot)
-          table.insert(self.popularContacts, _elem218)
+        local _etype93, _size90 = iprot:readListBegin()
+        for _i=1,_size90 do
+          local _elem94 = Contact:new{}
+          _elem94:read(iprot)
+          table.insert(self.popularContacts, _elem94)
         end
         iprot:readListEnd()
       else
@@ -9622,8 +5910,8 @@ function BuddyList:write(oprot)
   if self.popularContacts ~= nil then
     oprot:writeFieldBegin('popularContacts', TType.LIST, 4)
     oprot:writeListBegin(TType.STRUCT, #self.popularContacts)
-    for _,iter219 in ipairs(self.popularContacts) do
-      iter219:write(oprot)
+    for _,iter95 in ipairs(self.popularContacts) do
+      iter95:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -9733,11 +6021,11 @@ function BuddyMessageRequest:read(iprot)
     elseif fid == 5 then
       if ftype == TType.MAP then
         self.contentMetadata = {}
-        local _ktype221, _vtype222, _size220 = iprot:readMapBegin() 
-        for _i=1,_size220 do
-          local _key224 = iprot:readString()
-          local _val225 = iprot:readString()
-          self.contentMetadata[_key224] = _val225
+        local _ktype97, _vtype98, _size96 = iprot:readMapBegin() 
+        for _i=1,_size96 do
+          local _key100 = iprot:readString()
+          local _val101 = iprot:readString()
+          self.contentMetadata[_key100] = _val101
         end
         iprot:readMapEnd()
       else
@@ -9776,9 +6064,9 @@ function BuddyMessageRequest:write(oprot)
   if self.contentMetadata ~= nil then
     oprot:writeFieldBegin('contentMetadata', TType.MAP, 5)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.contentMetadata))
-    for kiter226,viter227 in pairs(self.contentMetadata) do
-      oprot:writeString(kiter226)
-      oprot:writeString(viter227)
+    for kiter102,viter103 in pairs(self.contentMetadata) do
+      oprot:writeString(kiter102)
+      oprot:writeString(viter103)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -9801,11 +6089,11 @@ function BuddyOnAirUrls:read(iprot)
     elseif fid == 1 then
       if ftype == TType.MAP then
         self.hls = {}
-        local _ktype229, _vtype230, _size228 = iprot:readMapBegin() 
-        for _i=1,_size228 do
-          local _key232 = iprot:readString()
-          local _val233 = iprot:readString()
-          self.hls[_key232] = _val233
+        local _ktype105, _vtype106, _size104 = iprot:readMapBegin() 
+        for _i=1,_size104 do
+          local _key108 = iprot:readString()
+          local _val109 = iprot:readString()
+          self.hls[_key108] = _val109
         end
         iprot:readMapEnd()
       else
@@ -9814,11 +6102,11 @@ function BuddyOnAirUrls:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.smoothStreaming = {}
-        local _ktype235, _vtype236, _size234 = iprot:readMapBegin() 
-        for _i=1,_size234 do
-          local _key238 = iprot:readString()
-          local _val239 = iprot:readString()
-          self.smoothStreaming[_key238] = _val239
+        local _ktype111, _vtype112, _size110 = iprot:readMapBegin() 
+        for _i=1,_size110 do
+          local _key114 = iprot:readString()
+          local _val115 = iprot:readString()
+          self.smoothStreaming[_key114] = _val115
         end
         iprot:readMapEnd()
       else
@@ -9837,9 +6125,9 @@ function BuddyOnAirUrls:write(oprot)
   if self.hls ~= nil then
     oprot:writeFieldBegin('hls', TType.MAP, 1)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.hls))
-    for kiter240,viter241 in pairs(self.hls) do
-      oprot:writeString(kiter240)
-      oprot:writeString(viter241)
+    for kiter116,viter117 in pairs(self.hls) do
+      oprot:writeString(kiter116)
+      oprot:writeString(viter117)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -9847,9 +6135,9 @@ function BuddyOnAirUrls:write(oprot)
   if self.smoothStreaming ~= nil then
     oprot:writeFieldBegin('smoothStreaming', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.smoothStreaming))
-    for kiter242,viter243 in pairs(self.smoothStreaming) do
-      oprot:writeString(kiter242)
-      oprot:writeString(viter243)
+    for kiter118,viter119 in pairs(self.smoothStreaming) do
+      oprot:writeString(kiter118)
+      oprot:writeString(viter119)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -10193,6 +6481,101 @@ function CommitMessageResult:write(oprot)
   oprot:writeStructEnd()
 end
 
+BuddySearchResult = __TObject:new{
+  mid,
+  displayName,
+  pictureStatus,
+  picturePath,
+  statusMessage,
+  businessAccount
+}
+
+function BuddySearchResult:read(iprot)
+  iprot:readStructBegin()
+  while true do
+    local fname, ftype, fid = iprot:readFieldBegin()
+    if ftype == TType.STOP then
+      break
+    elseif fid == 1 then
+      if ftype == TType.STRING then
+        self.mid = iprot:readString()
+      else
+        iprot:skip(ftype)
+      end
+    elseif fid == 2 then
+      if ftype == TType.STRING then
+        self.displayName = iprot:readString()
+      else
+        iprot:skip(ftype)
+      end
+    elseif fid == 3 then
+      if ftype == TType.STRING then
+        self.pictureStatus = iprot:readString()
+      else
+        iprot:skip(ftype)
+      end
+    elseif fid == 4 then
+      if ftype == TType.STRING then
+        self.picturePath = iprot:readString()
+      else
+        iprot:skip(ftype)
+      end
+    elseif fid == 5 then
+      if ftype == TType.STRING then
+        self.statusMessage = iprot:readString()
+      else
+        iprot:skip(ftype)
+      end
+    elseif fid == 6 then
+      if ftype == TType.BOOL then
+        self.businessAccount = iprot:readBool()
+      else
+        iprot:skip(ftype)
+      end
+    else
+      iprot:skip(ftype)
+    end
+    iprot:readFieldEnd()
+  end
+  iprot:readStructEnd()
+end
+
+function BuddySearchResult:write(oprot)
+  oprot:writeStructBegin('BuddySearchResult')
+  if self.mid ~= nil then
+    oprot:writeFieldBegin('mid', TType.STRING, 1)
+    oprot:writeString(self.mid)
+    oprot:writeFieldEnd()
+  end
+  if self.displayName ~= nil then
+    oprot:writeFieldBegin('displayName', TType.STRING, 2)
+    oprot:writeString(self.displayName)
+    oprot:writeFieldEnd()
+  end
+  if self.pictureStatus ~= nil then
+    oprot:writeFieldBegin('pictureStatus', TType.STRING, 3)
+    oprot:writeString(self.pictureStatus)
+    oprot:writeFieldEnd()
+  end
+  if self.picturePath ~= nil then
+    oprot:writeFieldBegin('picturePath', TType.STRING, 4)
+    oprot:writeString(self.picturePath)
+    oprot:writeFieldEnd()
+  end
+  if self.statusMessage ~= nil then
+    oprot:writeFieldBegin('statusMessage', TType.STRING, 5)
+    oprot:writeString(self.statusMessage)
+    oprot:writeFieldEnd()
+  end
+  if self.businessAccount ~= nil then
+    oprot:writeFieldBegin('businessAccount', TType.BOOL, 6)
+    oprot:writeBool(self.businessAccount)
+    oprot:writeFieldEnd()
+  end
+  oprot:writeFieldStop()
+  oprot:writeStructEnd()
+end
+
 SyncParamMid = __TObject:new{
   mid,
   diff,
@@ -10361,11 +6744,11 @@ function ChannelDomains:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.channelDomains = {}
-        local _etype247, _size244 = iprot:readListBegin()
-        for _i=1,_size244 do
-          local _elem248 = ChannelDomain:new{}
-          _elem248:read(iprot)
-          table.insert(self.channelDomains, _elem248)
+        local _etype123, _size120 = iprot:readListBegin()
+        for _i=1,_size120 do
+          local _elem124 = ChannelDomain:new{}
+          _elem124:read(iprot)
+          table.insert(self.channelDomains, _elem124)
         end
         iprot:readListEnd()
       else
@@ -10390,8 +6773,8 @@ function ChannelDomains:write(oprot)
   if self.channelDomains ~= nil then
     oprot:writeFieldBegin('channelDomains', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.channelDomains)
-    for _,iter249 in ipairs(self.channelDomains) do
-      iter249:write(oprot)
+    for _,iter125 in ipairs(self.channelDomains) do
+      iter125:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -10490,11 +6873,11 @@ function ChannelInfos:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.channelInfos = {}
-        local _etype253, _size250 = iprot:readListBegin()
-        for _i=1,_size250 do
-          local _elem254 = ChannelInfo:new{}
-          _elem254:read(iprot)
-          table.insert(self.channelInfos, _elem254)
+        local _etype129, _size126 = iprot:readListBegin()
+        for _i=1,_size126 do
+          local _elem130 = ChannelInfo:new{}
+          _elem130:read(iprot)
+          table.insert(self.channelInfos, _elem130)
         end
         iprot:readListEnd()
       else
@@ -10519,8 +6902,8 @@ function ChannelInfos:write(oprot)
   if self.channelInfos ~= nil then
     oprot:writeFieldBegin('channelInfos', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.channelInfos)
-    for _,iter255 in ipairs(self.channelInfos) do
-      iter255:write(oprot)
+    for _,iter131 in ipairs(self.channelInfos) do
+      iter131:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -10633,11 +7016,11 @@ function ChannelSyncDatas:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.channelInfos = {}
-        local _etype259, _size256 = iprot:readListBegin()
-        for _i=1,_size256 do
-          local _elem260 = ChannelInfo:new{}
-          _elem260:read(iprot)
-          table.insert(self.channelInfos, _elem260)
+        local _etype135, _size132 = iprot:readListBegin()
+        for _i=1,_size132 do
+          local _elem136 = ChannelInfo:new{}
+          _elem136:read(iprot)
+          table.insert(self.channelInfos, _elem136)
         end
         iprot:readListEnd()
       else
@@ -10646,11 +7029,11 @@ function ChannelSyncDatas:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.channelDomains = {}
-        local _etype264, _size261 = iprot:readListBegin()
-        for _i=1,_size261 do
-          local _elem265 = ChannelDomain:new{}
-          _elem265:read(iprot)
-          table.insert(self.channelDomains, _elem265)
+        local _etype140, _size137 = iprot:readListBegin()
+        for _i=1,_size137 do
+          local _elem141 = ChannelDomain:new{}
+          _elem141:read(iprot)
+          table.insert(self.channelDomains, _elem141)
         end
         iprot:readListEnd()
       else
@@ -10681,8 +7064,8 @@ function ChannelSyncDatas:write(oprot)
   if self.channelInfos ~= nil then
     oprot:writeFieldBegin('channelInfos', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.channelInfos)
-    for _,iter266 in ipairs(self.channelInfos) do
-      iter266:write(oprot)
+    for _,iter142 in ipairs(self.channelInfos) do
+      iter142:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -10690,8 +7073,8 @@ function ChannelSyncDatas:write(oprot)
   if self.channelDomains ~= nil then
     oprot:writeFieldBegin('channelDomains', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.channelDomains)
-    for _,iter267 in ipairs(self.channelDomains) do
-      iter267:write(oprot)
+    for _,iter143 in ipairs(self.channelDomains) do
+      iter143:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -10780,11 +7163,11 @@ function NotiCenterEventData:read(iprot)
     elseif fid == 9 then
       if ftype == TType.MAP then
         self.content = {}
-        local _ktype269, _vtype270, _size268 = iprot:readMapBegin() 
-        for _i=1,_size268 do
-          local _key272 = iprot:readString()
-          local _val273 = iprot:readString()
-          self.content[_key272] = _val273
+        local _ktype145, _vtype146, _size144 = iprot:readMapBegin() 
+        for _i=1,_size144 do
+          local _key148 = iprot:readString()
+          local _val149 = iprot:readString()
+          self.content[_key148] = _val149
         end
         iprot:readMapEnd()
       else
@@ -10793,11 +7176,11 @@ function NotiCenterEventData:read(iprot)
     elseif fid == 10 then
       if ftype == TType.MAP then
         self.push = {}
-        local _ktype275, _vtype276, _size274 = iprot:readMapBegin() 
-        for _i=1,_size274 do
-          local _key278 = iprot:readString()
-          local _val279 = iprot:readString()
-          self.push[_key278] = _val279
+        local _ktype151, _vtype152, _size150 = iprot:readMapBegin() 
+        for _i=1,_size150 do
+          local _key154 = iprot:readString()
+          local _val155 = iprot:readString()
+          self.push[_key154] = _val155
         end
         iprot:readMapEnd()
       else
@@ -10856,9 +7239,9 @@ function NotiCenterEventData:write(oprot)
   if self.content ~= nil then
     oprot:writeFieldBegin('content', TType.MAP, 9)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.content))
-    for kiter280,viter281 in pairs(self.content) do
-      oprot:writeString(kiter280)
-      oprot:writeString(viter281)
+    for kiter156,viter157 in pairs(self.content) do
+      oprot:writeString(kiter156)
+      oprot:writeString(viter157)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -10866,9 +7249,9 @@ function NotiCenterEventData:write(oprot)
   if self.push ~= nil then
     oprot:writeFieldBegin('push', TType.MAP, 10)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.push))
-    for kiter282,viter283 in pairs(self.push) do
-      oprot:writeString(kiter282)
-      oprot:writeString(viter283)
+    for kiter158,viter159 in pairs(self.push) do
+      oprot:writeString(kiter158)
+      oprot:writeString(viter159)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -11450,11 +7833,11 @@ function CoinHistoryResult:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.historys = {}
-        local _etype287, _size284 = iprot:readListBegin()
-        for _i=1,_size284 do
-          local _elem288 = CoinHistory:new{}
-          _elem288:read(iprot)
-          table.insert(self.historys, _elem288)
+        local _etype163, _size160 = iprot:readListBegin()
+        for _i=1,_size160 do
+          local _elem164 = CoinHistory:new{}
+          _elem164:read(iprot)
+          table.insert(self.historys, _elem164)
         end
         iprot:readListEnd()
       else
@@ -11486,8 +7869,8 @@ function CoinHistoryResult:write(oprot)
   if self.historys ~= nil then
     oprot:writeFieldBegin('historys', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.historys)
-    for _,iter289 in ipairs(self.historys) do
-      iter289:write(oprot)
+    for _,iter165 in ipairs(self.historys) do
+      iter165:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -11945,11 +8328,11 @@ function CoinUseReservation:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.items = {}
-        local _etype293, _size290 = iprot:readListBegin()
-        for _i=1,_size290 do
-          local _elem294 = CoinUseReservationItem:new{}
-          _elem294:read(iprot)
-          table.insert(self.items, _elem294)
+        local _etype169, _size166 = iprot:readListBegin()
+        for _i=1,_size166 do
+          local _elem170 = CoinUseReservationItem:new{}
+          _elem170:read(iprot)
+          table.insert(self.items, _elem170)
         end
         iprot:readListEnd()
       else
@@ -11989,8 +8372,8 @@ function CoinUseReservation:write(oprot)
   if self.items ~= nil then
     oprot:writeFieldBegin('items', TType.LIST, 4)
     oprot:writeListBegin(TType.STRUCT, #self.items)
-    for _,iter295 in ipairs(self.items) do
-      iter295:write(oprot)
+    for _,iter171 in ipairs(self.items) do
+      iter171:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -12128,10 +8511,10 @@ function ContactModification:read(iprot)
     elseif fid == 11 then
       if ftype == TType.LIST then
         self.phones = {}
-        local _etype299, _size296 = iprot:readListBegin()
-        for _i=1,_size296 do
-          local _elem300 = iprot:readString()
-          table.insert(self.phones, _elem300)
+        local _etype175, _size172 = iprot:readListBegin()
+        for _i=1,_size172 do
+          local _elem176 = iprot:readString()
+          table.insert(self.phones, _elem176)
         end
         iprot:readListEnd()
       else
@@ -12140,10 +8523,10 @@ function ContactModification:read(iprot)
     elseif fid == 12 then
       if ftype == TType.LIST then
         self.emails = {}
-        local _etype304, _size301 = iprot:readListBegin()
-        for _i=1,_size301 do
-          local _elem305 = iprot:readString()
-          table.insert(self.emails, _elem305)
+        local _etype180, _size177 = iprot:readListBegin()
+        for _i=1,_size177 do
+          local _elem181 = iprot:readString()
+          table.insert(self.emails, _elem181)
         end
         iprot:readListEnd()
       else
@@ -12152,10 +8535,10 @@ function ContactModification:read(iprot)
     elseif fid == 13 then
       if ftype == TType.LIST then
         self.userids = {}
-        local _etype309, _size306 = iprot:readListBegin()
-        for _i=1,_size306 do
-          local _elem310 = iprot:readString()
-          table.insert(self.userids, _elem310)
+        local _etype185, _size182 = iprot:readListBegin()
+        for _i=1,_size182 do
+          local _elem186 = iprot:readString()
+          table.insert(self.userids, _elem186)
         end
         iprot:readListEnd()
       else
@@ -12184,8 +8567,8 @@ function ContactModification:write(oprot)
   if self.phones ~= nil then
     oprot:writeFieldBegin('phones', TType.LIST, 11)
     oprot:writeListBegin(TType.STRING, #self.phones)
-    for _,iter311 in ipairs(self.phones) do
-      oprot:writeString(iter311)
+    for _,iter187 in ipairs(self.phones) do
+      oprot:writeString(iter187)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -12193,8 +8576,8 @@ function ContactModification:write(oprot)
   if self.emails ~= nil then
     oprot:writeFieldBegin('emails', TType.LIST, 12)
     oprot:writeListBegin(TType.STRING, #self.emails)
-    for _,iter312 in ipairs(self.emails) do
-      oprot:writeString(iter312)
+    for _,iter188 in ipairs(self.emails) do
+      oprot:writeString(iter188)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -12202,8 +8585,8 @@ function ContactModification:write(oprot)
   if self.userids ~= nil then
     oprot:writeFieldBegin('userids', TType.LIST, 13)
     oprot:writeListBegin(TType.STRING, #self.userids)
-    for _,iter313 in ipairs(self.userids) do
-      oprot:writeString(iter313)
+    for _,iter189 in ipairs(self.userids) do
+      oprot:writeString(iter189)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -12719,11 +9102,11 @@ function FriendChannelMatricesResponse:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.matrices = {}
-        local _etype317, _size314 = iprot:readListBegin()
-        for _i=1,_size314 do
-          local _elem318 = FriendChannelMatrix:new{}
-          _elem318:read(iprot)
-          table.insert(self.matrices, _elem318)
+        local _etype193, _size190 = iprot:readListBegin()
+        for _i=1,_size190 do
+          local _elem194 = FriendChannelMatrix:new{}
+          _elem194:read(iprot)
+          table.insert(self.matrices, _elem194)
         end
         iprot:readListEnd()
       else
@@ -12747,8 +9130,8 @@ function FriendChannelMatricesResponse:write(oprot)
   if self.matrices ~= nil then
     oprot:writeFieldBegin('matrices', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.matrices)
-    for _,iter319 in ipairs(self.matrices) do
-      iter319:write(oprot)
+    for _,iter195 in ipairs(self.matrices) do
+      iter195:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -12930,11 +9313,11 @@ function FriendRequestsInfo:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.recentIncomings = {}
-        local _etype323, _size320 = iprot:readListBegin()
-        for _i=1,_size320 do
-          local _elem324 = FriendRequest:new{}
-          _elem324:read(iprot)
-          table.insert(self.recentIncomings, _elem324)
+        local _etype199, _size196 = iprot:readListBegin()
+        for _i=1,_size196 do
+          local _elem200 = FriendRequest:new{}
+          _elem200:read(iprot)
+          table.insert(self.recentIncomings, _elem200)
         end
         iprot:readListEnd()
       else
@@ -12943,11 +9326,11 @@ function FriendRequestsInfo:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.recentOutgoings = {}
-        local _etype328, _size325 = iprot:readListBegin()
-        for _i=1,_size325 do
-          local _elem329 = FriendRequest:new{}
-          _elem329:read(iprot)
-          table.insert(self.recentOutgoings, _elem329)
+        local _etype204, _size201 = iprot:readListBegin()
+        for _i=1,_size201 do
+          local _elem205 = FriendRequest:new{}
+          _elem205:read(iprot)
+          table.insert(self.recentOutgoings, _elem205)
         end
         iprot:readListEnd()
       else
@@ -12988,8 +9371,8 @@ function FriendRequestsInfo:write(oprot)
   if self.recentIncomings ~= nil then
     oprot:writeFieldBegin('recentIncomings', TType.LIST, 3)
     oprot:writeListBegin(TType.STRUCT, #self.recentIncomings)
-    for _,iter330 in ipairs(self.recentIncomings) do
-      iter330:write(oprot)
+    for _,iter206 in ipairs(self.recentIncomings) do
+      iter206:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -12997,8 +9380,8 @@ function FriendRequestsInfo:write(oprot)
   if self.recentOutgoings ~= nil then
     oprot:writeFieldBegin('recentOutgoings', TType.LIST, 4)
     oprot:writeListBegin(TType.STRUCT, #self.recentOutgoings)
-    for _,iter331 in ipairs(self.recentOutgoings) do
-      iter331:write(oprot)
+    for _,iter207 in ipairs(self.recentOutgoings) do
+      iter207:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -13146,11 +9529,11 @@ function GlobalEvent:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.targets = {}
-        local _etype335, _size332 = iprot:readListBegin()
-        for _i=1,_size332 do
-          local _elem336 = NotificationTarget:new{}
-          _elem336:read(iprot)
-          table.insert(self.targets, _elem336)
+        local _etype211, _size208 = iprot:readListBegin()
+        for _i=1,_size208 do
+          local _elem212 = NotificationTarget:new{}
+          _elem212:read(iprot)
+          table.insert(self.targets, _elem212)
         end
         iprot:readListEnd()
       else
@@ -13192,8 +9575,8 @@ function GlobalEvent:write(oprot)
   if self.targets ~= nil then
     oprot:writeFieldBegin('targets', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.targets)
-    for _,iter337 in ipairs(self.targets) do
-      iter337:write(oprot)
+    for _,iter213 in ipairs(self.targets) do
+      iter213:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -13274,10 +9657,7 @@ Group = __TObject:new{
   members,
   creator,
   invitee,
-  notificationDisabled,
-  picturePath,
-  memberMids,
-  inviteeMids
+  notificationDisabled
 }
 
 function Group:read(iprot)
@@ -13326,11 +9706,11 @@ function Group:read(iprot)
     elseif fid == 20 then
       if ftype == TType.LIST then
         self.members = {}
-        local _etype341, _size338 = iprot:readListBegin()
-        for _i=1,_size338 do
-          local _elem342 = Contact:new{}
-          _elem342:read(iprot)
-          table.insert(self.members, _elem342)
+        local _etype217, _size214 = iprot:readListBegin()
+        for _i=1,_size214 do
+          local _elem218 = Contact:new{}
+          _elem218:read(iprot)
+          table.insert(self.members, _elem218)
         end
         iprot:readListEnd()
       else
@@ -13346,11 +9726,11 @@ function Group:read(iprot)
     elseif fid == 22 then
       if ftype == TType.LIST then
         self.invitee = {}
-        local _etype346, _size343 = iprot:readListBegin()
-        for _i=1,_size343 do
-          local _elem347 = Contact:new{}
-          _elem347:read(iprot)
-          table.insert(self.invitee, _elem347)
+        local _etype222, _size219 = iprot:readListBegin()
+        for _i=1,_size219 do
+          local _elem223 = Contact:new{}
+          _elem223:read(iprot)
+          table.insert(self.invitee, _elem223)
         end
         iprot:readListEnd()
       else
@@ -13359,36 +9739,6 @@ function Group:read(iprot)
     elseif fid == 31 then
       if ftype == TType.BOOL then
         self.notificationDisabled = iprot:readBool()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 32 then
-      if ftype == TType.STRING then
-        self.picturePath = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 40 then
-      if ftype == TType.LIST then
-        self.memberMids = {}
-        local _etype351, _size348 = iprot:readListBegin()
-        for _i=1,_size348 do
-          local _elem352 = iprot:readString()
-          table.insert(self.memberMids, _elem352)
-        end
-        iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 41 then
-      if ftype == TType.LIST then
-        self.inviteeMids = {}
-        local _etype356, _size353 = iprot:readListBegin()
-        for _i=1,_size353 do
-          local _elem357 = iprot:readString()
-          table.insert(self.inviteeMids, _elem357)
-        end
-        iprot:readListEnd()
       else
         iprot:skip(ftype)
       end
@@ -13435,8 +9785,8 @@ function Group:write(oprot)
   if self.members ~= nil then
     oprot:writeFieldBegin('members', TType.LIST, 20)
     oprot:writeListBegin(TType.STRUCT, #self.members)
-    for _,iter358 in ipairs(self.members) do
-      iter358:write(oprot)
+    for _,iter224 in ipairs(self.members) do
+      iter224:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -13449,8 +9799,8 @@ function Group:write(oprot)
   if self.invitee ~= nil then
     oprot:writeFieldBegin('invitee', TType.LIST, 22)
     oprot:writeListBegin(TType.STRUCT, #self.invitee)
-    for _,iter359 in ipairs(self.invitee) do
-      iter359:write(oprot)
+    for _,iter225 in ipairs(self.invitee) do
+      iter225:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -13458,29 +9808,6 @@ function Group:write(oprot)
   if self.notificationDisabled ~= nil then
     oprot:writeFieldBegin('notificationDisabled', TType.BOOL, 31)
     oprot:writeBool(self.notificationDisabled)
-    oprot:writeFieldEnd()
-  end
-  if self.picturePath ~= nil then
-    oprot:writeFieldBegin('picturePath', TType.STRING, 32)
-    oprot:writeString(self.picturePath)
-    oprot:writeFieldEnd()
-  end
-  if self.memberMids ~= nil then
-    oprot:writeFieldBegin('memberMids', TType.LIST, 40)
-    oprot:writeListBegin(TType.STRING, #self.memberMids)
-    for _,iter360 in ipairs(self.memberMids) do
-      oprot:writeString(iter360)
-    end
-    oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.inviteeMids ~= nil then
-    oprot:writeFieldBegin('inviteeMids', TType.LIST, 41)
-    oprot:writeListBegin(TType.STRING, #self.inviteeMids)
-    for _,iter361 in ipairs(self.inviteeMids) do
-      oprot:writeString(iter361)
-    end
-    oprot:writeListEnd()
     oprot:writeFieldEnd()
   end
   oprot:writeFieldStop()
@@ -13613,11 +9940,11 @@ function LastReadMessageIds:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.lastReadMessageIds = {}
-        local _etype365, _size362 = iprot:readListBegin()
-        for _i=1,_size362 do
-          local _elem366 = LastReadMessageId:new{}
-          _elem366:read(iprot)
-          table.insert(self.lastReadMessageIds, _elem366)
+        local _etype229, _size226 = iprot:readListBegin()
+        for _i=1,_size226 do
+          local _elem230 = LastReadMessageId:new{}
+          _elem230:read(iprot)
+          table.insert(self.lastReadMessageIds, _elem230)
         end
         iprot:readListEnd()
       else
@@ -13641,8 +9968,8 @@ function LastReadMessageIds:write(oprot)
   if self.lastReadMessageIds ~= nil then
     oprot:writeFieldBegin('lastReadMessageIds', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.lastReadMessageIds)
-    for _,iter367 in ipairs(self.lastReadMessageIds) do
-      iter367:write(oprot)
+    for _,iter231 in ipairs(self.lastReadMessageIds) do
+      iter231:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -13658,8 +9985,7 @@ VerificationSessionData = __TObject:new{
   normalizedPhone,
   countryCode,
   nationalSignificantNumber,
-  availableVerificationMethods,
-  callerIdMask
+  availableVerificationMethods
 }
 
 function VerificationSessionData:read(iprot)
@@ -13707,18 +10033,12 @@ function VerificationSessionData:read(iprot)
     elseif fid == 7 then
       if ftype == TType.LIST then
         self.availableVerificationMethods = {}
-        local _etype371, _size368 = iprot:readListBegin()
-        for _i=1,_size368 do
-          local _elem372 = iprot:readI32()
-          table.insert(self.availableVerificationMethods, _elem372)
+        local _etype235, _size232 = iprot:readListBegin()
+        for _i=1,_size232 do
+          local _elem236 = iprot:readI32()
+          table.insert(self.availableVerificationMethods, _elem236)
         end
         iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 8 then
-      if ftype == TType.STRING then
-        self.callerIdMask = iprot:readString()
       else
         iprot:skip(ftype)
       end
@@ -13765,15 +10085,10 @@ function VerificationSessionData:write(oprot)
   if self.availableVerificationMethods ~= nil then
     oprot:writeFieldBegin('availableVerificationMethods', TType.LIST, 7)
     oprot:writeListBegin(TType.I32, #self.availableVerificationMethods)
-    for _,iter373 in ipairs(self.availableVerificationMethods) do
-      oprot:writeI32(iter373)
+    for _,iter237 in ipairs(self.availableVerificationMethods) do
+      oprot:writeI32(iter237)
     end
     oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.callerIdMask ~= nil then
-    oprot:writeFieldBegin('callerIdMask', TType.STRING, 8)
-    oprot:writeString(self.callerIdMask)
     oprot:writeFieldEnd()
   end
   oprot:writeFieldStop()
@@ -14140,13 +10455,6 @@ end
 
 Message = __TObject:new{
   _from,
-  displayName,
-  picturePath,
-  type,
-  person,
-  person2,
-  personName,
-  personName2,
   to,
   toType,
   id,
@@ -14175,48 +10483,6 @@ function Message:read(iprot)
     elseif fid == 1 then
       if ftype == TType.STRING then
         self._from = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 99 then
-      if ftype == TType.STRING then
-        self.displayName = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 98 then
-      if ftype == TType.STRING then
-        self.picturePath = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 97 then
-      if ftype == TType.STRING then
-        self.type = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 96 then
-      if ftype == TType.STRING then
-        self.person = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 95 then
-      if ftype == TType.STRING then
-        self.person2 = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 94 then
-      if ftype == TType.STRING then
-        self.personName = iprot:readString()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 93 then
-      if ftype == TType.STRING then
-        self.personName2 = iprot:readString()
       else
         iprot:skip(ftype)
       end
@@ -14284,11 +10550,11 @@ function Message:read(iprot)
     elseif fid == 18 then
       if ftype == TType.MAP then
         self.contentMetadata = {}
-        local _ktype375, _vtype376, _size374 = iprot:readMapBegin() 
-        for _i=1,_size374 do
-          local _key378 = iprot:readString()
-          local _val379 = iprot:readString()
-          self.contentMetadata[_key378] = _val379
+        local _ktype239, _vtype240, _size238 = iprot:readMapBegin() 
+        for _i=1,_size238 do
+          local _key242 = iprot:readString()
+          local _val243 = iprot:readString()
+          self.contentMetadata[_key242] = _val243
         end
         iprot:readMapEnd()
       else
@@ -14303,10 +10569,10 @@ function Message:read(iprot)
     elseif fid == 20 then
       if ftype == TType.LIST then
         self.chunks = {}
-        local _etype383, _size380 = iprot:readListBegin()
-        for _i=1,_size380 do
-          local _elem384 = iprot:readString()
-          table.insert(self.chunks, _elem384)
+        local _etype247, _size244 = iprot:readListBegin()
+        for _i=1,_size244 do
+          local _elem248 = iprot:readString()
+          table.insert(self.chunks, _elem248)
         end
         iprot:readListEnd()
       else
@@ -14325,8 +10591,8 @@ function Message:read(iprot)
         iprot:skip(ftype)
       end
     elseif fid == 23 then
-      if ftype == TType.I32 then
-        self.readCount = iprot:readI32()
+      if ftype == TType.I64 then
+        self.readCount = iprot:readI64()
       else
         iprot:skip(ftype)
       end
@@ -14349,41 +10615,6 @@ function Message:write(oprot)
   if self._from ~= nil then
     oprot:writeFieldBegin('_from', TType.STRING, 1)
     oprot:writeString(self._from)
-    oprot:writeFieldEnd()
-  end
-  if self.displayName ~= nil then
-    oprot:writeFieldBegin('displayName', TType.STRING, 99)
-    oprot:writeString(self.displayName)
-    oprot:writeFieldEnd()
-  end
-  if self.picturePath ~= nil then
-    oprot:writeFieldBegin('picturePath', TType.STRING, 98)
-    oprot:writeString(self.picturePath)
-    oprot:writeFieldEnd()
-  end
-  if self.type ~= nil then
-    oprot:writeFieldBegin('type', TType.STRING, 97)
-    oprot:writeString(self.type)
-    oprot:writeFieldEnd()
-  end
-  if self.person ~= nil then
-    oprot:writeFieldBegin('person', TType.STRING, 96)
-    oprot:writeString(self.person)
-    oprot:writeFieldEnd()
-  end
-  if self.person2 ~= nil then
-    oprot:writeFieldBegin('person2', TType.STRING, 95)
-    oprot:writeString(self.person2)
-    oprot:writeFieldEnd()
-  end
-  if self.personName ~= nil then
-    oprot:writeFieldBegin('personName', TType.STRING, 94)
-    oprot:writeString(self.personName)
-    oprot:writeFieldEnd()
-  end
-  if self.personName2 ~= nil then
-    oprot:writeFieldBegin('personName2', TType.STRING, 93)
-    oprot:writeString(self.personName2)
     oprot:writeFieldEnd()
   end
   if self.to ~= nil then
@@ -14439,9 +10670,9 @@ function Message:write(oprot)
   if self.contentMetadata ~= nil then
     oprot:writeFieldBegin('contentMetadata', TType.MAP, 18)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.contentMetadata))
-    for kiter385,viter386 in pairs(self.contentMetadata) do
-      oprot:writeString(kiter385)
-      oprot:writeString(viter386)
+    for kiter249,viter250 in pairs(self.contentMetadata) do
+      oprot:writeString(kiter249)
+      oprot:writeString(viter250)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -14454,8 +10685,8 @@ function Message:write(oprot)
   if self.chunks ~= nil then
     oprot:writeFieldBegin('chunks', TType.LIST, 20)
     oprot:writeListBegin(TType.STRING, #self.chunks)
-    for _,iter387 in ipairs(self.chunks) do
-      oprot:writeString(iter387)
+    for _,iter251 in ipairs(self.chunks) do
+      oprot:writeString(iter251)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -14471,8 +10702,8 @@ function Message:write(oprot)
     oprot:writeFieldEnd()
   end
   if self.readCount ~= nil then
-    oprot:writeFieldBegin('readCount', TType.I32, 23)
-    oprot:writeI32(self.readCount)
+    oprot:writeFieldBegin('readCount', TType.I64, 23)
+    oprot:writeI64(self.readCount)
     oprot:writeFieldEnd()
   end
   if self.relatedMessageServiceCode ~= nil then
@@ -14881,11 +11112,11 @@ function MessageOperations:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.operations = {}
-        local _etype391, _size388 = iprot:readListBegin()
-        for _i=1,_size388 do
-          local _elem392 = MessageOperation:new{}
-          _elem392:read(iprot)
-          table.insert(self.operations, _elem392)
+        local _etype255, _size252 = iprot:readListBegin()
+        for _i=1,_size252 do
+          local _elem256 = MessageOperation:new{}
+          _elem256:read(iprot)
+          table.insert(self.operations, _elem256)
         end
         iprot:readListEnd()
       else
@@ -14910,8 +11141,8 @@ function MessageOperations:write(oprot)
   if self.operations ~= nil then
     oprot:writeFieldBegin('operations', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.operations)
-    for _,iter393 in ipairs(self.operations) do
-      iter393:write(oprot)
+    for _,iter257 in ipairs(self.operations) do
+      iter257:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -14945,10 +11176,10 @@ function MessageStoreResult:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.messageIds = {}
-        local _etype397, _size394 = iprot:readListBegin()
-        for _i=1,_size394 do
-          local _elem398 = iprot:readString()
-          table.insert(self.messageIds, _elem398)
+        local _etype261, _size258 = iprot:readListBegin()
+        for _i=1,_size258 do
+          local _elem262 = iprot:readString()
+          table.insert(self.messageIds, _elem262)
         end
         iprot:readListEnd()
       else
@@ -14972,8 +11203,8 @@ function MessageStoreResult:write(oprot)
   if self.messageIds ~= nil then
     oprot:writeFieldBegin('messageIds', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.messageIds)
-    for _,iter399 in ipairs(self.messageIds) do
-      oprot:writeString(iter399)
+    for _,iter263 in ipairs(self.messageIds) do
+      oprot:writeString(iter263)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -15009,11 +11240,11 @@ function MetaProfile:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.identities = {}
-        local _ktype401, _vtype402, _size400 = iprot:readMapBegin() 
-        for _i=1,_size400 do
-          local _key404 = iprot:readI32()
-          local _val405 = iprot:readString()
-          self.identities[_key404] = _val405
+        local _ktype265, _vtype266, _size264 = iprot:readMapBegin() 
+        for _i=1,_size264 do
+          local _key268 = iprot:readI32()
+          local _val269 = iprot:readString()
+          self.identities[_key268] = _val269
         end
         iprot:readMapEnd()
       else
@@ -15042,9 +11273,9 @@ function MetaProfile:write(oprot)
   if self.identities ~= nil then
     oprot:writeFieldBegin('identities', TType.MAP, 3)
     oprot:writeMapBegin(TType.I32, TType.STRING, ttable_size(self.identities))
-    for kiter406,viter407 in pairs(self.identities) do
-      oprot:writeI32(kiter406)
-      oprot:writeString(viter407)
+    for kiter270,viter271 in pairs(self.identities) do
+      oprot:writeI32(kiter270)
+      oprot:writeString(viter271)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -15115,11 +11346,11 @@ function NotificationItem:read(iprot)
     elseif fid == 9 then
       if ftype == TType.MAP then
         self.content = {}
-        local _ktype409, _vtype410, _size408 = iprot:readMapBegin() 
-        for _i=1,_size408 do
-          local _key412 = iprot:readString()
-          local _val413 = iprot:readString()
-          self.content[_key412] = _val413
+        local _ktype273, _vtype274, _size272 = iprot:readMapBegin() 
+        for _i=1,_size272 do
+          local _key276 = iprot:readString()
+          local _val277 = iprot:readString()
+          self.content[_key276] = _val277
         end
         iprot:readMapEnd()
       else
@@ -15173,9 +11404,9 @@ function NotificationItem:write(oprot)
   if self.content ~= nil then
     oprot:writeFieldBegin('content', TType.MAP, 9)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.content))
-    for kiter414,viter415 in pairs(self.content) do
-      oprot:writeString(kiter414)
-      oprot:writeString(viter415)
+    for kiter278,viter279 in pairs(self.content) do
+      oprot:writeString(kiter278)
+      oprot:writeString(viter279)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -15204,11 +11435,11 @@ function NotificationFetchResult:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.itemList = {}
-        local _etype419, _size416 = iprot:readListBegin()
-        for _i=1,_size416 do
-          local _elem420 = NotificationItem:new{}
-          _elem420:read(iprot)
-          table.insert(self.itemList, _elem420)
+        local _etype283, _size280 = iprot:readListBegin()
+        for _i=1,_size280 do
+          local _elem284 = NotificationItem:new{}
+          _elem284:read(iprot)
+          table.insert(self.itemList, _elem284)
         end
         iprot:readListEnd()
       else
@@ -15232,8 +11463,8 @@ function NotificationFetchResult:write(oprot)
   if self.itemList ~= nil then
     oprot:writeFieldBegin('itemList', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.itemList)
-    for _,iter421 in ipairs(self.itemList) do
-      iter421:write(oprot)
+    for _,iter285 in ipairs(self.itemList) do
+      iter285:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -15556,11 +11787,11 @@ function PaymentReservationResult:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.extras = {}
-        local _ktype423, _vtype424, _size422 = iprot:readMapBegin() 
-        for _i=1,_size422 do
-          local _key426 = iprot:readString()
-          local _val427 = iprot:readString()
-          self.extras[_key426] = _val427
+        local _ktype287, _vtype288, _size286 = iprot:readMapBegin() 
+        for _i=1,_size286 do
+          local _key290 = iprot:readString()
+          local _val291 = iprot:readString()
+          self.extras[_key290] = _val291
         end
         iprot:readMapEnd()
       else
@@ -15589,9 +11820,9 @@ function PaymentReservationResult:write(oprot)
   if self.extras ~= nil then
     oprot:writeFieldBegin('extras', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.extras))
-    for kiter428,viter429 in pairs(self.extras) do
-      oprot:writeString(kiter428)
-      oprot:writeString(viter429)
+    for kiter292,viter293 in pairs(self.extras) do
+      oprot:writeString(kiter292)
+      oprot:writeString(viter293)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -15820,11 +12051,11 @@ function Product:read(iprot)
     elseif fid == 29 then
       if ftype == TType.LIST then
         self.categories = {}
-        local _etype433, _size430 = iprot:readListBegin()
-        for _i=1,_size430 do
-          local _elem434 = ProductCategory:new{}
-          _elem434:read(iprot)
-          table.insert(self.categories, _elem434)
+        local _etype297, _size294 = iprot:readListBegin()
+        for _i=1,_size294 do
+          local _elem298 = ProductCategory:new{}
+          _elem298:read(iprot)
+          table.insert(self.categories, _elem298)
         end
         iprot:readListEnd()
       else
@@ -16049,8 +12280,8 @@ function Product:write(oprot)
   if self.categories ~= nil then
     oprot:writeFieldBegin('categories', TType.LIST, 29)
     oprot:writeListBegin(TType.STRUCT, #self.categories)
-    for _,iter435 in ipairs(self.categories) do
-      iter435:write(oprot)
+    for _,iter299 in ipairs(self.categories) do
+      iter299:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -16156,11 +12387,11 @@ function ProductList:read(iprot)
     elseif fid == 7 then
       if ftype == TType.LIST then
         self.productList = {}
-        local _etype439, _size436 = iprot:readListBegin()
-        for _i=1,_size436 do
-          local _elem440 = Product:new{}
-          _elem440:read(iprot)
-          table.insert(self.productList, _elem440)
+        local _etype303, _size300 = iprot:readListBegin()
+        for _i=1,_size300 do
+          local _elem304 = Product:new{}
+          _elem304:read(iprot)
+          table.insert(self.productList, _elem304)
         end
         iprot:readListEnd()
       else
@@ -16205,8 +12436,8 @@ function ProductList:write(oprot)
   if self.productList ~= nil then
     oprot:writeFieldBegin('productList', TType.LIST, 7)
     oprot:writeListBegin(TType.STRUCT, #self.productList)
-    for _,iter441 in ipairs(self.productList) do
-      iter441:write(oprot)
+    for _,iter305 in ipairs(self.productList) do
+      iter305:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -16317,11 +12548,11 @@ function ProductSimple:read(iprot)
     elseif fid == 10 then
       if ftype == TType.LIST then
         self.stickerIdRanges = {}
-        local _etype445, _size442 = iprot:readListBegin()
-        for _i=1,_size442 do
-          local _elem446 = StickerIdRange:new{}
-          _elem446:read(iprot)
-          table.insert(self.stickerIdRanges, _elem446)
+        local _etype309, _size306 = iprot:readListBegin()
+        for _i=1,_size306 do
+          local _elem310 = StickerIdRange:new{}
+          _elem310:read(iprot)
+          table.insert(self.stickerIdRanges, _elem310)
         end
         iprot:readListEnd()
       else
@@ -16377,8 +12608,8 @@ function ProductSimple:write(oprot)
   if self.stickerIdRanges ~= nil then
     oprot:writeFieldBegin('stickerIdRanges', TType.LIST, 10)
     oprot:writeListBegin(TType.STRUCT, #self.stickerIdRanges)
-    for _,iter447 in ipairs(self.stickerIdRanges) do
-      iter447:write(oprot)
+    for _,iter311 in ipairs(self.stickerIdRanges) do
+      iter311:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -16433,11 +12664,11 @@ function ProductSimpleList:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.productList = {}
-        local _etype451, _size448 = iprot:readListBegin()
-        for _i=1,_size448 do
-          local _elem452 = ProductSimple:new{}
-          _elem452:read(iprot)
-          table.insert(self.productList, _elem452)
+        local _etype315, _size312 = iprot:readListBegin()
+        for _i=1,_size312 do
+          local _elem316 = ProductSimple:new{}
+          _elem316:read(iprot)
+          table.insert(self.productList, _elem316)
         end
         iprot:readListEnd()
       else
@@ -16483,8 +12714,8 @@ function ProductSimpleList:write(oprot)
   if self.productList ~= nil then
     oprot:writeFieldBegin('productList', TType.LIST, 4)
     oprot:writeListBegin(TType.STRUCT, #self.productList)
-    for _,iter453 in ipairs(self.productList) do
-      iter453:write(oprot)
+    for _,iter317 in ipairs(self.productList) do
+      iter317:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -16720,11 +12951,11 @@ function ProximityMatchCandidateResult:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.users = {}
-        local _etype457, _size454 = iprot:readListBegin()
-        for _i=1,_size454 do
-          local _elem458 = Contact:new{}
-          _elem458:read(iprot)
-          table.insert(self.users, _elem458)
+        local _etype321, _size318 = iprot:readListBegin()
+        for _i=1,_size318 do
+          local _elem322 = Contact:new{}
+          _elem322:read(iprot)
+          table.insert(self.users, _elem322)
         end
         iprot:readListEnd()
       else
@@ -16733,11 +12964,11 @@ function ProximityMatchCandidateResult:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.buddies = {}
-        local _etype462, _size459 = iprot:readListBegin()
-        for _i=1,_size459 do
-          local _elem463 = Contact:new{}
-          _elem463:read(iprot)
-          table.insert(self.buddies, _elem463)
+        local _etype326, _size323 = iprot:readListBegin()
+        for _i=1,_size323 do
+          local _elem327 = Contact:new{}
+          _elem327:read(iprot)
+          table.insert(self.buddies, _elem327)
         end
         iprot:readListEnd()
       else
@@ -16756,8 +12987,8 @@ function ProximityMatchCandidateResult:write(oprot)
   if self.users ~= nil then
     oprot:writeFieldBegin('users', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.users)
-    for _,iter464 in ipairs(self.users) do
-      iter464:write(oprot)
+    for _,iter328 in ipairs(self.users) do
+      iter328:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -16765,8 +12996,8 @@ function ProximityMatchCandidateResult:write(oprot)
   if self.buddies ~= nil then
     oprot:writeFieldBegin('buddies', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.buddies)
-    for _,iter465 in ipairs(self.buddies) do
-      iter465:write(oprot)
+    for _,iter329 in ipairs(self.buddies) do
+      iter329:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -16898,11 +13129,11 @@ function Room:read(iprot)
     elseif fid == 10 then
       if ftype == TType.LIST then
         self.contacts = {}
-        local _etype469, _size466 = iprot:readListBegin()
-        for _i=1,_size466 do
-          local _elem470 = Contact:new{}
-          _elem470:read(iprot)
-          table.insert(self.contacts, _elem470)
+        local _etype333, _size330 = iprot:readListBegin()
+        for _i=1,_size330 do
+          local _elem334 = Contact:new{}
+          _elem334:read(iprot)
+          table.insert(self.contacts, _elem334)
         end
         iprot:readListEnd()
       else
@@ -16917,10 +13148,10 @@ function Room:read(iprot)
     elseif fid == 40 then
       if ftype == TType.LIST then
         self.memberMids = {}
-        local _etype474, _size471 = iprot:readListBegin()
-        for _i=1,_size471 do
-          local _elem475 = iprot:readString()
-          table.insert(self.memberMids, _elem475)
+        local _etype338, _size335 = iprot:readListBegin()
+        for _i=1,_size335 do
+          local _elem339 = iprot:readString()
+          table.insert(self.memberMids, _elem339)
         end
         iprot:readListEnd()
       else
@@ -16949,8 +13180,8 @@ function Room:write(oprot)
   if self.contacts ~= nil then
     oprot:writeFieldBegin('contacts', TType.LIST, 10)
     oprot:writeListBegin(TType.STRUCT, #self.contacts)
-    for _,iter476 in ipairs(self.contacts) do
-      iter476:write(oprot)
+    for _,iter340 in ipairs(self.contacts) do
+      iter340:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -16963,8 +13194,8 @@ function Room:write(oprot)
   if self.memberMids ~= nil then
     oprot:writeFieldBegin('memberMids', TType.LIST, 40)
     oprot:writeListBegin(TType.STRING, #self.memberMids)
-    for _,iter477 in ipairs(self.memberMids) do
-      oprot:writeString(iter477)
+    for _,iter341 in ipairs(self.memberMids) do
+      oprot:writeString(iter341)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -17195,11 +13426,11 @@ function SuggestDictionaryIncrements:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.tagIncrements = {}
-        local _etype481, _size478 = iprot:readListBegin()
-        for _i=1,_size478 do
-          local _elem482 = SuggestTagDictionaryIncrement:new{}
-          _elem482:read(iprot)
-          table.insert(self.tagIncrements, _elem482)
+        local _etype345, _size342 = iprot:readListBegin()
+        for _i=1,_size342 do
+          local _elem346 = SuggestTagDictionaryIncrement:new{}
+          _elem346:read(iprot)
+          table.insert(self.tagIncrements, _elem346)
         end
         iprot:readListEnd()
       else
@@ -17223,8 +13454,8 @@ function SuggestDictionaryIncrements:write(oprot)
   if self.tagIncrements ~= nil then
     oprot:writeFieldBegin('tagIncrements', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.tagIncrements)
-    for _,iter483 in ipairs(self.tagIncrements) do
-      iter483:write(oprot)
+    for _,iter347 in ipairs(self.tagIncrements) do
+      iter347:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -17360,11 +13591,11 @@ function SuggestDictionaryRevisions:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.tagRevisions = {}
-        local _etype487, _size484 = iprot:readListBegin()
-        for _i=1,_size484 do
-          local _elem488 = SuggestTagDictionaryRevision:new{}
-          _elem488:read(iprot)
-          table.insert(self.tagRevisions, _elem488)
+        local _etype351, _size348 = iprot:readListBegin()
+        for _i=1,_size348 do
+          local _elem352 = SuggestTagDictionaryRevision:new{}
+          _elem352:read(iprot)
+          table.insert(self.tagRevisions, _elem352)
         end
         iprot:readListEnd()
       else
@@ -17388,8 +13619,8 @@ function SuggestDictionaryRevisions:write(oprot)
   if self.tagRevisions ~= nil then
     oprot:writeFieldBegin('tagRevisions', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.tagRevisions)
-    for _,iter489 in ipairs(self.tagRevisions) do
-      iter489:write(oprot)
+    for _,iter353 in ipairs(self.tagRevisions) do
+      iter353:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -17426,11 +13657,11 @@ function SuggestDictionarySettings:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.dictionaries = {}
-        local _etype493, _size490 = iprot:readListBegin()
-        for _i=1,_size490 do
-          local _elem494 = SuggestDictionary:new{}
-          _elem494:read(iprot)
-          table.insert(self.dictionaries, _elem494)
+        local _etype357, _size354 = iprot:readListBegin()
+        for _i=1,_size354 do
+          local _elem358 = SuggestDictionary:new{}
+          _elem358:read(iprot)
+          table.insert(self.dictionaries, _elem358)
         end
         iprot:readListEnd()
       else
@@ -17439,10 +13670,10 @@ function SuggestDictionarySettings:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.preloadedDictionaries = {}
-        local _etype498, _size495 = iprot:readListBegin()
-        for _i=1,_size495 do
-          local _elem499 = iprot:readString()
-          table.insert(self.preloadedDictionaries, _elem499)
+        local _etype362, _size359 = iprot:readListBegin()
+        for _i=1,_size359 do
+          local _elem363 = iprot:readString()
+          table.insert(self.preloadedDictionaries, _elem363)
         end
         iprot:readListEnd()
       else
@@ -17471,8 +13702,8 @@ function SuggestDictionarySettings:write(oprot)
   if self.dictionaries ~= nil then
     oprot:writeFieldBegin('dictionaries', TType.LIST, 3)
     oprot:writeListBegin(TType.STRUCT, #self.dictionaries)
-    for _,iter500 in ipairs(self.dictionaries) do
-      iter500:write(oprot)
+    for _,iter364 in ipairs(self.dictionaries) do
+      iter364:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -17480,8 +13711,8 @@ function SuggestDictionarySettings:write(oprot)
   if self.preloadedDictionaries ~= nil then
     oprot:writeFieldBegin('preloadedDictionaries', TType.LIST, 4)
     oprot:writeListBegin(TType.STRING, #self.preloadedDictionaries)
-    for _,iter501 in ipairs(self.preloadedDictionaries) do
-      oprot:writeString(iter501)
+    for _,iter365 in ipairs(self.preloadedDictionaries) do
+      oprot:writeString(iter365)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -18313,11 +14544,11 @@ function Settings:read(iprot)
     elseif fid == 42 then
       if ftype == TType.MAP then
         self.snsAccounts = {}
-        local _ktype503, _vtype504, _size502 = iprot:readMapBegin() 
-        for _i=1,_size502 do
-          local _key506 = iprot:readI32()
-          local _val507 = iprot:readString()
-          self.snsAccounts[_key506] = _val507
+        local _ktype367, _vtype368, _size366 = iprot:readMapBegin() 
+        for _i=1,_size366 do
+          local _key370 = iprot:readI32()
+          local _val371 = iprot:readString()
+          self.snsAccounts[_key370] = _val371
         end
         iprot:readMapEnd()
       else
@@ -18344,11 +14575,11 @@ function Settings:read(iprot)
     elseif fid == 60 then
       if ftype == TType.MAP then
         self.customModes = {}
-        local _ktype509, _vtype510, _size508 = iprot:readMapBegin() 
-        for _i=1,_size508 do
-          local _key512 = iprot:readI32()
-          local _val513 = iprot:readString()
-          self.customModes[_key512] = _val513
+        local _ktype373, _vtype374, _size372 = iprot:readMapBegin() 
+        for _i=1,_size372 do
+          local _key376 = iprot:readI32()
+          local _val377 = iprot:readString()
+          self.customModes[_key376] = _val377
         end
         iprot:readMapEnd()
       else
@@ -18510,9 +14741,9 @@ function Settings:write(oprot)
   if self.snsAccounts ~= nil then
     oprot:writeFieldBegin('snsAccounts', TType.MAP, 42)
     oprot:writeMapBegin(TType.I32, TType.STRING, ttable_size(self.snsAccounts))
-    for kiter514,viter515 in pairs(self.snsAccounts) do
-      oprot:writeI32(kiter514)
-      oprot:writeString(viter515)
+    for kiter378,viter379 in pairs(self.snsAccounts) do
+      oprot:writeI32(kiter378)
+      oprot:writeString(viter379)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -18535,9 +14766,9 @@ function Settings:write(oprot)
   if self.customModes ~= nil then
     oprot:writeFieldBegin('customModes', TType.MAP, 60)
     oprot:writeMapBegin(TType.I32, TType.STRING, ttable_size(self.customModes))
-    for kiter516,viter517 in pairs(self.customModes) do
-      oprot:writeI32(kiter516)
-      oprot:writeString(viter517)
+    for kiter380,viter381 in pairs(self.customModes) do
+      oprot:writeI32(kiter380)
+      oprot:writeString(viter381)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -18909,11 +15140,11 @@ function SnsFriends:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.snsFriends = {}
-        local _etype521, _size518 = iprot:readListBegin()
-        for _i=1,_size518 do
-          local _elem522 = SnsFriend:new{}
-          _elem522:read(iprot)
-          table.insert(self.snsFriends, _elem522)
+        local _etype385, _size382 = iprot:readListBegin()
+        for _i=1,_size382 do
+          local _elem386 = SnsFriend:new{}
+          _elem386:read(iprot)
+          table.insert(self.snsFriends, _elem386)
         end
         iprot:readListEnd()
       else
@@ -18938,8 +15169,8 @@ function SnsFriends:write(oprot)
   if self.snsFriends ~= nil then
     oprot:writeFieldBegin('snsFriends', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.snsFriends)
-    for _,iter523 in ipairs(self.snsFriends) do
-      iter523:write(oprot)
+    for _,iter387 in ipairs(self.snsFriends) do
+      iter387:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -19287,11 +15518,11 @@ function TMessageBox:read(iprot)
     elseif fid == 10 then
       if ftype == TType.LIST then
         self.lastMessages = {}
-        local _etype527, _size524 = iprot:readListBegin()
-        for _i=1,_size524 do
-          local _elem528 = Message:new{}
-          _elem528:read(iprot)
-          table.insert(self.lastMessages, _elem528)
+        local _etype391, _size388 = iprot:readListBegin()
+        for _i=1,_size388 do
+          local _elem392 = Message:new{}
+          _elem392:read(iprot)
+          table.insert(self.lastMessages, _elem392)
         end
         iprot:readListEnd()
       else
@@ -19345,8 +15576,8 @@ function TMessageBox:write(oprot)
   if self.lastMessages ~= nil then
     oprot:writeFieldBegin('lastMessages', TType.LIST, 10)
     oprot:writeListBegin(TType.STRUCT, #self.lastMessages)
-    for _,iter529 in ipairs(self.lastMessages) do
-      iter529:write(oprot)
+    for _,iter393 in ipairs(self.lastMessages) do
+      iter393:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -19384,11 +15615,11 @@ function TMessageBoxWrapUp:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.contacts = {}
-        local _etype533, _size530 = iprot:readListBegin()
-        for _i=1,_size530 do
-          local _elem534 = Contact:new{}
-          _elem534:read(iprot)
-          table.insert(self.contacts, _elem534)
+        local _etype397, _size394 = iprot:readListBegin()
+        for _i=1,_size394 do
+          local _elem398 = Contact:new{}
+          _elem398:read(iprot)
+          table.insert(self.contacts, _elem398)
         end
         iprot:readListEnd()
       else
@@ -19423,8 +15654,8 @@ function TMessageBoxWrapUp:write(oprot)
   if self.contacts ~= nil then
     oprot:writeFieldBegin('contacts', TType.LIST, 3)
     oprot:writeListBegin(TType.STRUCT, #self.contacts)
-    for _,iter535 in ipairs(self.contacts) do
-      iter535:write(oprot)
+    for _,iter399 in ipairs(self.contacts) do
+      iter399:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -19452,11 +15683,11 @@ function TMessageBoxWrapUpResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.messageBoxWrapUpList = {}
-        local _etype539, _size536 = iprot:readListBegin()
-        for _i=1,_size536 do
-          local _elem540 = TMessageBoxWrapUp:new{}
-          _elem540:read(iprot)
-          table.insert(self.messageBoxWrapUpList, _elem540)
+        local _etype403, _size400 = iprot:readListBegin()
+        for _i=1,_size400 do
+          local _elem404 = TMessageBoxWrapUp:new{}
+          _elem404:read(iprot)
+          table.insert(self.messageBoxWrapUpList, _elem404)
         end
         iprot:readListEnd()
       else
@@ -19481,8 +15712,8 @@ function TMessageBoxWrapUpResponse:write(oprot)
   if self.messageBoxWrapUpList ~= nil then
     oprot:writeFieldBegin('messageBoxWrapUpList', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.messageBoxWrapUpList)
-    for _,iter541 in ipairs(self.messageBoxWrapUpList) do
-      iter541:write(oprot)
+    for _,iter405 in ipairs(self.messageBoxWrapUpList) do
+      iter405:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -19587,18 +15818,18 @@ function TMessageReadRange:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.ranges = {}
-        local _ktype543, _vtype544, _size542 = iprot:readMapBegin() 
-        for _i=1,_size542 do
-          local _key546 = iprot:readString()
-          local _val547 = {}
-          local _etype551, _size548 = iprot:readListBegin()
-          for _i=1,_size548 do
-            local _elem552 = TMessageReadRangeEntry:new{}
-            _elem552:read(iprot)
-            table.insert(_val547, _elem552)
+        local _ktype407, _vtype408, _size406 = iprot:readMapBegin() 
+        for _i=1,_size406 do
+          local _key410 = iprot:readString()
+          local _val411 = {}
+          local _etype415, _size412 = iprot:readListBegin()
+          for _i=1,_size412 do
+            local _elem416 = TMessageReadRangeEntry:new{}
+            _elem416:read(iprot)
+            table.insert(_val411, _elem416)
           end
           iprot:readListEnd()
-          self.ranges[_key546] = _val547
+          self.ranges[_key410] = _val411
         end
         iprot:readMapEnd()
       else
@@ -19622,11 +15853,11 @@ function TMessageReadRange:write(oprot)
   if self.ranges ~= nil then
     oprot:writeFieldBegin('ranges', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.LIST, ttable_size(self.ranges))
-    for kiter553,viter554 in pairs(self.ranges) do
-      oprot:writeString(kiter553)
-      oprot:writeListBegin(TType.STRUCT, #viter554)
-      for _,iter555 in ipairs(viter554) do
-        iter555:write(oprot)
+    for kiter417,viter418 in pairs(self.ranges) do
+      oprot:writeString(kiter417)
+      oprot:writeListBegin(TType.STRUCT, #viter418)
+      for _,iter419 in ipairs(viter418) do
+        iter419:write(oprot)
       end
       oprot:writeListEnd()
     end
@@ -19848,11 +16079,11 @@ function SyncRelations:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.syncParamContact = {}
-        local _etype559, _size556 = iprot:readListBegin()
-        for _i=1,_size556 do
-          local _elem560 = SyncParamContact:new{}
-          _elem560:read(iprot)
-          table.insert(self.syncParamContact, _elem560)
+        local _etype423, _size420 = iprot:readListBegin()
+        for _i=1,_size420 do
+          local _elem424 = SyncParamContact:new{}
+          _elem424:read(iprot)
+          table.insert(self.syncParamContact, _elem424)
         end
         iprot:readListEnd()
       else
@@ -19861,11 +16092,11 @@ function SyncRelations:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.syncParamMid = {}
-        local _etype564, _size561 = iprot:readListBegin()
-        for _i=1,_size561 do
-          local _elem565 = SyncParamMid:new{}
-          _elem565:read(iprot)
-          table.insert(self.syncParamMid, _elem565)
+        local _etype428, _size425 = iprot:readListBegin()
+        for _i=1,_size425 do
+          local _elem429 = SyncParamMid:new{}
+          _elem429:read(iprot)
+          table.insert(self.syncParamMid, _elem429)
         end
         iprot:readListEnd()
       else
@@ -19889,8 +16120,8 @@ function SyncRelations:write(oprot)
   if self.syncParamContact ~= nil then
     oprot:writeFieldBegin('syncParamContact', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.syncParamContact)
-    for _,iter566 in ipairs(self.syncParamContact) do
-      iter566:write(oprot)
+    for _,iter430 in ipairs(self.syncParamContact) do
+      iter430:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -19898,8 +16129,8 @@ function SyncRelations:write(oprot)
   if self.syncParamMid ~= nil then
     oprot:writeFieldBegin('syncParamMid', TType.LIST, 3)
     oprot:writeListBegin(TType.STRUCT, #self.syncParamMid)
-    for _,iter567 in ipairs(self.syncParamMid) do
-      iter567:write(oprot)
+    for _,iter431 in ipairs(self.syncParamMid) do
+      iter431:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -20505,11 +16736,11 @@ function ApproveSquareMembersResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.approvedMembers = {}
-        local _etype571, _size568 = iprot:readListBegin()
-        for _i=1,_size568 do
-          local _elem572 = SquareMember:new{}
-          _elem572:read(iprot)
-          table.insert(self.approvedMembers, _elem572)
+        local _etype435, _size432 = iprot:readListBegin()
+        for _i=1,_size432 do
+          local _elem436 = SquareMember:new{}
+          _elem436:read(iprot)
+          table.insert(self.approvedMembers, _elem436)
         end
         iprot:readListEnd()
       else
@@ -20535,8 +16766,8 @@ function ApproveSquareMembersResponse:write(oprot)
   if self.approvedMembers ~= nil then
     oprot:writeFieldBegin('approvedMembers', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.approvedMembers)
-    for _,iter573 in ipairs(self.approvedMembers) do
-      iter573:write(oprot)
+    for _,iter437 in ipairs(self.approvedMembers) do
+      iter437:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -20570,10 +16801,10 @@ function ApproveSquareMembersRequest:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.requestedMemberMids = {}
-        local _etype577, _size574 = iprot:readListBegin()
-        for _i=1,_size574 do
-          local _elem578 = iprot:readString()
-          table.insert(self.requestedMemberMids, _elem578)
+        local _etype441, _size438 = iprot:readListBegin()
+        for _i=1,_size438 do
+          local _elem442 = iprot:readString()
+          table.insert(self.requestedMemberMids, _elem442)
         end
         iprot:readListEnd()
       else
@@ -20597,8 +16828,8 @@ function ApproveSquareMembersRequest:write(oprot)
   if self.requestedMemberMids ~= nil then
     oprot:writeFieldBegin('requestedMemberMids', TType.LIST, 3)
     oprot:writeListBegin(TType.STRING, #self.requestedMemberMids)
-    for _,iter579 in ipairs(self.requestedMemberMids) do
-      oprot:writeString(iter579)
+    for _,iter443 in ipairs(self.requestedMemberMids) do
+      oprot:writeString(iter443)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -20697,10 +16928,10 @@ function CreateSquareChatRequest:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.squareMemberMids = {}
-        local _etype583, _size580 = iprot:readListBegin()
-        for _i=1,_size580 do
-          local _elem584 = iprot:readString()
-          table.insert(self.squareMemberMids, _elem584)
+        local _etype447, _size444 = iprot:readListBegin()
+        for _i=1,_size444 do
+          local _elem448 = iprot:readString()
+          table.insert(self.squareMemberMids, _elem448)
         end
         iprot:readListEnd()
       else
@@ -20729,8 +16960,8 @@ function CreateSquareChatRequest:write(oprot)
   if self.squareMemberMids ~= nil then
     oprot:writeFieldBegin('squareMemberMids', TType.LIST, 3)
     oprot:writeListBegin(TType.STRING, #self.squareMemberMids)
-    for _,iter585 in ipairs(self.squareMemberMids) do
-      oprot:writeString(iter585)
+    for _,iter449 in ipairs(self.squareMemberMids) do
+      oprot:writeString(iter449)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -21428,11 +17659,11 @@ function GetJoinedSquaresResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.squares = {}
-        local _etype589, _size586 = iprot:readListBegin()
-        for _i=1,_size586 do
-          local _elem590 = Square:new{}
-          _elem590:read(iprot)
-          table.insert(self.squares, _elem590)
+        local _etype453, _size450 = iprot:readListBegin()
+        for _i=1,_size450 do
+          local _elem454 = Square:new{}
+          _elem454:read(iprot)
+          table.insert(self.squares, _elem454)
         end
         iprot:readListEnd()
       else
@@ -21441,12 +17672,12 @@ function GetJoinedSquaresResponse:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.members = {}
-        local _ktype592, _vtype593, _size591 = iprot:readMapBegin() 
-        for _i=1,_size591 do
-          local _key595 = iprot:readString()
-          local _val596 = SquareMember:new{}
-          _val596:read(iprot)
-          self.members[_key595] = _val596
+        local _ktype456, _vtype457, _size455 = iprot:readMapBegin() 
+        for _i=1,_size455 do
+          local _key459 = iprot:readString()
+          local _val460 = SquareMember:new{}
+          _val460:read(iprot)
+          self.members[_key459] = _val460
         end
         iprot:readMapEnd()
       else
@@ -21455,12 +17686,12 @@ function GetJoinedSquaresResponse:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.authorities = {}
-        local _ktype598, _vtype599, _size597 = iprot:readMapBegin() 
-        for _i=1,_size597 do
-          local _key601 = iprot:readString()
-          local _val602 = SquareAuthority:new{}
-          _val602:read(iprot)
-          self.authorities[_key601] = _val602
+        local _ktype462, _vtype463, _size461 = iprot:readMapBegin() 
+        for _i=1,_size461 do
+          local _key465 = iprot:readString()
+          local _val466 = SquareAuthority:new{}
+          _val466:read(iprot)
+          self.authorities[_key465] = _val466
         end
         iprot:readMapEnd()
       else
@@ -21469,12 +17700,12 @@ function GetJoinedSquaresResponse:read(iprot)
     elseif fid == 4 then
       if ftype == TType.MAP then
         self.statuses = {}
-        local _ktype604, _vtype605, _size603 = iprot:readMapBegin() 
-        for _i=1,_size603 do
-          local _key607 = iprot:readString()
-          local _val608 = SquareStatus:new{}
-          _val608:read(iprot)
-          self.statuses[_key607] = _val608
+        local _ktype468, _vtype469, _size467 = iprot:readMapBegin() 
+        for _i=1,_size467 do
+          local _key471 = iprot:readString()
+          local _val472 = SquareStatus:new{}
+          _val472:read(iprot)
+          self.statuses[_key471] = _val472
         end
         iprot:readMapEnd()
       else
@@ -21489,12 +17720,12 @@ function GetJoinedSquaresResponse:read(iprot)
     elseif fid == 6 then
       if ftype == TType.MAP then
         self.noteStatuses = {}
-        local _ktype610, _vtype611, _size609 = iprot:readMapBegin() 
-        for _i=1,_size609 do
-          local _key613 = iprot:readString()
-          local _val614 = NoteStatus:new{}
-          _val614:read(iprot)
-          self.noteStatuses[_key613] = _val614
+        local _ktype474, _vtype475, _size473 = iprot:readMapBegin() 
+        for _i=1,_size473 do
+          local _key477 = iprot:readString()
+          local _val478 = NoteStatus:new{}
+          _val478:read(iprot)
+          self.noteStatuses[_key477] = _val478
         end
         iprot:readMapEnd()
       else
@@ -21513,8 +17744,8 @@ function GetJoinedSquaresResponse:write(oprot)
   if self.squares ~= nil then
     oprot:writeFieldBegin('squares', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.squares)
-    for _,iter615 in ipairs(self.squares) do
-      iter615:write(oprot)
+    for _,iter479 in ipairs(self.squares) do
+      iter479:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -21522,9 +17753,9 @@ function GetJoinedSquaresResponse:write(oprot)
   if self.members ~= nil then
     oprot:writeFieldBegin('members', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.members))
-    for kiter616,viter617 in pairs(self.members) do
-      oprot:writeString(kiter616)
-      viter617:write(oprot)
+    for kiter480,viter481 in pairs(self.members) do
+      oprot:writeString(kiter480)
+      viter481:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -21532,9 +17763,9 @@ function GetJoinedSquaresResponse:write(oprot)
   if self.authorities ~= nil then
     oprot:writeFieldBegin('authorities', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.authorities))
-    for kiter618,viter619 in pairs(self.authorities) do
-      oprot:writeString(kiter618)
-      viter619:write(oprot)
+    for kiter482,viter483 in pairs(self.authorities) do
+      oprot:writeString(kiter482)
+      viter483:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -21542,9 +17773,9 @@ function GetJoinedSquaresResponse:write(oprot)
   if self.statuses ~= nil then
     oprot:writeFieldBegin('statuses', TType.MAP, 4)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.statuses))
-    for kiter620,viter621 in pairs(self.statuses) do
-      oprot:writeString(kiter620)
-      viter621:write(oprot)
+    for kiter484,viter485 in pairs(self.statuses) do
+      oprot:writeString(kiter484)
+      viter485:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -21557,9 +17788,9 @@ function GetJoinedSquaresResponse:write(oprot)
   if self.noteStatuses ~= nil then
     oprot:writeFieldBegin('noteStatuses', TType.MAP, 6)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.noteStatuses))
-    for kiter622,viter623 in pairs(self.noteStatuses) do
-      oprot:writeString(kiter622)
-      viter623:write(oprot)
+    for kiter486,viter487 in pairs(self.noteStatuses) do
+      oprot:writeString(kiter486)
+      viter487:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -21643,11 +17874,11 @@ function GetJoinableSquareChatsResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.squareChats = {}
-        local _etype627, _size624 = iprot:readListBegin()
-        for _i=1,_size624 do
-          local _elem628 = SquareChat:new{}
-          _elem628:read(iprot)
-          table.insert(self.squareChats, _elem628)
+        local _etype491, _size488 = iprot:readListBegin()
+        for _i=1,_size488 do
+          local _elem492 = SquareChat:new{}
+          _elem492:read(iprot)
+          table.insert(self.squareChats, _elem492)
         end
         iprot:readListEnd()
       else
@@ -21668,12 +17899,12 @@ function GetJoinableSquareChatsResponse:read(iprot)
     elseif fid == 4 then
       if ftype == TType.MAP then
         self.squareChatStatuses = {}
-        local _ktype630, _vtype631, _size629 = iprot:readMapBegin() 
-        for _i=1,_size629 do
-          local _key633 = iprot:readString()
-          local _val634 = SquareChatStatus:new{}
-          _val634:read(iprot)
-          self.squareChatStatuses[_key633] = _val634
+        local _ktype494, _vtype495, _size493 = iprot:readMapBegin() 
+        for _i=1,_size493 do
+          local _key497 = iprot:readString()
+          local _val498 = SquareChatStatus:new{}
+          _val498:read(iprot)
+          self.squareChatStatuses[_key497] = _val498
         end
         iprot:readMapEnd()
       else
@@ -21692,8 +17923,8 @@ function GetJoinableSquareChatsResponse:write(oprot)
   if self.squareChats ~= nil then
     oprot:writeFieldBegin('squareChats', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.squareChats)
-    for _,iter635 in ipairs(self.squareChats) do
-      iter635:write(oprot)
+    for _,iter499 in ipairs(self.squareChats) do
+      iter499:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -21711,9 +17942,9 @@ function GetJoinableSquareChatsResponse:write(oprot)
   if self.squareChatStatuses ~= nil then
     oprot:writeFieldBegin('squareChatStatuses', TType.MAP, 4)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.squareChatStatuses))
-    for kiter636,viter637 in pairs(self.squareChatStatuses) do
-      oprot:writeString(kiter636)
-      viter637:write(oprot)
+    for kiter500,viter501 in pairs(self.squareChatStatuses) do
+      oprot:writeString(kiter500)
+      viter501:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -21959,10 +18190,10 @@ function SquareMemberSearchOption:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.memberRoles = {}
-        local _etype641, _size638 = iprot:readSetBegin()
-        for _i=1,_size638 do
-          local _elem642 = iprot:readI32()
-          self.memberRoles[_elem642] = _elem642
+        local _etype505, _size502 = iprot:readSetBegin()
+        for _i=1,_size502 do
+          local _elem506 = iprot:readI32()
+          self.memberRoles[_elem506] = _elem506
         end
         iprot:readSetEnd()
       else
@@ -22016,8 +18247,8 @@ function SquareMemberSearchOption:write(oprot)
   if self.memberRoles ~= nil then
     oprot:writeFieldBegin('memberRoles', TType.SET, 2)
     oprot:writeSetBegin(TType.I32, ttable_size(self.memberRoles))
-    for iter643,_ in pairs(self.memberRoles) do
-      oprot:writeI32(iter643)
+    for iter507,_ in pairs(self.memberRoles) do
+      oprot:writeI32(iter507)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -22139,11 +18370,11 @@ function SearchSquareMembersResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.members = {}
-        local _etype647, _size644 = iprot:readListBegin()
-        for _i=1,_size644 do
-          local _elem648 = SquareMember:new{}
-          _elem648:read(iprot)
-          table.insert(self.members, _elem648)
+        local _etype511, _size508 = iprot:readListBegin()
+        for _i=1,_size508 do
+          local _elem512 = SquareMember:new{}
+          _elem512:read(iprot)
+          table.insert(self.members, _elem512)
         end
         iprot:readListEnd()
       else
@@ -22180,8 +18411,8 @@ function SearchSquareMembersResponse:write(oprot)
   if self.members ~= nil then
     oprot:writeFieldBegin('members', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.members)
-    for _,iter649 in ipairs(self.members) do
-      iter649:write(oprot)
+    for _,iter513 in ipairs(self.members) do
+      iter513:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -22493,11 +18724,11 @@ function SquareEventNotifiedInviteIntoSquareChat:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.invitees = {}
-        local _etype653, _size650 = iprot:readListBegin()
-        for _i=1,_size650 do
-          local _elem654 = SquareMember:new{}
-          _elem654:read(iprot)
-          table.insert(self.invitees, _elem654)
+        local _etype517, _size514 = iprot:readListBegin()
+        for _i=1,_size514 do
+          local _elem518 = SquareMember:new{}
+          _elem518:read(iprot)
+          table.insert(self.invitees, _elem518)
         end
         iprot:readListEnd()
       else
@@ -22535,8 +18766,8 @@ function SquareEventNotifiedInviteIntoSquareChat:write(oprot)
   if self.invitees ~= nil then
     oprot:writeFieldBegin('invitees', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.invitees)
-    for _,iter655 in ipairs(self.invitees) do
-      iter655:write(oprot)
+    for _,iter519 in ipairs(self.invitees) do
+      iter519:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -22801,11 +19032,11 @@ function SquareEventNotifiedKickoutFromSquare:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.kickees = {}
-        local _etype659, _size656 = iprot:readListBegin()
-        for _i=1,_size656 do
-          local _elem660 = SquareMember:new{}
-          _elem660:read(iprot)
-          table.insert(self.kickees, _elem660)
+        local _etype523, _size520 = iprot:readListBegin()
+        for _i=1,_size520 do
+          local _elem524 = SquareMember:new{}
+          _elem524:read(iprot)
+          table.insert(self.kickees, _elem524)
         end
         iprot:readListEnd()
       else
@@ -22829,8 +19060,8 @@ function SquareEventNotifiedKickoutFromSquare:write(oprot)
   if self.kickees ~= nil then
     oprot:writeFieldBegin('kickees', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.kickees)
-    for _,iter661 in ipairs(self.kickees) do
-      iter661:write(oprot)
+    for _,iter525 in ipairs(self.kickees) do
+      iter525:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -24621,11 +20852,11 @@ function FetchMyEventsResponse:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.events = {}
-        local _etype665, _size662 = iprot:readListBegin()
-        for _i=1,_size662 do
-          local _elem666 = SquareEvent:new{}
-          _elem666:read(iprot)
-          table.insert(self.events, _elem666)
+        local _etype529, _size526 = iprot:readListBegin()
+        for _i=1,_size526 do
+          local _elem530 = SquareEvent:new{}
+          _elem530:read(iprot)
+          table.insert(self.events, _elem530)
         end
         iprot:readListEnd()
       else
@@ -24661,8 +20892,8 @@ function FetchMyEventsResponse:write(oprot)
   if self.events ~= nil then
     oprot:writeFieldBegin('events', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.events)
-    for _,iter667 in ipairs(self.events) do
-      iter667:write(oprot)
+    for _,iter531 in ipairs(self.events) do
+      iter531:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -24787,11 +21018,11 @@ function FetchSquareChatEventsResponse:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.events = {}
-        local _etype671, _size668 = iprot:readListBegin()
-        for _i=1,_size668 do
-          local _elem672 = SquareEvent:new{}
-          _elem672:read(iprot)
-          table.insert(self.events, _elem672)
+        local _etype535, _size532 = iprot:readListBegin()
+        for _i=1,_size532 do
+          local _elem536 = SquareEvent:new{}
+          _elem536:read(iprot)
+          table.insert(self.events, _elem536)
         end
         iprot:readListEnd()
       else
@@ -24827,8 +21058,8 @@ function FetchSquareChatEventsResponse:write(oprot)
   if self.events ~= nil then
     oprot:writeFieldBegin('events', TType.LIST, 2)
     oprot:writeListBegin(TType.STRUCT, #self.events)
-    for _,iter673 in ipairs(self.events) do
-      iter673:write(oprot)
+    for _,iter537 in ipairs(self.events) do
+      iter537:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -24868,10 +21099,10 @@ function InviteToSquareRequest:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.invitees = {}
-        local _etype677, _size674 = iprot:readListBegin()
-        for _i=1,_size674 do
-          local _elem678 = iprot:readString()
-          table.insert(self.invitees, _elem678)
+        local _etype541, _size538 = iprot:readListBegin()
+        for _i=1,_size538 do
+          local _elem542 = iprot:readString()
+          table.insert(self.invitees, _elem542)
         end
         iprot:readListEnd()
       else
@@ -24901,8 +21132,8 @@ function InviteToSquareRequest:write(oprot)
   if self.invitees ~= nil then
     oprot:writeFieldBegin('invitees', TType.LIST, 3)
     oprot:writeListBegin(TType.STRING, #self.invitees)
-    for _,iter679 in ipairs(self.invitees) do
-      oprot:writeString(iter679)
+    for _,iter543 in ipairs(self.invitees) do
+      oprot:writeString(iter543)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -24954,10 +21185,10 @@ function InviteToSquareChatRequest:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.inviteeMids = {}
-        local _etype683, _size680 = iprot:readListBegin()
-        for _i=1,_size680 do
-          local _elem684 = iprot:readString()
-          table.insert(self.inviteeMids, _elem684)
+        local _etype547, _size544 = iprot:readListBegin()
+        for _i=1,_size544 do
+          local _elem548 = iprot:readString()
+          table.insert(self.inviteeMids, _elem548)
         end
         iprot:readListEnd()
       else
@@ -24982,8 +21213,8 @@ function InviteToSquareChatRequest:write(oprot)
   if self.inviteeMids ~= nil then
     oprot:writeFieldBegin('inviteeMids', TType.LIST, 1)
     oprot:writeListBegin(TType.STRING, #self.inviteeMids)
-    for _,iter685 in ipairs(self.inviteeMids) do
-      oprot:writeString(iter685)
+    for _,iter549 in ipairs(self.inviteeMids) do
+      oprot:writeString(iter549)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -25010,10 +21241,10 @@ function InviteToSquareChatResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.inviteeMids = {}
-        local _etype689, _size686 = iprot:readListBegin()
-        for _i=1,_size686 do
-          local _elem690 = iprot:readString()
-          table.insert(self.inviteeMids, _elem690)
+        local _etype553, _size550 = iprot:readListBegin()
+        for _i=1,_size550 do
+          local _elem554 = iprot:readString()
+          table.insert(self.inviteeMids, _elem554)
         end
         iprot:readListEnd()
       else
@@ -25032,8 +21263,8 @@ function InviteToSquareChatResponse:write(oprot)
   if self.inviteeMids ~= nil then
     oprot:writeFieldBegin('inviteeMids', TType.LIST, 1)
     oprot:writeListBegin(TType.STRING, #self.inviteeMids)
-    for _,iter691 in ipairs(self.inviteeMids) do
-      oprot:writeString(iter691)
+    for _,iter555 in ipairs(self.inviteeMids) do
+      oprot:writeString(iter555)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -25151,10 +21382,10 @@ function GetSquareMembersRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.mids = {}
-        local _etype695, _size692 = iprot:readSetBegin()
-        for _i=1,_size692 do
-          local _elem696 = iprot:readString()
-          self.mids[_elem696] = _elem696
+        local _etype559, _size556 = iprot:readSetBegin()
+        for _i=1,_size556 do
+          local _elem560 = iprot:readString()
+          self.mids[_elem560] = _elem560
         end
         iprot:readSetEnd()
       else
@@ -25173,8 +21404,8 @@ function GetSquareMembersRequest:write(oprot)
   if self.mids ~= nil then
     oprot:writeFieldBegin('mids', TType.SET, 2)
     oprot:writeSetBegin(TType.STRING, ttable_size(self.mids))
-    for iter697,_ in pairs(self.mids) do
-      oprot:writeString(iter697)
+    for iter561,_ in pairs(self.mids) do
+      oprot:writeString(iter561)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -25293,11 +21524,11 @@ function GetSquareMemberRelationsResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.squareMembers = {}
-        local _etype701, _size698 = iprot:readListBegin()
-        for _i=1,_size698 do
-          local _elem702 = SquareMember:new{}
-          _elem702:read(iprot)
-          table.insert(self.squareMembers, _elem702)
+        local _etype565, _size562 = iprot:readListBegin()
+        for _i=1,_size562 do
+          local _elem566 = SquareMember:new{}
+          _elem566:read(iprot)
+          table.insert(self.squareMembers, _elem566)
         end
         iprot:readListEnd()
       else
@@ -25306,12 +21537,12 @@ function GetSquareMemberRelationsResponse:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.relations = {}
-        local _ktype704, _vtype705, _size703 = iprot:readMapBegin() 
-        for _i=1,_size703 do
-          local _key707 = iprot:readString()
-          local _val708 = SquareMemberRelation:new{}
-          _val708:read(iprot)
-          self.relations[_key707] = _val708
+        local _ktype568, _vtype569, _size567 = iprot:readMapBegin() 
+        for _i=1,_size567 do
+          local _key571 = iprot:readString()
+          local _val572 = SquareMemberRelation:new{}
+          _val572:read(iprot)
+          self.relations[_key571] = _val572
         end
         iprot:readMapEnd()
       else
@@ -25336,8 +21567,8 @@ function GetSquareMemberRelationsResponse:write(oprot)
   if self.squareMembers ~= nil then
     oprot:writeFieldBegin('squareMembers', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.squareMembers)
-    for _,iter709 in ipairs(self.squareMembers) do
-      iter709:write(oprot)
+    for _,iter573 in ipairs(self.squareMembers) do
+      iter573:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -25345,9 +21576,9 @@ function GetSquareMemberRelationsResponse:write(oprot)
   if self.relations ~= nil then
     oprot:writeFieldBegin('relations', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.relations))
-    for kiter710,viter711 in pairs(self.relations) do
-      oprot:writeString(kiter710)
-      viter711:write(oprot)
+    for kiter574,viter575 in pairs(self.relations) do
+      oprot:writeString(kiter574)
+      viter575:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -25552,11 +21783,11 @@ function GetSquareCategoriesResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.categoryList = {}
-        local _etype715, _size712 = iprot:readListBegin()
-        for _i=1,_size712 do
-          local _elem716 = Category:new{}
-          _elem716:read(iprot)
-          table.insert(self.categoryList, _elem716)
+        local _etype579, _size576 = iprot:readListBegin()
+        for _i=1,_size576 do
+          local _elem580 = Category:new{}
+          _elem580:read(iprot)
+          table.insert(self.categoryList, _elem580)
         end
         iprot:readListEnd()
       else
@@ -25575,8 +21806,8 @@ function GetSquareCategoriesResponse:write(oprot)
   if self.categoryList ~= nil then
     oprot:writeFieldBegin('categoryList', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.categoryList)
-    for _,iter717 in ipairs(self.categoryList) do
-      iter717:write(oprot)
+    for _,iter581 in ipairs(self.categoryList) do
+      iter581:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -25599,10 +21830,10 @@ function UpdateSquareRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype721, _size718 = iprot:readSetBegin()
-        for _i=1,_size718 do
-          local _elem722 = iprot:readI32()
-          self.updatedAttrs[_elem722] = _elem722
+        local _etype585, _size582 = iprot:readSetBegin()
+        for _i=1,_size582 do
+          local _elem586 = iprot:readI32()
+          self.updatedAttrs[_elem586] = _elem586
         end
         iprot:readSetEnd()
       else
@@ -25628,8 +21859,8 @@ function UpdateSquareRequest:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 2)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter723,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter723)
+    for iter587,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter587)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -25657,10 +21888,10 @@ function UpdateSquareResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype727, _size724 = iprot:readSetBegin()
-        for _i=1,_size724 do
-          local _elem728 = iprot:readI32()
-          self.updatedAttrs[_elem728] = _elem728
+        local _etype591, _size588 = iprot:readSetBegin()
+        for _i=1,_size588 do
+          local _elem592 = iprot:readI32()
+          self.updatedAttrs[_elem592] = _elem592
         end
         iprot:readSetEnd()
       else
@@ -25686,8 +21917,8 @@ function UpdateSquareResponse:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 1)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter729,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter729)
+    for iter593,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter593)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -25777,11 +22008,11 @@ function SearchSquaresResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.squares = {}
-        local _etype733, _size730 = iprot:readListBegin()
-        for _i=1,_size730 do
-          local _elem734 = Square:new{}
-          _elem734:read(iprot)
-          table.insert(self.squares, _elem734)
+        local _etype597, _size594 = iprot:readListBegin()
+        for _i=1,_size594 do
+          local _elem598 = Square:new{}
+          _elem598:read(iprot)
+          table.insert(self.squares, _elem598)
         end
         iprot:readListEnd()
       else
@@ -25790,12 +22021,12 @@ function SearchSquaresResponse:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.squareStatuses = {}
-        local _ktype736, _vtype737, _size735 = iprot:readMapBegin() 
-        for _i=1,_size735 do
-          local _key739 = iprot:readString()
-          local _val740 = SquareStatus:new{}
-          _val740:read(iprot)
-          self.squareStatuses[_key739] = _val740
+        local _ktype600, _vtype601, _size599 = iprot:readMapBegin() 
+        for _i=1,_size599 do
+          local _key603 = iprot:readString()
+          local _val604 = SquareStatus:new{}
+          _val604:read(iprot)
+          self.squareStatuses[_key603] = _val604
         end
         iprot:readMapEnd()
       else
@@ -25804,12 +22035,12 @@ function SearchSquaresResponse:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.myMemberships = {}
-        local _ktype742, _vtype743, _size741 = iprot:readMapBegin() 
-        for _i=1,_size741 do
-          local _key745 = iprot:readString()
-          local _val746 = SquareMember:new{}
-          _val746:read(iprot)
-          self.myMemberships[_key745] = _val746
+        local _ktype606, _vtype607, _size605 = iprot:readMapBegin() 
+        for _i=1,_size605 do
+          local _key609 = iprot:readString()
+          local _val610 = SquareMember:new{}
+          _val610:read(iprot)
+          self.myMemberships[_key609] = _val610
         end
         iprot:readMapEnd()
       else
@@ -25824,12 +22055,12 @@ function SearchSquaresResponse:read(iprot)
     elseif fid == 5 then
       if ftype == TType.MAP then
         self.noteStatuses = {}
-        local _ktype748, _vtype749, _size747 = iprot:readMapBegin() 
-        for _i=1,_size747 do
-          local _key751 = iprot:readString()
-          local _val752 = NoteStatus:new{}
-          _val752:read(iprot)
-          self.noteStatuses[_key751] = _val752
+        local _ktype612, _vtype613, _size611 = iprot:readMapBegin() 
+        for _i=1,_size611 do
+          local _key615 = iprot:readString()
+          local _val616 = NoteStatus:new{}
+          _val616:read(iprot)
+          self.noteStatuses[_key615] = _val616
         end
         iprot:readMapEnd()
       else
@@ -25848,8 +22079,8 @@ function SearchSquaresResponse:write(oprot)
   if self.squares ~= nil then
     oprot:writeFieldBegin('squares', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.squares)
-    for _,iter753 in ipairs(self.squares) do
-      iter753:write(oprot)
+    for _,iter617 in ipairs(self.squares) do
+      iter617:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -25857,9 +22088,9 @@ function SearchSquaresResponse:write(oprot)
   if self.squareStatuses ~= nil then
     oprot:writeFieldBegin('squareStatuses', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.squareStatuses))
-    for kiter754,viter755 in pairs(self.squareStatuses) do
-      oprot:writeString(kiter754)
-      viter755:write(oprot)
+    for kiter618,viter619 in pairs(self.squareStatuses) do
+      oprot:writeString(kiter618)
+      viter619:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -25867,9 +22098,9 @@ function SearchSquaresResponse:write(oprot)
   if self.myMemberships ~= nil then
     oprot:writeFieldBegin('myMemberships', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.myMemberships))
-    for kiter756,viter757 in pairs(self.myMemberships) do
-      oprot:writeString(kiter756)
-      viter757:write(oprot)
+    for kiter620,viter621 in pairs(self.myMemberships) do
+      oprot:writeString(kiter620)
+      viter621:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -25882,9 +22113,9 @@ function SearchSquaresResponse:write(oprot)
   if self.noteStatuses ~= nil then
     oprot:writeFieldBegin('noteStatuses', TType.MAP, 5)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.noteStatuses))
-    for kiter758,viter759 in pairs(self.noteStatuses) do
-      oprot:writeString(kiter758)
-      viter759:write(oprot)
+    for kiter622,viter623 in pairs(self.noteStatuses) do
+      oprot:writeString(kiter622)
+      viter623:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -25978,10 +22209,10 @@ function UpdateSquareFeatureSetRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.updateAttributes = {}
-        local _etype763, _size760 = iprot:readSetBegin()
-        for _i=1,_size760 do
-          local _elem764 = iprot:readI32()
-          self.updateAttributes[_elem764] = _elem764
+        local _etype627, _size624 = iprot:readSetBegin()
+        for _i=1,_size624 do
+          local _elem628 = iprot:readI32()
+          self.updateAttributes[_elem628] = _elem628
         end
         iprot:readSetEnd()
       else
@@ -26007,8 +22238,8 @@ function UpdateSquareFeatureSetRequest:write(oprot)
   if self.updateAttributes ~= nil then
     oprot:writeFieldBegin('updateAttributes', TType.SET, 2)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updateAttributes))
-    for iter765,_ in pairs(self.updateAttributes) do
-      oprot:writeI32(iter765)
+    for iter629,_ in pairs(self.updateAttributes) do
+      oprot:writeI32(iter629)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26036,10 +22267,10 @@ function UpdateSquareFeatureSetResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.SET then
         self.updateAttributes = {}
-        local _etype769, _size766 = iprot:readSetBegin()
-        for _i=1,_size766 do
-          local _elem770 = iprot:readI32()
-          self.updateAttributes[_elem770] = _elem770
+        local _etype633, _size630 = iprot:readSetBegin()
+        for _i=1,_size630 do
+          local _elem634 = iprot:readI32()
+          self.updateAttributes[_elem634] = _elem634
         end
         iprot:readSetEnd()
       else
@@ -26065,8 +22296,8 @@ function UpdateSquareFeatureSetResponse:write(oprot)
   if self.updateAttributes ~= nil then
     oprot:writeFieldBegin('updateAttributes', TType.SET, 1)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updateAttributes))
-    for iter771,_ in pairs(self.updateAttributes) do
-      oprot:writeI32(iter771)
+    for iter635,_ in pairs(self.updateAttributes) do
+      oprot:writeI32(iter635)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26095,10 +22326,10 @@ function UpdateSquareMemberRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype775, _size772 = iprot:readSetBegin()
-        for _i=1,_size772 do
-          local _elem776 = iprot:readI32()
-          self.updatedAttrs[_elem776] = _elem776
+        local _etype639, _size636 = iprot:readSetBegin()
+        for _i=1,_size636 do
+          local _elem640 = iprot:readI32()
+          self.updatedAttrs[_elem640] = _elem640
         end
         iprot:readSetEnd()
       else
@@ -26107,10 +22338,10 @@ function UpdateSquareMemberRequest:read(iprot)
     elseif fid == 3 then
       if ftype == TType.SET then
         self.updatedPreferenceAttrs = {}
-        local _etype780, _size777 = iprot:readSetBegin()
-        for _i=1,_size777 do
-          local _elem781 = iprot:readI32()
-          self.updatedPreferenceAttrs[_elem781] = _elem781
+        local _etype644, _size641 = iprot:readSetBegin()
+        for _i=1,_size641 do
+          local _elem645 = iprot:readI32()
+          self.updatedPreferenceAttrs[_elem645] = _elem645
         end
         iprot:readSetEnd()
       else
@@ -26136,8 +22367,8 @@ function UpdateSquareMemberRequest:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 2)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter782,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter782)
+    for iter646,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter646)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26145,8 +22376,8 @@ function UpdateSquareMemberRequest:write(oprot)
   if self.updatedPreferenceAttrs ~= nil then
     oprot:writeFieldBegin('updatedPreferenceAttrs', TType.SET, 3)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedPreferenceAttrs))
-    for iter783,_ in pairs(self.updatedPreferenceAttrs) do
-      oprot:writeI32(iter783)
+    for iter647,_ in pairs(self.updatedPreferenceAttrs) do
+      oprot:writeI32(iter647)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26175,10 +22406,10 @@ function UpdateSquareMemberResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype787, _size784 = iprot:readSetBegin()
-        for _i=1,_size784 do
-          local _elem788 = iprot:readI32()
-          self.updatedAttrs[_elem788] = _elem788
+        local _etype651, _size648 = iprot:readSetBegin()
+        for _i=1,_size648 do
+          local _elem652 = iprot:readI32()
+          self.updatedAttrs[_elem652] = _elem652
         end
         iprot:readSetEnd()
       else
@@ -26194,10 +22425,10 @@ function UpdateSquareMemberResponse:read(iprot)
     elseif fid == 3 then
       if ftype == TType.SET then
         self.updatedPreferenceAttrs = {}
-        local _etype792, _size789 = iprot:readSetBegin()
-        for _i=1,_size789 do
-          local _elem793 = iprot:readI32()
-          self.updatedPreferenceAttrs[_elem793] = _elem793
+        local _etype656, _size653 = iprot:readSetBegin()
+        for _i=1,_size653 do
+          local _elem657 = iprot:readI32()
+          self.updatedPreferenceAttrs[_elem657] = _elem657
         end
         iprot:readSetEnd()
       else
@@ -26216,8 +22447,8 @@ function UpdateSquareMemberResponse:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 1)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter794,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter794)
+    for iter658,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter658)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26230,8 +22461,8 @@ function UpdateSquareMemberResponse:write(oprot)
   if self.updatedPreferenceAttrs ~= nil then
     oprot:writeFieldBegin('updatedPreferenceAttrs', TType.SET, 3)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedPreferenceAttrs))
-    for iter795,_ in pairs(self.updatedPreferenceAttrs) do
-      oprot:writeI32(iter795)
+    for iter659,_ in pairs(self.updatedPreferenceAttrs) do
+      oprot:writeI32(iter659)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26254,10 +22485,10 @@ function UpdateSquareMembersRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype799, _size796 = iprot:readSetBegin()
-        for _i=1,_size796 do
-          local _elem800 = iprot:readI32()
-          self.updatedAttrs[_elem800] = _elem800
+        local _etype663, _size660 = iprot:readSetBegin()
+        for _i=1,_size660 do
+          local _elem664 = iprot:readI32()
+          self.updatedAttrs[_elem664] = _elem664
         end
         iprot:readSetEnd()
       else
@@ -26266,11 +22497,11 @@ function UpdateSquareMembersRequest:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.members = {}
-        local _etype804, _size801 = iprot:readListBegin()
-        for _i=1,_size801 do
-          local _elem805 = SquareMember:new{}
-          _elem805:read(iprot)
-          table.insert(self.members, _elem805)
+        local _etype668, _size665 = iprot:readListBegin()
+        for _i=1,_size665 do
+          local _elem669 = SquareMember:new{}
+          _elem669:read(iprot)
+          table.insert(self.members, _elem669)
         end
         iprot:readListEnd()
       else
@@ -26289,8 +22520,8 @@ function UpdateSquareMembersRequest:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 2)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter806,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter806)
+    for iter670,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter670)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26298,8 +22529,8 @@ function UpdateSquareMembersRequest:write(oprot)
   if self.members ~= nil then
     oprot:writeFieldBegin('members', TType.LIST, 3)
     oprot:writeListBegin(TType.STRUCT, #self.members)
-    for _,iter807 in ipairs(self.members) do
-      iter807:write(oprot)
+    for _,iter671 in ipairs(self.members) do
+      iter671:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -26323,10 +22554,10 @@ function UpdateSquareMembersResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype811, _size808 = iprot:readSetBegin()
-        for _i=1,_size808 do
-          local _elem812 = iprot:readI32()
-          self.updatedAttrs[_elem812] = _elem812
+        local _etype675, _size672 = iprot:readSetBegin()
+        for _i=1,_size672 do
+          local _elem676 = iprot:readI32()
+          self.updatedAttrs[_elem676] = _elem676
         end
         iprot:readSetEnd()
       else
@@ -26342,12 +22573,12 @@ function UpdateSquareMembersResponse:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.members = {}
-        local _ktype814, _vtype815, _size813 = iprot:readMapBegin() 
-        for _i=1,_size813 do
-          local _key817 = iprot:readString()
-          local _val818 = SquareMember:new{}
-          _val818:read(iprot)
-          self.members[_key817] = _val818
+        local _ktype678, _vtype679, _size677 = iprot:readMapBegin() 
+        for _i=1,_size677 do
+          local _key681 = iprot:readString()
+          local _val682 = SquareMember:new{}
+          _val682:read(iprot)
+          self.members[_key681] = _val682
         end
         iprot:readMapEnd()
       else
@@ -26366,8 +22597,8 @@ function UpdateSquareMembersResponse:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 1)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter819,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter819)
+    for iter683,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter683)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26380,9 +22611,9 @@ function UpdateSquareMembersResponse:write(oprot)
   if self.members ~= nil then
     oprot:writeFieldBegin('members', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.members))
-    for kiter820,viter821 in pairs(self.members) do
-      oprot:writeString(kiter820)
-      viter821:write(oprot)
+    for kiter684,viter685 in pairs(self.members) do
+      oprot:writeString(kiter684)
+      viter685:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -26411,10 +22642,10 @@ function RejectSquareMembersRequest:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.requestedMemberMids = {}
-        local _etype825, _size822 = iprot:readListBegin()
-        for _i=1,_size822 do
-          local _elem826 = iprot:readString()
-          table.insert(self.requestedMemberMids, _elem826)
+        local _etype689, _size686 = iprot:readListBegin()
+        for _i=1,_size686 do
+          local _elem690 = iprot:readString()
+          table.insert(self.requestedMemberMids, _elem690)
         end
         iprot:readListEnd()
       else
@@ -26438,8 +22669,8 @@ function RejectSquareMembersRequest:write(oprot)
   if self.requestedMemberMids ~= nil then
     oprot:writeFieldBegin('requestedMemberMids', TType.LIST, 3)
     oprot:writeListBegin(TType.STRING, #self.requestedMemberMids)
-    for _,iter827 in ipairs(self.requestedMemberMids) do
-      oprot:writeString(iter827)
+    for _,iter691 in ipairs(self.requestedMemberMids) do
+      oprot:writeString(iter691)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -26462,11 +22693,11 @@ function RejectSquareMembersResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.rejectedMembers = {}
-        local _etype831, _size828 = iprot:readListBegin()
-        for _i=1,_size828 do
-          local _elem832 = SquareMember:new{}
-          _elem832:read(iprot)
-          table.insert(self.rejectedMembers, _elem832)
+        local _etype695, _size692 = iprot:readListBegin()
+        for _i=1,_size692 do
+          local _elem696 = SquareMember:new{}
+          _elem696:read(iprot)
+          table.insert(self.rejectedMembers, _elem696)
         end
         iprot:readListEnd()
       else
@@ -26492,8 +22723,8 @@ function RejectSquareMembersResponse:write(oprot)
   if self.rejectedMembers ~= nil then
     oprot:writeFieldBegin('rejectedMembers', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.rejectedMembers)
-    for _,iter833 in ipairs(self.rejectedMembers) do
-      iter833:write(oprot)
+    for _,iter697 in ipairs(self.rejectedMembers) do
+      iter697:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -26520,10 +22751,10 @@ function RemoveSubscriptionsRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.unsubscriptions = {}
-        local _etype837, _size834 = iprot:readListBegin()
-        for _i=1,_size834 do
-          local _elem838 = iprot:readI64()
-          table.insert(self.unsubscriptions, _elem838)
+        local _etype701, _size698 = iprot:readListBegin()
+        for _i=1,_size698 do
+          local _elem702 = iprot:readI64()
+          table.insert(self.unsubscriptions, _elem702)
         end
         iprot:readListEnd()
       else
@@ -26542,8 +22773,8 @@ function RemoveSubscriptionsRequest:write(oprot)
   if self.unsubscriptions ~= nil then
     oprot:writeFieldBegin('unsubscriptions', TType.LIST, 2)
     oprot:writeListBegin(TType.I64, #self.unsubscriptions)
-    for _,iter839 in ipairs(self.unsubscriptions) do
-      oprot:writeI64(iter839)
+    for _,iter703 in ipairs(self.unsubscriptions) do
+      oprot:writeI64(iter703)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -26589,10 +22820,10 @@ function RefreshSubscriptionsRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.subscriptions = {}
-        local _etype843, _size840 = iprot:readListBegin()
-        for _i=1,_size840 do
-          local _elem844 = iprot:readI64()
-          table.insert(self.subscriptions, _elem844)
+        local _etype707, _size704 = iprot:readListBegin()
+        for _i=1,_size704 do
+          local _elem708 = iprot:readI64()
+          table.insert(self.subscriptions, _elem708)
         end
         iprot:readListEnd()
       else
@@ -26611,8 +22842,8 @@ function RefreshSubscriptionsRequest:write(oprot)
   if self.subscriptions ~= nil then
     oprot:writeFieldBegin('subscriptions', TType.LIST, 2)
     oprot:writeListBegin(TType.I64, #self.subscriptions)
-    for _,iter845 in ipairs(self.subscriptions) do
-      oprot:writeI64(iter845)
+    for _,iter709 in ipairs(self.subscriptions) do
+      oprot:writeI64(iter709)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -26641,12 +22872,12 @@ function RefreshSubscriptionsResponse:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.subscriptionStates = {}
-        local _ktype847, _vtype848, _size846 = iprot:readMapBegin() 
-        for _i=1,_size846 do
-          local _key850 = iprot:readI64()
-          local _val851 = SubscriptionState:new{}
-          _val851:read(iprot)
-          self.subscriptionStates[_key850] = _val851
+        local _ktype711, _vtype712, _size710 = iprot:readMapBegin() 
+        for _i=1,_size710 do
+          local _key714 = iprot:readI64()
+          local _val715 = SubscriptionState:new{}
+          _val715:read(iprot)
+          self.subscriptionStates[_key714] = _val715
         end
         iprot:readMapEnd()
       else
@@ -26670,9 +22901,9 @@ function RefreshSubscriptionsResponse:write(oprot)
   if self.subscriptionStates ~= nil then
     oprot:writeFieldBegin('subscriptionStates', TType.MAP, 2)
     oprot:writeMapBegin(TType.I64, TType.STRUCT, ttable_size(self.subscriptionStates))
-    for kiter852,viter853 in pairs(self.subscriptionStates) do
-      oprot:writeI64(kiter852)
-      viter853:write(oprot)
+    for kiter716,viter717 in pairs(self.subscriptionStates) do
+      oprot:writeI64(kiter716)
+      viter717:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -26695,10 +22926,10 @@ function UpdateSquareChatRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype857, _size854 = iprot:readSetBegin()
-        for _i=1,_size854 do
-          local _elem858 = iprot:readI32()
-          self.updatedAttrs[_elem858] = _elem858
+        local _etype721, _size718 = iprot:readSetBegin()
+        for _i=1,_size718 do
+          local _elem722 = iprot:readI32()
+          self.updatedAttrs[_elem722] = _elem722
         end
         iprot:readSetEnd()
       else
@@ -26724,8 +22955,8 @@ function UpdateSquareChatRequest:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 2)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter859,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter859)
+    for iter723,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter723)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26753,10 +22984,10 @@ function UpdateSquareChatResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype863, _size860 = iprot:readSetBegin()
-        for _i=1,_size860 do
-          local _elem864 = iprot:readI32()
-          self.updatedAttrs[_elem864] = _elem864
+        local _etype727, _size724 = iprot:readSetBegin()
+        for _i=1,_size724 do
+          local _elem728 = iprot:readI32()
+          self.updatedAttrs[_elem728] = _elem728
         end
         iprot:readSetEnd()
       else
@@ -26782,8 +23013,8 @@ function UpdateSquareChatResponse:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 1)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter865,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter865)
+    for iter729,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter729)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26882,10 +23113,10 @@ function UpdateSquareChatMemberRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype869, _size866 = iprot:readSetBegin()
-        for _i=1,_size866 do
-          local _elem870 = iprot:readI32()
-          self.updatedAttrs[_elem870] = _elem870
+        local _etype733, _size730 = iprot:readSetBegin()
+        for _i=1,_size730 do
+          local _elem734 = iprot:readI32()
+          self.updatedAttrs[_elem734] = _elem734
         end
         iprot:readSetEnd()
       else
@@ -26911,8 +23142,8 @@ function UpdateSquareChatMemberRequest:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 2)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter871,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter871)
+    for iter735,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter735)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -26976,10 +23207,10 @@ function UpdateSquareAuthorityRequest:read(iprot)
     elseif fid == 2 then
       if ftype == TType.SET then
         self.updateAttributes = {}
-        local _etype875, _size872 = iprot:readSetBegin()
-        for _i=1,_size872 do
-          local _elem876 = iprot:readI32()
-          self.updateAttributes[_elem876] = _elem876
+        local _etype739, _size736 = iprot:readSetBegin()
+        for _i=1,_size736 do
+          local _elem740 = iprot:readI32()
+          self.updateAttributes[_elem740] = _elem740
         end
         iprot:readSetEnd()
       else
@@ -27005,8 +23236,8 @@ function UpdateSquareAuthorityRequest:write(oprot)
   if self.updateAttributes ~= nil then
     oprot:writeFieldBegin('updateAttributes', TType.SET, 2)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updateAttributes))
-    for iter877,_ in pairs(self.updateAttributes) do
-      oprot:writeI32(iter877)
+    for iter741,_ in pairs(self.updateAttributes) do
+      oprot:writeI32(iter741)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -27034,10 +23265,10 @@ function UpdateSquareAuthorityResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.SET then
         self.updatdAttributes = {}
-        local _etype881, _size878 = iprot:readSetBegin()
-        for _i=1,_size878 do
-          local _elem882 = iprot:readI32()
-          self.updatdAttributes[_elem882] = _elem882
+        local _etype745, _size742 = iprot:readSetBegin()
+        for _i=1,_size742 do
+          local _elem746 = iprot:readI32()
+          self.updatdAttributes[_elem746] = _elem746
         end
         iprot:readSetEnd()
       else
@@ -27063,8 +23294,8 @@ function UpdateSquareAuthorityResponse:write(oprot)
   if self.updatdAttributes ~= nil then
     oprot:writeFieldBegin('updatdAttributes', TType.SET, 1)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatdAttributes))
-    for iter883,_ in pairs(self.updatdAttributes) do
-      oprot:writeI32(iter883)
+    for iter747,_ in pairs(self.updatdAttributes) do
+      oprot:writeI32(iter747)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -27106,10 +23337,10 @@ function UpdateSquareMemberRelationRequest:read(iprot)
     elseif fid == 4 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype887, _size884 = iprot:readSetBegin()
-        for _i=1,_size884 do
-          local _elem888 = iprot:readI32()
-          self.updatedAttrs[_elem888] = _elem888
+        local _etype751, _size748 = iprot:readSetBegin()
+        for _i=1,_size748 do
+          local _elem752 = iprot:readI32()
+          self.updatedAttrs[_elem752] = _elem752
         end
         iprot:readSetEnd()
       else
@@ -27145,8 +23376,8 @@ function UpdateSquareMemberRelationRequest:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 4)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter889,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter889)
+    for iter753,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter753)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -27188,10 +23419,10 @@ function UpdateSquareMemberRelationResponse:read(iprot)
     elseif fid == 3 then
       if ftype == TType.SET then
         self.updatedAttrs = {}
-        local _etype893, _size890 = iprot:readSetBegin()
-        for _i=1,_size890 do
-          local _elem894 = iprot:readI32()
-          self.updatedAttrs[_elem894] = _elem894
+        local _etype757, _size754 = iprot:readSetBegin()
+        for _i=1,_size754 do
+          local _elem758 = iprot:readI32()
+          self.updatedAttrs[_elem758] = _elem758
         end
         iprot:readSetEnd()
       else
@@ -27227,8 +23458,8 @@ function UpdateSquareMemberRelationResponse:write(oprot)
   if self.updatedAttrs ~= nil then
     oprot:writeFieldBegin('updatedAttrs', TType.SET, 3)
     oprot:writeSetBegin(TType.I32, ttable_size(self.updatedAttrs))
-    for iter895,_ in pairs(self.updatedAttrs) do
-      oprot:writeI32(iter895)
+    for iter759,_ in pairs(self.updatedAttrs) do
+      oprot:writeI32(iter759)
     end
     oprot:writeSetEnd()
     oprot:writeFieldEnd()
@@ -28127,11 +24358,11 @@ function GetSquareChatAnnouncementsResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.announcements = {}
-        local _etype899, _size896 = iprot:readListBegin()
-        for _i=1,_size896 do
-          local _elem900 = SquareChatAnnouncement:new{}
-          _elem900:read(iprot)
-          table.insert(self.announcements, _elem900)
+        local _etype763, _size760 = iprot:readListBegin()
+        for _i=1,_size760 do
+          local _elem764 = SquareChatAnnouncement:new{}
+          _elem764:read(iprot)
+          table.insert(self.announcements, _elem764)
         end
         iprot:readListEnd()
       else
@@ -28150,8 +24381,8 @@ function GetSquareChatAnnouncementsResponse:write(oprot)
   if self.announcements ~= nil then
     oprot:writeFieldBegin('announcements', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.announcements)
-    for _,iter901 in ipairs(self.announcements) do
-      iter901:write(oprot)
+    for _,iter765 in ipairs(self.announcements) do
+      iter765:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -28223,11 +24454,11 @@ function GetJoinedSquareChatsResponse:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.chats = {}
-        local _etype905, _size902 = iprot:readListBegin()
-        for _i=1,_size902 do
-          local _elem906 = SquareChat:new{}
-          _elem906:read(iprot)
-          table.insert(self.chats, _elem906)
+        local _etype769, _size766 = iprot:readListBegin()
+        for _i=1,_size766 do
+          local _elem770 = SquareChat:new{}
+          _elem770:read(iprot)
+          table.insert(self.chats, _elem770)
         end
         iprot:readListEnd()
       else
@@ -28236,12 +24467,12 @@ function GetJoinedSquareChatsResponse:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.chatMembers = {}
-        local _ktype908, _vtype909, _size907 = iprot:readMapBegin() 
-        for _i=1,_size907 do
-          local _key911 = iprot:readString()
-          local _val912 = SquareChatMember:new{}
-          _val912:read(iprot)
-          self.chatMembers[_key911] = _val912
+        local _ktype772, _vtype773, _size771 = iprot:readMapBegin() 
+        for _i=1,_size771 do
+          local _key775 = iprot:readString()
+          local _val776 = SquareChatMember:new{}
+          _val776:read(iprot)
+          self.chatMembers[_key775] = _val776
         end
         iprot:readMapEnd()
       else
@@ -28250,12 +24481,12 @@ function GetJoinedSquareChatsResponse:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.statuses = {}
-        local _ktype914, _vtype915, _size913 = iprot:readMapBegin() 
-        for _i=1,_size913 do
-          local _key917 = iprot:readString()
-          local _val918 = SquareChatStatus:new{}
-          _val918:read(iprot)
-          self.statuses[_key917] = _val918
+        local _ktype778, _vtype779, _size777 = iprot:readMapBegin() 
+        for _i=1,_size777 do
+          local _key781 = iprot:readString()
+          local _val782 = SquareChatStatus:new{}
+          _val782:read(iprot)
+          self.statuses[_key781] = _val782
         end
         iprot:readMapEnd()
       else
@@ -28280,8 +24511,8 @@ function GetJoinedSquareChatsResponse:write(oprot)
   if self.chats ~= nil then
     oprot:writeFieldBegin('chats', TType.LIST, 1)
     oprot:writeListBegin(TType.STRUCT, #self.chats)
-    for _,iter919 in ipairs(self.chats) do
-      iter919:write(oprot)
+    for _,iter783 in ipairs(self.chats) do
+      iter783:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -28289,9 +24520,9 @@ function GetJoinedSquareChatsResponse:write(oprot)
   if self.chatMembers ~= nil then
     oprot:writeFieldBegin('chatMembers', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.chatMembers))
-    for kiter920,viter921 in pairs(self.chatMembers) do
-      oprot:writeString(kiter920)
-      viter921:write(oprot)
+    for kiter784,viter785 in pairs(self.chatMembers) do
+      oprot:writeString(kiter784)
+      viter785:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -28299,9 +24530,9 @@ function GetJoinedSquareChatsResponse:write(oprot)
   if self.statuses ~= nil then
     oprot:writeFieldBegin('statuses', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRUCT, ttable_size(self.statuses))
-    for kiter922,viter923 in pairs(self.statuses) do
-      oprot:writeString(kiter922)
-      viter923:write(oprot)
+    for kiter786,viter787 in pairs(self.statuses) do
+      oprot:writeString(kiter786)
+      viter787:write(oprot)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -28343,11 +24574,11 @@ function TalkException:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.parameterMap = {}
-        local _ktype925, _vtype926, _size924 = iprot:readMapBegin() 
-        for _i=1,_size924 do
-          local _key928 = iprot:readString()
-          local _val929 = iprot:readString()
-          self.parameterMap[_key928] = _val929
+        local _ktype789, _vtype790, _size788 = iprot:readMapBegin() 
+        for _i=1,_size788 do
+          local _key792 = iprot:readString()
+          local _val793 = iprot:readString()
+          self.parameterMap[_key792] = _val793
         end
         iprot:readMapEnd()
       else
@@ -28376,9 +24607,9 @@ function TalkException:write(oprot)
   if self.parameterMap ~= nil then
     oprot:writeFieldBegin('parameterMap', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.parameterMap))
-    for kiter930,viter931 in pairs(self.parameterMap) do
-      oprot:writeString(kiter930)
-      oprot:writeString(viter931)
+    for kiter794,viter795 in pairs(self.parameterMap) do
+      oprot:writeString(kiter794)
+      oprot:writeString(viter795)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -28488,11 +24719,11 @@ function PointException:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.extra = {}
-        local _ktype933, _vtype934, _size932 = iprot:readMapBegin() 
-        for _i=1,_size932 do
-          local _key936 = iprot:readString()
-          local _val937 = iprot:readString()
-          self.extra[_key936] = _val937
+        local _ktype797, _vtype798, _size796 = iprot:readMapBegin() 
+        for _i=1,_size796 do
+          local _key800 = iprot:readString()
+          local _val801 = iprot:readString()
+          self.extra[_key800] = _val801
         end
         iprot:readMapEnd()
       else
@@ -28521,9 +24752,9 @@ function PointException:write(oprot)
   if self.extra ~= nil then
     oprot:writeFieldBegin('extra', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.extra))
-    for kiter938,viter939 in pairs(self.extra) do
-      oprot:writeString(kiter938)
-      oprot:writeString(viter939)
+    for kiter802,viter803 in pairs(self.extra) do
+      oprot:writeString(kiter802)
+      oprot:writeString(viter803)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -28560,11 +24791,11 @@ function ChannelException:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.parameterMap = {}
-        local _ktype941, _vtype942, _size940 = iprot:readMapBegin() 
-        for _i=1,_size940 do
-          local _key944 = iprot:readString()
-          local _val945 = iprot:readString()
-          self.parameterMap[_key944] = _val945
+        local _ktype805, _vtype806, _size804 = iprot:readMapBegin() 
+        for _i=1,_size804 do
+          local _key808 = iprot:readString()
+          local _val809 = iprot:readString()
+          self.parameterMap[_key808] = _val809
         end
         iprot:readMapEnd()
       else
@@ -28593,9 +24824,9 @@ function ChannelException:write(oprot)
   if self.parameterMap ~= nil then
     oprot:writeFieldBegin('parameterMap', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.parameterMap))
-    for kiter946,viter947 in pairs(self.parameterMap) do
-      oprot:writeString(kiter946)
-      oprot:writeString(viter947)
+    for kiter810,viter811 in pairs(self.parameterMap) do
+      oprot:writeString(kiter810)
+      oprot:writeString(viter811)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -28693,11 +24924,11 @@ function UniversalNotificationServiceException:read(iprot)
     elseif fid == 3 then
       if ftype == TType.MAP then
         self.parameterMap = {}
-        local _ktype949, _vtype950, _size948 = iprot:readMapBegin() 
-        for _i=1,_size948 do
-          local _key952 = iprot:readString()
-          local _val953 = iprot:readString()
-          self.parameterMap[_key952] = _val953
+        local _ktype813, _vtype814, _size812 = iprot:readMapBegin() 
+        for _i=1,_size812 do
+          local _key816 = iprot:readString()
+          local _val817 = iprot:readString()
+          self.parameterMap[_key816] = _val817
         end
         iprot:readMapEnd()
       else
@@ -28726,9 +24957,9 @@ function UniversalNotificationServiceException:write(oprot)
   if self.parameterMap ~= nil then
     oprot:writeFieldBegin('parameterMap', TType.MAP, 3)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.parameterMap))
-    for kiter954,viter955 in pairs(self.parameterMap) do
-      oprot:writeString(kiter954)
-      oprot:writeString(viter955)
+    for kiter818,viter819 in pairs(self.parameterMap) do
+      oprot:writeString(kiter818)
+      oprot:writeString(viter819)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -28882,8 +25113,7 @@ end
 
 UserAuthStatus = __TObject:new{
   phoneNumberRegistered,
-  registeredSnsIdTypes,
-  accountMigrationCheckType
+  registeredSnsIdTypes
 }
 
 function UserAuthStatus:read(iprot)
@@ -28901,18 +25131,12 @@ function UserAuthStatus:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.registeredSnsIdTypes = {}
-        local _etype959, _size956 = iprot:readListBegin()
-        for _i=1,_size956 do
-          local _elem960 = iprot:readI32()
-          table.insert(self.registeredSnsIdTypes, _elem960)
+        local _etype823, _size820 = iprot:readListBegin()
+        for _i=1,_size820 do
+          local _elem824 = iprot:readI32()
+          table.insert(self.registeredSnsIdTypes, _elem824)
         end
         iprot:readListEnd()
-      else
-        iprot:skip(ftype)
-      end
-    elseif fid == 3 then
-      if ftype == TType.I32 then
-        self.accountMigrationCheckType = iprot:readI32()
       else
         iprot:skip(ftype)
       end
@@ -28934,15 +25158,10 @@ function UserAuthStatus:write(oprot)
   if self.registeredSnsIdTypes ~= nil then
     oprot:writeFieldBegin('registeredSnsIdTypes', TType.LIST, 2)
     oprot:writeListBegin(TType.I32, #self.registeredSnsIdTypes)
-    for _,iter961 in ipairs(self.registeredSnsIdTypes) do
-      oprot:writeI32(iter961)
+    for _,iter825 in ipairs(self.registeredSnsIdTypes) do
+      oprot:writeI32(iter825)
     end
     oprot:writeListEnd()
-    oprot:writeFieldEnd()
-  end
-  if self.accountMigrationCheckType ~= nil then
-    oprot:writeFieldBegin('accountMigrationCheckType', TType.I32, 3)
-    oprot:writeI32(self.accountMigrationCheckType)
     oprot:writeFieldEnd()
   end
   oprot:writeFieldStop()
@@ -29056,10 +25275,10 @@ function GroupCall:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.memberMids = {}
-        local _etype965, _size962 = iprot:readListBegin()
-        for _i=1,_size962 do
-          local _elem966 = iprot:readString()
-          table.insert(self.memberMids, _elem966)
+        local _etype829, _size826 = iprot:readListBegin()
+        for _i=1,_size826 do
+          local _elem830 = iprot:readString()
+          table.insert(self.memberMids, _elem830)
         end
         iprot:readListEnd()
       else
@@ -29105,8 +25324,8 @@ function GroupCall:write(oprot)
   if self.memberMids ~= nil then
     oprot:writeFieldBegin('memberMids', TType.LIST, 4)
     oprot:writeListBegin(TType.STRING, #self.memberMids)
-    for _,iter967 in ipairs(self.memberMids) do
-      oprot:writeString(iter967)
+    for _,iter831 in ipairs(self.memberMids) do
+      oprot:writeString(iter831)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()

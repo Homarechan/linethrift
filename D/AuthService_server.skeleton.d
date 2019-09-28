@@ -22,24 +22,6 @@ class AuthServiceHandler : AuthService {
     // Your initialization goes here.
   }
 
-  IdentityCredentialResponse updatePassword(string authSessionId, ref const(IdentityCredentialRequest) request) {
-    // Your implementation goes here.
-    writeln("updatePassword called");
-    return typeof(return).init;
-  }
-
-  RSAKey getAuthRSAKey(string authSessionId, IdentityProvider identityProvider) {
-    // Your implementation goes here.
-    writeln("getAuthRSAKey called");
-    return typeof(return).init;
-  }
-
-  string openAuthSession(ref const(AuthSessionRequest) request) {
-    // Your implementation goes here.
-    writeln("openAuthSession called");
-    return typeof(return).init;
-  }
-
   string normalizePhoneNumber(string countryCode, string phoneNumber, string countryCodeHint) {
     // Your implementation goes here.
     writeln("normalizePhoneNumber called");

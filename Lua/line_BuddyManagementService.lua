@@ -3131,10 +3131,10 @@ function addBuddyMembers_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.userMids = {}
-        local _etype979, _size976 = iprot:readListBegin()
-        for _i=1,_size976 do
-          local _elem980 = iprot:readString()
-          table.insert(self.userMids, _elem980)
+        local _etype843, _size840 = iprot:readListBegin()
+        for _i=1,_size840 do
+          local _elem844 = iprot:readString()
+          table.insert(self.userMids, _elem844)
         end
         iprot:readListEnd()
       else
@@ -3158,8 +3158,8 @@ function addBuddyMembers_args:write(oprot)
   if self.userMids ~= nil then
     oprot:writeFieldBegin('userMids', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.userMids)
-    for _,iter981 in ipairs(self.userMids) do
-      oprot:writeString(iter981)
+    for _,iter845 in ipairs(self.userMids) do
+      oprot:writeString(iter845)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3300,10 +3300,10 @@ function commitSendMessagesToAll_args:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.requestIdList = {}
-        local _etype985, _size982 = iprot:readListBegin()
-        for _i=1,_size982 do
-          local _elem986 = iprot:readString()
-          table.insert(self.requestIdList, _elem986)
+        local _etype849, _size846 = iprot:readListBegin()
+        for _i=1,_size846 do
+          local _elem850 = iprot:readString()
+          table.insert(self.requestIdList, _elem850)
         end
         iprot:readListEnd()
       else
@@ -3322,8 +3322,8 @@ function commitSendMessagesToAll_args:write(oprot)
   if self.requestIdList ~= nil then
     oprot:writeFieldBegin('requestIdList', TType.LIST, 1)
     oprot:writeListBegin(TType.STRING, #self.requestIdList)
-    for _,iter987 in ipairs(self.requestIdList) do
-      oprot:writeString(iter987)
+    for _,iter851 in ipairs(self.requestIdList) do
+      oprot:writeString(iter851)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3346,11 +3346,11 @@ function commitSendMessagesToAll_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype991, _size988 = iprot:readListBegin()
-        for _i=1,_size988 do
-          local _elem992 = SendBuddyMessageResult:new{}
-          _elem992:read(iprot)
-          table.insert(self.success, _elem992)
+        local _etype855, _size852 = iprot:readListBegin()
+        for _i=1,_size852 do
+          local _elem856 = SendBuddyMessageResult:new{}
+          _elem856:read(iprot)
+          table.insert(self.success, _elem856)
         end
         iprot:readListEnd()
       else
@@ -3376,8 +3376,8 @@ function commitSendMessagesToAll_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter993 in ipairs(self.success) do
-      iter993:write(oprot)
+    for _,iter857 in ipairs(self.success) do
+      iter857:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3405,10 +3405,10 @@ function commitSendMessagesToMids_args:read(iprot)
     elseif fid == 1 then
       if ftype == TType.LIST then
         self.requestIdList = {}
-        local _etype997, _size994 = iprot:readListBegin()
-        for _i=1,_size994 do
-          local _elem998 = iprot:readString()
-          table.insert(self.requestIdList, _elem998)
+        local _etype861, _size858 = iprot:readListBegin()
+        for _i=1,_size858 do
+          local _elem862 = iprot:readString()
+          table.insert(self.requestIdList, _elem862)
         end
         iprot:readListEnd()
       else
@@ -3417,10 +3417,10 @@ function commitSendMessagesToMids_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.mids = {}
-        local _etype1002, _size999 = iprot:readListBegin()
-        for _i=1,_size999 do
-          local _elem1003 = iprot:readString()
-          table.insert(self.mids, _elem1003)
+        local _etype866, _size863 = iprot:readListBegin()
+        for _i=1,_size863 do
+          local _elem867 = iprot:readString()
+          table.insert(self.mids, _elem867)
         end
         iprot:readListEnd()
       else
@@ -3439,8 +3439,8 @@ function commitSendMessagesToMids_args:write(oprot)
   if self.requestIdList ~= nil then
     oprot:writeFieldBegin('requestIdList', TType.LIST, 1)
     oprot:writeListBegin(TType.STRING, #self.requestIdList)
-    for _,iter1004 in ipairs(self.requestIdList) do
-      oprot:writeString(iter1004)
+    for _,iter868 in ipairs(self.requestIdList) do
+      oprot:writeString(iter868)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3448,8 +3448,8 @@ function commitSendMessagesToMids_args:write(oprot)
   if self.mids ~= nil then
     oprot:writeFieldBegin('mids', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.mids)
-    for _,iter1005 in ipairs(self.mids) do
-      oprot:writeString(iter1005)
+    for _,iter869 in ipairs(self.mids) do
+      oprot:writeString(iter869)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -3472,11 +3472,11 @@ function commitSendMessagesToMids_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1009, _size1006 = iprot:readListBegin()
-        for _i=1,_size1006 do
-          local _elem1010 = SendBuddyMessageResult:new{}
-          _elem1010:read(iprot)
-          table.insert(self.success, _elem1010)
+        local _etype873, _size870 = iprot:readListBegin()
+        for _i=1,_size870 do
+          local _elem874 = SendBuddyMessageResult:new{}
+          _elem874:read(iprot)
+          table.insert(self.success, _elem874)
         end
         iprot:readListEnd()
       else
@@ -3502,8 +3502,8 @@ function commitSendMessagesToMids_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRUCT, #self.success)
-    for _,iter1011 in ipairs(self.success) do
-      iter1011:write(oprot)
+    for _,iter875 in ipairs(self.success) do
+      iter875:write(oprot)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -4100,10 +4100,10 @@ function getActiveMemberMidsByBuddyMid_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1015, _size1012 = iprot:readListBegin()
-        for _i=1,_size1012 do
-          local _elem1016 = iprot:readString()
-          table.insert(self.success, _elem1016)
+        local _etype879, _size876 = iprot:readListBegin()
+        for _i=1,_size876 do
+          local _elem880 = iprot:readString()
+          table.insert(self.success, _elem880)
         end
         iprot:readListEnd()
       else
@@ -4129,8 +4129,8 @@ function getActiveMemberMidsByBuddyMid_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1017 in ipairs(self.success) do
-      oprot:writeString(iter1017)
+    for _,iter881 in ipairs(self.success) do
+      oprot:writeString(iter881)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -4182,10 +4182,10 @@ function getAllBuddyMembers_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1021, _size1018 = iprot:readListBegin()
-        for _i=1,_size1018 do
-          local _elem1022 = iprot:readString()
-          table.insert(self.success, _elem1022)
+        local _etype885, _size882 = iprot:readListBegin()
+        for _i=1,_size882 do
+          local _elem886 = iprot:readString()
+          table.insert(self.success, _elem886)
         end
         iprot:readListEnd()
       else
@@ -4211,8 +4211,8 @@ function getAllBuddyMembers_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1023 in ipairs(self.success) do
-      oprot:writeString(iter1023)
+    for _,iter887 in ipairs(self.success) do
+      oprot:writeString(iter887)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -4264,10 +4264,10 @@ function getBlockedBuddyMembers_result:read(iprot)
     elseif fid == 0 then
       if ftype == TType.LIST then
         self.success = {}
-        local _etype1027, _size1024 = iprot:readListBegin()
-        for _i=1,_size1024 do
-          local _elem1028 = iprot:readString()
-          table.insert(self.success, _elem1028)
+        local _etype891, _size888 = iprot:readListBegin()
+        for _i=1,_size888 do
+          local _elem892 = iprot:readString()
+          table.insert(self.success, _elem892)
         end
         iprot:readListEnd()
       else
@@ -4293,8 +4293,8 @@ function getBlockedBuddyMembers_result:write(oprot)
   if self.success ~= nil then
     oprot:writeFieldBegin('success', TType.LIST, 0)
     oprot:writeListBegin(TType.STRING, #self.success)
-    for _,iter1029 in ipairs(self.success) do
-      oprot:writeString(iter1029)
+    for _,iter893 in ipairs(self.success) do
+      oprot:writeString(iter893)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -5182,10 +5182,10 @@ function linkAndSendBuddyContentMessageToMids_args:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.mids = {}
-        local _etype1033, _size1030 = iprot:readListBegin()
-        for _i=1,_size1030 do
-          local _elem1034 = iprot:readString()
-          table.insert(self.mids, _elem1034)
+        local _etype897, _size894 = iprot:readListBegin()
+        for _i=1,_size894 do
+          local _elem898 = iprot:readString()
+          table.insert(self.mids, _elem898)
         end
         iprot:readListEnd()
       else
@@ -5219,8 +5219,8 @@ function linkAndSendBuddyContentMessageToMids_args:write(oprot)
   if self.mids ~= nil then
     oprot:writeFieldBegin('mids', TType.LIST, 4)
     oprot:writeListBegin(TType.STRING, #self.mids)
-    for _,iter1035 in ipairs(self.mids) do
-      oprot:writeString(iter1035)
+    for _,iter899 in ipairs(self.mids) do
+      oprot:writeString(iter899)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -5492,11 +5492,11 @@ function registerBuddy_args:read(iprot)
     elseif fid == 7 then
       if ftype == TType.MAP then
         self.settings = {}
-        local _ktype1037, _vtype1038, _size1036 = iprot:readMapBegin() 
-        for _i=1,_size1036 do
-          local _key1040 = iprot:readString()
-          local _val1041 = iprot:readString()
-          self.settings[_key1040] = _val1041
+        local _ktype901, _vtype902, _size900 = iprot:readMapBegin() 
+        for _i=1,_size900 do
+          local _key904 = iprot:readString()
+          local _val905 = iprot:readString()
+          self.settings[_key904] = _val905
         end
         iprot:readMapEnd()
       else
@@ -5540,9 +5540,9 @@ function registerBuddy_args:write(oprot)
   if self.settings ~= nil then
     oprot:writeFieldBegin('settings', TType.MAP, 7)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.settings))
-    for kiter1042,viter1043 in pairs(self.settings) do
-      oprot:writeString(kiter1042)
-      oprot:writeString(viter1043)
+    for kiter906,viter907 in pairs(self.settings) do
+      oprot:writeString(kiter906)
+      oprot:writeString(viter907)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -5928,10 +5928,10 @@ function removeBuddyMembers_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.LIST then
         self.userMids = {}
-        local _etype1047, _size1044 = iprot:readListBegin()
-        for _i=1,_size1044 do
-          local _elem1048 = iprot:readString()
-          table.insert(self.userMids, _elem1048)
+        local _etype911, _size908 = iprot:readListBegin()
+        for _i=1,_size908 do
+          local _elem912 = iprot:readString()
+          table.insert(self.userMids, _elem912)
         end
         iprot:readListEnd()
       else
@@ -5955,8 +5955,8 @@ function removeBuddyMembers_args:write(oprot)
   if self.userMids ~= nil then
     oprot:writeFieldBegin('userMids', TType.LIST, 2)
     oprot:writeListBegin(TType.STRING, #self.userMids)
-    for _,iter1049 in ipairs(self.userMids) do
-      oprot:writeString(iter1049)
+    for _,iter913 in ipairs(self.userMids) do
+      oprot:writeString(iter913)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -6253,10 +6253,10 @@ function sendBuddyContentMessageToMids_args:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.mids = {}
-        local _etype1053, _size1050 = iprot:readListBegin()
-        for _i=1,_size1050 do
-          local _elem1054 = iprot:readString()
-          table.insert(self.mids, _elem1054)
+        local _etype917, _size914 = iprot:readListBegin()
+        for _i=1,_size914 do
+          local _elem918 = iprot:readString()
+          table.insert(self.mids, _elem918)
         end
         iprot:readListEnd()
       else
@@ -6290,8 +6290,8 @@ function sendBuddyContentMessageToMids_args:write(oprot)
   if self.mids ~= nil then
     oprot:writeFieldBegin('mids', TType.LIST, 4)
     oprot:writeListBegin(TType.STRING, #self.mids)
-    for _,iter1055 in ipairs(self.mids) do
-      oprot:writeString(iter1055)
+    for _,iter919 in ipairs(self.mids) do
+      oprot:writeString(iter919)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -6384,10 +6384,10 @@ function sendBuddyContentMessageToMidsAsync_args:read(iprot)
     elseif fid == 4 then
       if ftype == TType.LIST then
         self.mids = {}
-        local _etype1059, _size1056 = iprot:readListBegin()
-        for _i=1,_size1056 do
-          local _elem1060 = iprot:readString()
-          table.insert(self.mids, _elem1060)
+        local _etype923, _size920 = iprot:readListBegin()
+        for _i=1,_size920 do
+          local _elem924 = iprot:readString()
+          table.insert(self.mids, _elem924)
         end
         iprot:readListEnd()
       else
@@ -6421,8 +6421,8 @@ function sendBuddyContentMessageToMidsAsync_args:write(oprot)
   if self.mids ~= nil then
     oprot:writeFieldBegin('mids', TType.LIST, 4)
     oprot:writeListBegin(TType.STRING, #self.mids)
-    for _,iter1061 in ipairs(self.mids) do
-      oprot:writeString(iter1061)
+    for _,iter925 in ipairs(self.mids) do
+      oprot:writeString(iter925)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -6700,10 +6700,10 @@ function sendBuddyMessageToMids_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.mids = {}
-        local _etype1065, _size1062 = iprot:readListBegin()
-        for _i=1,_size1062 do
-          local _elem1066 = iprot:readString()
-          table.insert(self.mids, _elem1066)
+        local _etype929, _size926 = iprot:readListBegin()
+        for _i=1,_size926 do
+          local _elem930 = iprot:readString()
+          table.insert(self.mids, _elem930)
         end
         iprot:readListEnd()
       else
@@ -6732,8 +6732,8 @@ function sendBuddyMessageToMids_args:write(oprot)
   if self.mids ~= nil then
     oprot:writeFieldBegin('mids', TType.LIST, 3)
     oprot:writeListBegin(TType.STRING, #self.mids)
-    for _,iter1067 in ipairs(self.mids) do
-      oprot:writeString(iter1067)
+    for _,iter931 in ipairs(self.mids) do
+      oprot:writeString(iter931)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -6819,10 +6819,10 @@ function sendBuddyMessageToMidsAsync_args:read(iprot)
     elseif fid == 3 then
       if ftype == TType.LIST then
         self.mids = {}
-        local _etype1071, _size1068 = iprot:readListBegin()
-        for _i=1,_size1068 do
-          local _elem1072 = iprot:readString()
-          table.insert(self.mids, _elem1072)
+        local _etype935, _size932 = iprot:readListBegin()
+        for _i=1,_size932 do
+          local _elem936 = iprot:readString()
+          table.insert(self.mids, _elem936)
         end
         iprot:readListEnd()
       else
@@ -6851,8 +6851,8 @@ function sendBuddyMessageToMidsAsync_args:write(oprot)
   if self.mids ~= nil then
     oprot:writeFieldBegin('mids', TType.LIST, 3)
     oprot:writeListBegin(TType.STRING, #self.mids)
-    for _,iter1073 in ipairs(self.mids) do
-      oprot:writeString(iter1073)
+    for _,iter937 in ipairs(self.mids) do
+      oprot:writeString(iter937)
     end
     oprot:writeListEnd()
     oprot:writeFieldEnd()
@@ -7537,11 +7537,11 @@ function updateBuddyAdminProfileAttribute_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.attributes = {}
-        local _ktype1075, _vtype1076, _size1074 = iprot:readMapBegin() 
-        for _i=1,_size1074 do
-          local _key1078 = iprot:readString()
-          local _val1079 = iprot:readString()
-          self.attributes[_key1078] = _val1079
+        local _ktype939, _vtype940, _size938 = iprot:readMapBegin() 
+        for _i=1,_size938 do
+          local _key942 = iprot:readString()
+          local _val943 = iprot:readString()
+          self.attributes[_key942] = _val943
         end
         iprot:readMapEnd()
       else
@@ -7565,9 +7565,9 @@ function updateBuddyAdminProfileAttribute_args:write(oprot)
   if self.attributes ~= nil then
     oprot:writeFieldBegin('attributes', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.attributes))
-    for kiter1080,viter1081 in pairs(self.attributes) do
-      oprot:writeString(kiter1080)
-      oprot:writeString(viter1081)
+    for kiter944,viter945 in pairs(self.attributes) do
+      oprot:writeString(kiter944)
+      oprot:writeString(viter945)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -7715,11 +7715,11 @@ function updateBuddyProfileAttributes_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.attributes = {}
-        local _ktype1083, _vtype1084, _size1082 = iprot:readMapBegin() 
-        for _i=1,_size1082 do
-          local _key1086 = iprot:readString()
-          local _val1087 = iprot:readString()
-          self.attributes[_key1086] = _val1087
+        local _ktype947, _vtype948, _size946 = iprot:readMapBegin() 
+        for _i=1,_size946 do
+          local _key950 = iprot:readString()
+          local _val951 = iprot:readString()
+          self.attributes[_key950] = _val951
         end
         iprot:readMapEnd()
       else
@@ -7743,9 +7743,9 @@ function updateBuddyProfileAttributes_args:write(oprot)
   if self.attributes ~= nil then
     oprot:writeFieldBegin('attributes', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.attributes))
-    for kiter1088,viter1089 in pairs(self.attributes) do
-      oprot:writeString(kiter1088)
-      oprot:writeString(viter1089)
+    for kiter952,viter953 in pairs(self.attributes) do
+      oprot:writeString(kiter952)
+      oprot:writeString(viter953)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -7823,11 +7823,11 @@ function updateBuddyProfileAttributesAsync_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.attributes = {}
-        local _ktype1091, _vtype1092, _size1090 = iprot:readMapBegin() 
-        for _i=1,_size1090 do
-          local _key1094 = iprot:readString()
-          local _val1095 = iprot:readString()
-          self.attributes[_key1094] = _val1095
+        local _ktype955, _vtype956, _size954 = iprot:readMapBegin() 
+        for _i=1,_size954 do
+          local _key958 = iprot:readString()
+          local _val959 = iprot:readString()
+          self.attributes[_key958] = _val959
         end
         iprot:readMapEnd()
       else
@@ -7851,9 +7851,9 @@ function updateBuddyProfileAttributesAsync_args:write(oprot)
   if self.attributes ~= nil then
     oprot:writeFieldBegin('attributes', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.attributes))
-    for kiter1096,viter1097 in pairs(self.attributes) do
-      oprot:writeString(kiter1096)
-      oprot:writeString(viter1097)
+    for kiter960,viter961 in pairs(self.attributes) do
+      oprot:writeString(kiter960)
+      oprot:writeString(viter961)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
@@ -8197,11 +8197,11 @@ function updateBuddySettings_args:read(iprot)
     elseif fid == 2 then
       if ftype == TType.MAP then
         self.settings = {}
-        local _ktype1099, _vtype1100, _size1098 = iprot:readMapBegin() 
-        for _i=1,_size1098 do
-          local _key1102 = iprot:readString()
-          local _val1103 = iprot:readString()
-          self.settings[_key1102] = _val1103
+        local _ktype963, _vtype964, _size962 = iprot:readMapBegin() 
+        for _i=1,_size962 do
+          local _key966 = iprot:readString()
+          local _val967 = iprot:readString()
+          self.settings[_key966] = _val967
         end
         iprot:readMapEnd()
       else
@@ -8220,9 +8220,9 @@ function updateBuddySettings_args:write(oprot)
   if self.settings ~= nil then
     oprot:writeFieldBegin('settings', TType.MAP, 2)
     oprot:writeMapBegin(TType.STRING, TType.STRING, ttable_size(self.settings))
-    for kiter1104,viter1105 in pairs(self.settings) do
-      oprot:writeString(kiter1104)
-      oprot:writeString(viter1105)
+    for kiter968,viter969 in pairs(self.settings) do
+      oprot:writeString(kiter968)
+      oprot:writeString(viter969)
     end
     oprot:writeMapEnd()
     oprot:writeFieldEnd()
