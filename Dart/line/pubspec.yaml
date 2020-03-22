@@ -6,6 +6,6 @@ environment:
   sdk: '>=1.24.3 <3.0.0'
 
 dependencies:
-  thrift:  # ^0.13.0
+  thrift:  # ^0.14.0
     path: ../../../../lib/dart
 
