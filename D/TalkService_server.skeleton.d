@@ -1052,7 +1052,7 @@ class TalkServiceHandler : TalkService {
     return typeof(return).init;
   }
 
-  E2EEPublicKey getE2EEPublicKey(string mid, int version_, int keyId) {
+  E2EEPublicKey getE2EEPublicKey(string mid, int version, int keyId) {
     // Your implementation goes here.
     writeln("getE2EEPublicKey called");
     return typeof(return).init;

@@ -382,11 +382,11 @@ class CallServiceHandler : virtual public CallServiceIf {
 
 int main(int argc, char **argv) {
   int port = 9090;
-  ::std::shared_ptr<CallServiceHandler> handler(new CallServiceHandler());
-  ::std::shared_ptr<TProcessor> processor(new CallServiceProcessor(handler));
-  ::std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  ::std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  ::std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+  ::apache::thrift::stdcxx::shared_ptr<CallServiceHandler> handler(new CallServiceHandler());
+  ::apache::thrift::stdcxx::shared_ptr<TProcessor> processor(new CallServiceProcessor(handler));
+  ::apache::thrift::stdcxx::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+  ::apache::thrift::stdcxx::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+  ::apache::thrift::stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();

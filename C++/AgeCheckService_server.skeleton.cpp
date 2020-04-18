@@ -42,11 +42,11 @@ class AgeCheckServiceHandler : virtual public AgeCheckServiceIf {
 
 int main(int argc, char **argv) {
   int port = 9090;
-  ::std::shared_ptr<AgeCheckServiceHandler> handler(new AgeCheckServiceHandler());
-  ::std::shared_ptr<TProcessor> processor(new AgeCheckServiceProcessor(handler));
-  ::std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  ::std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  ::std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+  ::apache::thrift::stdcxx::shared_ptr<AgeCheckServiceHandler> handler(new AgeCheckServiceHandler());
+  ::apache::thrift::stdcxx::shared_ptr<TProcessor> processor(new AgeCheckServiceProcessor(handler));
+  ::apache::thrift::stdcxx::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+  ::apache::thrift::stdcxx::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+  ::apache::thrift::stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();

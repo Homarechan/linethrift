@@ -177,11 +177,11 @@ class ChannelApplicationProvidedServiceHandler : virtual public ChannelApplicati
 
 int main(int argc, char **argv) {
   int port = 9090;
-  ::std::shared_ptr<ChannelApplicationProvidedServiceHandler> handler(new ChannelApplicationProvidedServiceHandler());
-  ::std::shared_ptr<TProcessor> processor(new ChannelApplicationProvidedServiceProcessor(handler));
-  ::std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  ::std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  ::std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+  ::apache::thrift::stdcxx::shared_ptr<ChannelApplicationProvidedServiceHandler> handler(new ChannelApplicationProvidedServiceHandler());
+  ::apache::thrift::stdcxx::shared_ptr<TProcessor> processor(new ChannelApplicationProvidedServiceProcessor(handler));
+  ::apache::thrift::stdcxx::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+  ::apache::thrift::stdcxx::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+  ::apache::thrift::stdcxx::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();
